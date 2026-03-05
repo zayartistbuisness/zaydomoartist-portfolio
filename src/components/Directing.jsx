@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import { Film, Award, Calendar } from 'lucide-react'
 
 const stills = [
-  { src: '/headshots/keon-still-1.png', alt: 'Keon - Gym hand-wrapping scene' },
-  { src: '/headshots/keon-still-2.png', alt: 'Keon - Foster care office scene' },
-  { src: '/headshots/keon-still-3.png', alt: 'Keon - Shadow boxing scene' },
-  { src: '/headshots/keon-still-4.png', alt: 'Keon - Boxing ring corner' },
+  { src: '/headshots/keon-still-1.jpg', alt: 'Keon - Gym hand-wrapping scene' },
+  { src: '/headshots/keon-still-2.jpg', alt: 'Keon - Foster care office scene' },
+  { src: '/headshots/keon-still-3.jpg', alt: 'Keon - Shadow boxing scene' },
+  { src: '/headshots/keon-still-4.jpg', alt: 'Keon - Boxing ring corner' },
 ]
 
 export default function Directing() {
@@ -38,7 +38,7 @@ export default function Directing() {
           >
             <div className="relative overflow-hidden">
               <img
-                src="/headshots/keon-poster.png"
+                src="/headshots/keon-poster.jpg"
                 alt="KEON - Official Movie Poster"
                 className="w-full h-auto object-cover"
               />

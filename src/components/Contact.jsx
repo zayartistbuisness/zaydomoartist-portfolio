@@ -13,7 +13,7 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="text-[10px] tracking-[0.5em] uppercase text-gold mb-4">04</p>
+          <p className="text-[10px] tracking-[0.5em] uppercase text-gold mb-4">05</p>
           <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl font-light">
             Get In Touch
           </h2>

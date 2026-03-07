@@ -5,6 +5,7 @@ import Marquee from './components/Marquee'
 import About from './components/About'
 import Acting from './components/Acting'
 import Music from './components/Music'
+import Business from './components/Business'
 import Directing from './components/Directing'
 import Contact from './components/Contact'
 import Loader from './components/Loader'
@@ -52,6 +53,7 @@ function App() {
             <About />
             <Acting />
             <Music />
+            <Business />
             <Directing />
             <Contact />
           </main>

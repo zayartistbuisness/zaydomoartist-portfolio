@@ -5,6 +5,7 @@ import { ChevronDown } from 'lucide-react'
 const pillars = [
   { label: 'Acting', href: '#acting' },
   { label: 'Production', href: '#music' },
+  { label: 'Business', href: '#business' },
   { label: 'Directing', href: '#directing' },
   { label: 'Contact', href: '#contact' },
 ]

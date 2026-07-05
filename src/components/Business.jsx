@@ -1,6 +1,6 @@
 import { Suspense, useRef, useMemo, useEffect, Component } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useGLTF, Environment, Lightformer, Float } from '@react-three/drei'
+import { useGLTF, Environment, Float } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import * as THREE from 'three'
 import Eyebrow from './ui/Eyebrow'
@@ -93,10 +93,7 @@ export default function Business() {
                   <Suspense fallback={null}>
                     <MossLeaf />
                     <AutoFit />
-                    <Environment resolution={64}>
-                      <Lightformer intensity={2.2} color="#fff2d0" position={[0, 2, 4]} scale={5} />
-                      <Lightformer intensity={1.1} color="#c8a24c" position={[-3, -1, -2]} scale={4} />
-                    </Environment>
+                    <Environment preset="sunset" />
                   </Suspense>
                 </Canvas>
               </LeafBoundary>

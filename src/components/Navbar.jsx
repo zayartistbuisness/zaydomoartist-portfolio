@@ -1,93 +1,74 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const links = [
-  { label: 'Acting', href: '#acting' },
-  { label: 'Production', href: '#music' },
-  { label: 'Business', href: '#business' },
-  { label: 'Directing', href: '#directing' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Origin',     href: '#hero' },
+  { label: 'Signal',     href: '#signal' },
+  { label: 'Genesis',    href: '#about' },
+  { label: 'Screen',     href: '#acting' },
+  { label: 'Frequency',  href: '#music' },
+  { label: 'Empire',     href: '#business' },
+  { label: 'Vision',     href: '#directing' },
+  { label: 'MOSS Algo',  href: '/moss', isRoute: true },
+  { label: 'Contact',    href: '#contact' },
 ]
 
-export default function Navbar({ activeSection }) {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+export default function Navbar() {
+  const [open, setOpen] = useState(false)
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 0.2, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-midnight/90 backdrop-blur-md border-b border-white/5' : ''
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
-          <a href="#hero" className="text-sm tracking-[0.3em] uppercase font-light hover:text-gold transition-colors duration-300">
-            Zay Domo
-          </a>
+      {/* Mobile-only hamburger (desktop uses HUD + right rail) */}
+      <div className="md:hidden fixed top-4 right-4 z-[60]">
+        <button
+          onClick={() => setOpen(!open)}
+          data-cursor={open ? 'CLOSE' : 'MENU'}
+          className="w-10 h-10 flex items-center justify-center border border-ivory/20 bg-obsidian/80 backdrop-blur-sm text-ivory"
+        >
+          {open ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      </div>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-10">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`text-[11px] tracking-[0.2em] uppercase transition-all duration-300 ${
-                  activeSection === link.href.slice(1)
-                    ? 'text-white'
-                    : 'text-silver hover:text-white'
-                }`}
-              >
-                {link.label}
-                {activeSection === link.href.slice(1) && (
-                  <motion.div layoutId="nav-dot" className="h-[1px] bg-gold mt-1" />
-                )}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-white bg-transparent border-none p-2"
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </motion.nav>
-
-      {/* Mobile menu */}
       <AnimatePresence>
-        {mobileOpen && (
+        {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-midnight/98 backdrop-blur-xl flex flex-col items-center justify-center gap-10"
+            className="fixed inset-0 z-50 bg-obsidian/98 backdrop-blur-xl flex flex-col items-start justify-center gap-6 px-10 md:hidden"
           >
+            <p className="font-mono-hud text-gold mb-4">INDEX · TRANSMISSIONS</p>
             {links.map((link, i) => (
-              <motion.a
+              <motion.div
                 key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
-                className="text-2xl tracking-[0.2em] uppercase font-light text-white hover:text-gold transition-colors"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                transition={{ delay: i * 0.05, duration: 0.4 }}
+                className="flex items-baseline gap-4"
               >
-                {link.label}
-              </motion.a>
+                <span className="font-mono-hud text-silver w-8">0{i + 1}</span>
+                {link.isRoute ? (
+                  <Link
+                    to={link.href}
+                    onClick={() => setOpen(false)}
+                    className="font-serif text-3xl italic text-ivory"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="font-serif text-3xl italic text-ivory"
+                  >
+                    {link.label}
+                  </a>
+                )}
+              </motion.div>
             ))}
           </motion.div>
         )}

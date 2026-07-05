@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
@@ -10,16 +10,12 @@ import Directing from './components/Directing'
 import Contact from './components/Contact'
 import Loader from './components/Loader'
 import Navbar from './components/Navbar'
+import Cursor from './components/Cursor'
+import HUD from './components/HUD'
 
 function App() {
   const [loading, setLoading] = useState(true)
-  const [activeSection, setActiveSection] = useState('')
-  const mainRef = useRef(null)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2800)
-    return () => clearTimeout(timer)
-  }, [])
+  const [activeSection, setActiveSection] = useState('hero')
 
   useEffect(() => {
     if (loading) return
@@ -27,27 +23,28 @@ function App() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
         })
       },
-      { threshold: 0.3 }
+      { threshold: 0.35 }
     )
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
   }, [loading])
 
   return (
-    <div className="film-grain">
+    <div className="film-grain vignette scanlines">
+      <Cursor />
+
       <AnimatePresence mode="wait">
-        {loading && <Loader key="loader" />}
+        {loading && <Loader key="loader" onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
       {!loading && (
         <>
-          <Navbar activeSection={activeSection} />
-          <main ref={mainRef}>
+          <HUD activeSection={activeSection} />
+          <Navbar />
+          <main>
             <Hero />
             <Marquee />
             <About />

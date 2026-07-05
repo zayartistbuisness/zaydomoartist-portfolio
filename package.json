@@ -11,10 +11,18 @@
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@gltf-transform/core": "^4.3.0",
+    "@gltf-transform/extensions": "^4.3.0",
+    "@gltf-transform/functions": "^4.3.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "framer-motion": "^12.35.0",
     "lucide-react": "^0.577.0",
+    "meshoptimizer": "^1.1.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.14.0",
+    "three": "^0.175.0"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.26.0",

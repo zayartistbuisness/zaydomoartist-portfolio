@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "preview": "npm run build && wrangler dev -c dist/zaydomoartist_portfolio/wrangler.json",
+    "deploy": "npm run build && wrangler deploy -c dist/zaydomoartist_portfolio/wrangler.json",
+    "db:migrate": "wrangler d1 execute zaydomo-portfolio --remote --file=./migrations/0001_init.sql",
+    "db:migrate:local": "wrangler d1 execute zaydomo-portfolio --local --file=./migrations/0001_init.sql"
   },
   "dependencies": {
     "@gltf-transform/core": "^4.3.0",

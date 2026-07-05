@@ -1,211 +1,112 @@
 import { motion } from 'framer-motion'
+import Eyebrow from './ui/Eyebrow'
+import Reveal from './ui/Reveal'
+import { inView, stagger, fadeUp, easeLux } from '../lib/motion'
 
 const stills = [
-  { src: '/headshots/keon-still-1.jpg', alt: 'Gym · Hand-wrapping',    time: '00:04:12' },
-  { src: '/headshots/keon-still-2.jpg', alt: 'Foster care · Office',   time: '00:18:55' },
-  { src: '/headshots/keon-still-3.jpg', alt: 'Shadow boxing · Mirror', time: '00:37:08' },
-  { src: '/headshots/keon-still-4.jpg', alt: 'Ring · Corner',          time: '01:24:39' },
+  { src: '/headshots/keon-still-1.jpg', label: 'Gym · Hand-wrapping' },
+  { src: '/headshots/keon-still-2.jpg', label: 'Foster Care · Office' },
+  { src: '/headshots/keon-still-3.jpg', label: 'Shadow Boxing · Mirror' },
+  { src: '/headshots/keon-still-4.jpg', label: 'Ring · Corner' },
+]
+
+const credits = [
+  { l: 'Director', v: 'Zay “Domo” Artist' },
+  { l: 'Writer', v: 'Zay “Domo” Artist' },
+  { l: 'Genre', v: 'Drama' },
+  { l: 'Status', v: 'In Development', gold: true },
 ]
 
 /**
- * KEON — viewfinder / film-strip treatment.
- * Scroll-revealed slates, screenplay-formatted synopsis, director credit card.
+ * Directing — Keon, presented as a film work. Poster, synopsis, and a
+ * contact sheet of frames. No clapperboard theatrics.
  */
 export default function Directing() {
   return (
-    <section id="directing" className="relative py-28 md:py-44 px-6 md:px-16 overflow-hidden bg-charcoal/30">
-      {/* Watermark */}
-      <span className="pointer-events-none absolute right-0 top-16 font-display text-[22vw] md:text-[14vw] text-ivory/[0.025] leading-none select-none whitespace-nowrap">
-        VISION
-      </span>
-
-      <div className="relative max-w-7xl mx-auto">
-        {/* Section header */}
-        <div className="grid grid-cols-12 items-end gap-8 mb-16 md:mb-24">
-          <div className="col-span-12 md:col-span-3">
-            <p className="font-mono-hud text-gold mb-3">06 / VISION</p>
-            <p className="font-mono-hud text-silver">DIRECTING · WRITING</p>
-          </div>
-          <div className="col-span-12 md:col-span-9">
-            <h2 className="font-serif text-fluid-big font-light text-ivory leading-none">
-              The only way out <span className="italic text-gold">is through.</span>
-            </h2>
-          </div>
+    <section id="directing" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-obsidian">
+      <div className="max-w-[1600px] mx-auto">
+        {/* Header */}
+        <div className="mb-16 md:mb-24">
+          <Reveal y={20}><Eyebrow index="V">Directing · Writing</Eyebrow></Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="mt-7 font-serif italic font-light text-ivory leading-[0.9] text-[clamp(2.6rem,6vw,5.5rem)]">Keon</h2>
+          </Reveal>
         </div>
 
-        {/* Slate header — clapperboard treatment */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9 }}
-          className="border border-ivory/20 bg-obsidian/60 mb-12 md:mb-20"
-        >
-          <div className="grid grid-cols-12 text-xs md:text-sm">
-            <div className="col-span-3 border-r border-ivory/20 p-4 md:p-6">
-              <p className="font-mono-hud text-silver mb-1">PRODUCTION</p>
-              <p className="font-display text-lg md:text-3xl text-ivory">KEON</p>
-            </div>
-            <div className="col-span-3 border-r border-ivory/20 p-4 md:p-6">
-              <p className="font-mono-hud text-silver mb-1">DIRECTOR</p>
-              <p className="font-mono text-[11px] md:text-base text-ivory">ZAY "DOMO" ARTIST</p>
-            </div>
-            <div className="col-span-3 border-r border-ivory/20 p-4 md:p-6">
-              <p className="font-mono-hud text-silver mb-1">DATE</p>
-              <p className="font-mono text-[11px] md:text-base text-ivory">2027 · PLANNED</p>
-            </div>
-            <div className="col-span-3 p-4 md:p-6">
-              <p className="font-mono-hud text-silver mb-1">TAKE</p>
-              <p className="font-mono text-[11px] md:text-base text-gold">FIRST · ROLL</p>
-            </div>
-          </div>
-          {/* Stripe pattern bottom */}
-          <div className="h-4 bg-[repeating-linear-gradient(90deg,#c9a84c_0,#c9a84c_14px,#050506_14px,#050506_28px)]" />
-        </motion.div>
-
-        {/* Main: poster + screenplay synopsis */}
-        <div className="grid grid-cols-12 gap-8 md:gap-12 items-start">
+        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
+          {/* Poster */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            className="col-span-12 md:col-span-5 relative"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-12%' }}
+            transition={{ duration: 1.2, ease: easeLux }}
+            className="col-span-12 md:col-span-5"
           >
-            <div className="relative aspect-[2/3] overflow-hidden">
-              <img
-                src="/headshots/keon-poster.jpg"
-                alt="KEON — Official Poster"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian/70 via-transparent to-transparent" />
-              {/* Corner markers */}
-              {['top-3 left-3 border-t border-l', 'top-3 right-3 border-t border-r', 'bottom-3 left-3 border-b border-l', 'bottom-3 right-3 border-b border-r'].map((c, i) => (
-                <div key={i} className={`absolute w-6 h-6 border-gold/60 ${c}`} />
-              ))}
-              <div className="absolute top-4 left-4 flex items-center gap-2">
-                <span className="block w-2 h-2 rounded-full bg-blood animate-pulse-glow" />
-                <span className="font-mono-hud text-ivory">REC · IN DEVELOPMENT</span>
-              </div>
-            </div>
-
-            {/* Film info strip */}
-            <div className="grid grid-cols-3 mt-4 text-center border border-ivory/10 divide-x divide-ivory/10">
-              <div className="py-3">
-                <p className="font-mono-hud text-silver">GENRE</p>
-                <p className="font-mono-hud text-ivory mt-1">DRAMA</p>
-              </div>
-              <div className="py-3">
-                <p className="font-mono-hud text-silver">FORMAT</p>
-                <p className="font-mono-hud text-ivory mt-1">FEATURE</p>
-              </div>
-              <div className="py-3">
-                <p className="font-mono-hud text-silver">STATUS</p>
-                <p className="font-mono-hud text-gold mt-1">DEV</p>
+            <div className="relative aspect-[2/3] overflow-hidden border border-ivory/[0.08]">
+              <img src="/headshots/keon-poster.jpg" alt="Keon — poster" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(6,6,7,0.6), transparent 45%)' }} />
+              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                <span className="text-[10px] tracking-[0.3em] uppercase text-bone/70">Feature · Drama</span>
+                <span className="text-[10px] tracking-[0.3em] uppercase text-gold">2027</span>
               </div>
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: 0.15 }}
-            className="col-span-12 md:col-span-7"
-          >
-            <p className="font-mono-hud text-gold mb-4">FEATURED · SCREENPLAY · ORIGINAL</p>
-            <h3 className="font-serif text-5xl md:text-7xl italic font-light text-ivory leading-none mb-10">Keon</h3>
+          {/* Synopsis */}
+          <div className="col-span-12 md:col-span-7 md:pt-2">
+            <Reveal>
+              <p className="font-editorial italic text-2xl md:text-3xl text-bone/90 leading-snug mb-9">
+                A feature — written and directed by Zay.
+              </p>
+            </Reveal>
+            <motion.div {...inView} variants={stagger(0.12)} className="space-y-6 text-bone/75 text-[15px] md:text-[17px] leading-relaxed font-light max-w-2xl">
+              <motion.p variants={fadeUp}>
+                After witnessing his mother's overdose at ten, a foster youth named Keon survives six
+                years of institutional invisibility in rural Central Florida — before finding purpose in
+                a rundown boxing gym run by a grieving former champion.
+              </motion.p>
+              <motion.p variants={fadeUp}>
+                As Keon fights for a chance at adoption, and his coach fights to stay sober, both learn
+                that the only way out of the past is through it. One round at a time.
+              </motion.p>
+            </motion.div>
 
-            {/* Screenplay-style synopsis */}
-            <div className="border-l-2 border-gold/50 pl-6 md:pl-8 space-y-6 font-mono text-[13px] md:text-sm text-bone leading-relaxed">
-              <p>
-                <span className="text-gold">FADE IN:</span>
-              </p>
-              <p>
-                <span className="text-ivory uppercase">EXT. CENTRAL FLORIDA — BOXING GYM — DAY</span>
-              </p>
-              <p>
-                After witnessing his mother's overdose at ten years old, a foster youth named
-                <span className="text-ivory"> KEON </span>
-                survives six years of institutional invisibility in rural Central Florida before
-                finding purpose in a rundown boxing gym run by a grieving former champion.
-              </p>
-              <p>
-                As Keon fights for a chance at adoption — and his coach fights to stay sober —
-                both discover that the only way out of the past is <span className="italic text-gold">through it</span>.
-              </p>
-              <p>
-                One round at a time.
-              </p>
-              <p className="text-gold">
-                FADE OUT.
-              </p>
-            </div>
-
-            {/* Credits */}
-            <div className="grid grid-cols-2 gap-8 mt-12 border-t border-ivory/10 pt-8">
-              {[
-                { label: 'DIRECTOR', value: 'Zay "Domo" Artist' },
-                { label: 'WRITER',   value: 'Zay "Domo" Artist' },
-                { label: 'GENRE',    value: 'Drama' },
-                { label: 'STATUS',   value: 'In Development', gold: true },
-              ].map((c) => (
-                <div key={c.label}>
-                  <p className="font-mono-hud text-silver mb-2">{c.label}</p>
-                  <p className={`font-serif text-lg ${c.gold ? 'text-gold' : 'text-ivory'}`}>{c.value}</p>
-                </div>
+            <motion.div {...inView} variants={stagger(0.08)} className="grid grid-cols-2 gap-8 mt-12 border-t border-ivory/[0.08] pt-8 max-w-lg">
+              {credits.map((c) => (
+                <motion.div key={c.l} variants={fadeUp}>
+                  <p className="text-[10px] tracking-[0.28em] uppercase text-silver mb-2">{c.l}</p>
+                  <p className={`font-serif text-lg ${c.gold ? 'text-gold' : 'text-ivory'}`}>{c.v}</p>
+                </motion.div>
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Film stills — contact-sheet treatment */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="mt-24 md:mt-36"
-        >
-          <div className="flex items-baseline justify-between mb-8 border-t border-ivory/10 pt-8">
-            <p className="font-mono-hud text-silver">SELECTED FRAMES · CONTACT SHEET</p>
-            <p className="font-mono-hud text-silver hidden md:block">{stills.length} STILLS</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {stills.map((still, i) => (
-              <motion.div
-                key={still.src}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
+        {/* Frames */}
+        <div className="mt-24 md:mt-36">
+          <Reveal>
+            <p className="text-[10px] tracking-[0.34em] uppercase text-silver mb-8 border-t border-ivory/[0.08] pt-8">Selected Frames</p>
+          </Reveal>
+          <motion.div {...inView} variants={stagger(0.1)} className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {stills.map((s) => (
+              <motion.figure
+                key={s.src}
+                variants={fadeUp}
                 data-cursor="FRAME"
-                className="relative aspect-video overflow-hidden group border border-ivory/10 hover:border-gold/60 transition-all"
+                className="group relative aspect-video overflow-hidden border border-ivory/[0.08]"
               >
                 <img
-                  src={still.src}
-                  alt={still.alt}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  src={s.src}
+                  alt={s.label}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute top-2 left-2 right-2 flex items-start justify-between">
-                  <p className="font-mono-hud text-ivory bg-obsidian/60 px-2 py-1">
-                    {String(i + 1).padStart(2, '0')}
-                  </p>
-                  <p className="font-mono-hud text-gold bg-obsidian/60 px-2 py-1">
-                    {still.time}
-                  </p>
-                </div>
-                <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <p className="font-mono-hud text-ivory bg-obsidian/60 px-2 py-1">
-                    {still.alt.toUpperCase()}
-                  </p>
-                </div>
-              </motion.div>
+                <figcaption className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-obsidian/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="text-[10px] tracking-[0.24em] uppercase text-bone/85">{s.label}</span>
+                </figcaption>
+              </motion.figure>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

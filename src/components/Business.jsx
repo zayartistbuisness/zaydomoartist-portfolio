@@ -1,227 +1,140 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useRef, useMemo, useEffect, Component } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { useGLTF, Environment, Lightformer, Float } from '@react-three/drei'
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import * as THREE from 'three'
+import Eyebrow from './ui/Eyebrow'
+import Reveal from './ui/Reveal'
+import LuxButton from './ui/LuxButton'
+import { inView, stagger, fadeUp } from '../lib/motion'
 
-const sportsbooks = [
-  { name: 'DraftKings', src: '/brands/draftkings.svg' },
-  { name: 'FanDuel', src: '/brands/fanduel.png' },
-  { name: 'BetMGM', src: '/brands/betmgm.webp' },
-  { name: 'Fanatics Sportsbook', src: '/brands/fanatics.png' },
+const facts = [
+  { n: '15,000+', l: 'Members' },
+  { n: '#1', l: 'On Whop' },
+  { n: 'Every', l: 'Major US sportsbook' },
 ]
 
-function Counter({ target, duration = 1800, suffix = '' }) {
-  const [n, setN] = useState(0)
+function MossLeaf() {
+  const { scene } = useGLTF('/models/moss-logo-rotating-opt.glb')
+  const ref = useRef()
+  const cloned = useMemo(() => {
+    const c = scene.clone(true)
+    c.traverse((o) => {
+      if (o.isMesh) {
+        o.material = new THREE.MeshStandardMaterial({ color: '#c8a24c', metalness: 1, roughness: 0.18, envMapIntensity: 1.7 })
+      }
+    })
+    return c
+  }, [scene])
+  useFrame((s) => { if (ref.current) ref.current.rotation.y = s.clock.elapsedTime * 0.4 })
+  return (
+    <Float speed={1} rotationIntensity={0.2} floatIntensity={0.5}>
+      <primitive ref={ref} object={cloned} scale={3} />
+    </Float>
+  )
+}
+
+function AutoFit() {
+  const { camera, scene } = useThree()
   useEffect(() => {
-    let raf
-    const start = performance.now()
-    const tick = (now) => {
-      const p = Math.min((now - start) / duration, 1)
-      setN(Math.floor(target * (1 - Math.pow(1 - p, 3))))
-      if (p < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [target, duration])
-  return <>{n.toLocaleString()}{suffix}</>
+    const t = setTimeout(() => {
+      const box = new THREE.Box3().setFromObject(scene)
+      const size = box.getSize(new THREE.Vector3())
+      const center = box.getCenter(new THREE.Vector3())
+      const maxDim = Math.max(size.x, size.y, size.z)
+      if (!maxDim) return
+      const fov = camera.fov * (Math.PI / 180)
+      const dist = (maxDim / (2 * Math.tan(fov / 2))) * 1.5
+      camera.position.set(center.x, center.y, center.z + dist)
+      camera.lookAt(center)
+      camera.updateProjectionMatrix()
+    }, 120)
+    return () => clearTimeout(t)
+  }, [camera, scene])
+  return null
+}
+
+class LeafBoundary extends Component {
+  state = { err: false }
+  static getDerivedStateFromError() { return { err: true } }
+  render() {
+    return this.state.err
+      ? <div className="absolute inset-0 flex items-center justify-center"><img src="/moss/leaf-gold.png" alt="MOSS" className="w-1/2 opacity-80" /></div>
+      : this.props.children
+  }
 }
 
 /**
- * MOSS Algorithm — financial-terminal aesthetic.
- * Ticker-tape stats, terminal-style printout, hero trophy photo.
+ * MOSS Algorithm — the venture beyond the screen. A single 3D gold mark,
+ * the facts, and a door into the full page.
  */
 export default function Business() {
-  const [clock, setClock] = useState(new Date())
-  const [started, setStarted] = useState(false)
-
-  useEffect(() => {
-    const id = setInterval(() => setClock(new Date()), 1000)
-    return () => clearInterval(id)
-  }, [])
-
   return (
-    <section id="business" className="relative py-28 md:py-44 px-6 md:px-16 overflow-hidden bg-obsidian">
-      {/* Watermark */}
-      <span className="pointer-events-none absolute -left-10 top-24 font-display text-[22vw] md:text-[14vw] text-ivory/[0.025] leading-none select-none whitespace-nowrap">
-        MOSS·ALGO
-      </span>
-
-      <div className="relative max-w-7xl mx-auto">
-        {/* Section header */}
-        <div className="grid grid-cols-12 items-end gap-8 mb-16 md:mb-24">
-          <div className="col-span-12 md:col-span-3">
-            <p className="font-mono-hud text-gold mb-3">05 / EMPIRE</p>
-            <p className="font-mono-hud text-silver">BUSINESS · VENTURE</p>
-          </div>
-          <div className="col-span-12 md:col-span-9">
-            <h2 className="font-serif text-fluid-big font-light text-ivory leading-none">
-              Proof the vision <span className="italic text-gold">extends</span> beyond the screen.
+    <section id="business" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-onyx">
+      <div className="max-w-[1600px] mx-auto">
+        <div className="mb-16 md:mb-24">
+          <Reveal y={20}><Eyebrow index="IV">Venture</Eyebrow></Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="mt-7 font-serif font-light text-ivory leading-[0.9] text-[clamp(2.6rem,6vw,5.5rem)]">
+              MOSS <span className="italic text-gold-metallic">Algorithm</span>
             </h2>
-          </div>
+          </Reveal>
         </div>
 
-        {/* Ticker tape */}
-        <div className="relative overflow-hidden border-y border-gold/30 bg-charcoal/40 py-3 mb-16 md:mb-24">
-          <div className="flex items-center whitespace-nowrap animate-ticker">
-            {[
-              'MOSS ALGO',
-              '▲ 15,000+ ACTIVE MEMBERS',
-              '▲ #1 LARGEST COMMUNITY',
-              '▲ INTEGRATED W/ EVERY MAJOR US SPORTSBOOK',
-              '▲ WHOP CREATOR AWARDS · 10K & 5K MILESTONES',
-              '▲ FOUNDED BY Z.DOMO',
-            ].map((x, i) => (
-              <span key={i} className="font-mono-hud text-gold px-10 flex items-center gap-8">
-                {x}
-                <span className="text-blood">◆</span>
-              </span>
-            ))}
+        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
+          {/* 3D mark */}
+          <div className="col-span-12 md:col-span-6 order-2 md:order-1">
+            <div className="relative aspect-square max-w-md mx-auto">
+              <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(200,162,76,0.1), transparent 62%)' }} />
+              <LeafBoundary>
+                <Canvas camera={{ position: [0, 0, 6], fov: 40 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
+                  <ambientLight intensity={0.4} />
+                  <directionalLight position={[4, 5, 5]} intensity={2} color="#fff2d0" />
+                  <Suspense fallback={null}>
+                    <MossLeaf />
+                    <AutoFit />
+                    <Environment resolution={64}>
+                      <Lightformer intensity={2.2} color="#fff2d0" position={[0, 2, 4]} scale={5} />
+                      <Lightformer intensity={1.1} color="#c8a24c" position={[-3, -1, -2]} scale={4} />
+                    </Environment>
+                  </Suspense>
+                </Canvas>
+              </LeafBoundary>
+            </div>
           </div>
-        </div>
 
-        {/* Main 2-col: trophy | terminal */}
-        <div onMouseEnter={() => setStarted(true)} className="grid grid-cols-12 gap-8 md:gap-12 items-start">
-          {/* Trophy image with film treatment */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            className="col-span-12 md:col-span-6 relative"
-          >
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <img
-                src="/headshots/whop-trophy.jpg"
-                alt="Zay with Whop Creator Awards"
-                className="w-full h-full object-cover"
-              />
-              {/* Treatment */}
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent mix-blend-overlay" />
-              {/* Corner HUD */}
-              {['top-3 left-3 border-t border-l', 'top-3 right-3 border-t border-r', 'bottom-3 left-3 border-b border-l', 'bottom-3 right-3 border-b border-r'].map((c, i) => (
-                <div key={i} className={`absolute w-6 h-6 border-gold/60 ${c}`} />
+          {/* Copy */}
+          <div className="col-span-12 md:col-span-6 order-1 md:order-2">
+            <Reveal>
+              <p className="font-editorial italic text-2xl md:text-3xl text-bone/90 leading-snug mb-8">
+                One of the largest sports-analysis communities on the market — founded by Zay.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="text-bone/70 text-[15px] md:text-[17px] leading-relaxed font-light max-w-lg mb-10">
+                A members' community built around a proprietary model, integrated across every major
+                US sportsbook and recognized with Whop Creator Awards at its 5,000 and 10,000-member
+                milestones.
+              </p>
+            </Reveal>
+
+            <motion.div {...inView} variants={stagger(0.1)} className="grid grid-cols-3 gap-4 border-y border-ivory/[0.08] py-8 mb-10 max-w-lg">
+              {facts.map((f) => (
+                <motion.div key={f.l} variants={fadeUp}>
+                  <p className="font-serif font-light text-ivory text-3xl md:text-4xl leading-none">{f.n}</p>
+                  <p className="text-[10px] tracking-[0.24em] uppercase text-silver mt-2">{f.l}</p>
+                </motion.div>
               ))}
-              {/* Caption */}
-              <div className="absolute left-4 bottom-4 right-4 flex items-end justify-between">
-                <div>
-                  <p className="font-mono-hud text-gold">WHOP · CREATOR AWARDS</p>
-                  <p className="font-mono-hud text-ivory/80 mt-1">10,000 & 5,000 MEMBER MILESTONES</p>
-                </div>
-                <div className="text-right">
-                  <p className="font-mono-hud text-ivory">FRAME / 03</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Terminal printout */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: 0.15 }}
-            className="col-span-12 md:col-span-6"
-          >
-            <div className="border border-gold/20 bg-charcoal/30 p-6 md:p-8">
-              {/* Terminal header */}
-              <div className="flex items-center justify-between border-b border-ivory/10 pb-4 mb-6">
-                <div className="flex items-center gap-2">
-                  <span className="block w-2 h-2 rounded-full bg-blood" />
-                  <span className="block w-2 h-2 rounded-full bg-gold" />
-                  <span className="block w-2 h-2 rounded-full bg-ivory/70" />
-                  <span className="font-mono-hud text-silver ml-3">moss_algo@live : ~ $</span>
-                </div>
-                <span className="font-mono-hud text-silver">{clock.toISOString().slice(11, 19)} UTC</span>
-              </div>
-
-              <div className="font-mono text-xs md:text-sm text-bone space-y-2 mb-6">
-                <p><span className="text-gold">&gt;</span> status --community</p>
-                <p className="text-silver pl-4">COMMUNITY :: ACTIVE · 15,000+ MEMBERS</p>
-                <p><span className="text-gold">&gt;</span> report --partners</p>
-                <p className="text-silver pl-4">INTEGRATION :: ALL MAJOR US SPORTSBOOKS</p>
-                <p><span className="text-gold">&gt;</span> founder --query</p>
-                <p className="text-silver pl-4">FOUNDER :: ZAY "DOMO" ARTIST</p>
-              </div>
-
-              <h3 className="font-serif text-4xl md:text-6xl italic text-ivory leading-none mb-3">
-                MOSS<br/>
-                <span className="text-gold">Algorithm</span>
-              </h3>
-              <p className="font-mono-hud text-silver mb-6">ONE OF THE LARGEST SPORTS BETTING COMMUNITIES</p>
-
-              <p className="text-bone text-[15px] leading-relaxed font-light mb-8">
-                What started as a personal edge became an empire. Our proprietary algorithm is
-                currently used by <span className="text-ivory">every major sportsbook across the United States</span>.
-                Not a side project — the answer to the question everyone asks.
-              </p>
-
-              <Link
-                to="/moss"
-                data-cursor="LAUNCH"
-                className="inline-flex items-center gap-3 group"
-              >
-                <span className="flex items-center justify-center w-14 h-14 rounded-full border border-gold group-hover:bg-gold transition-colors">
-                  <ArrowUpRight size={18} className="text-gold group-hover:text-obsidian transition-colors" />
-                </span>
-                <span className="font-mono-hud text-ivory group-hover:text-gold transition-colors">
-                  ENTER MOSS ALGORITHM
-                </span>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Live stats */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          className="grid grid-cols-1 md:grid-cols-3 border-t border-ivory/10 mt-24 md:mt-32 divide-y md:divide-y-0 md:divide-x divide-ivory/10"
-        >
-          {[
-            { n: 15000, suffix: '+', l: 'ACTIVE MEMBERS', s: 'and counting' },
-            { n: 1, l: '#1 LARGEST COMMUNITY', s: 'on the market', prefix: true },
-            { n: 100, l: '% SPORTSBOOK COVERAGE', s: 'every major US book' },
-          ].map((stat) => (
-            <motion.div
-              key={stat.l}
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8 } } }}
-              className="py-10 md:py-14 px-0 md:px-10"
-            >
-              <p className="font-mono-hud text-gold mb-4">{stat.l}</p>
-              <p className="font-display text-[18vw] md:text-[8vw] leading-[0.8] text-ivory">
-                {stat.prefix ? '#' : ''}<Counter target={stat.n} suffix={stat.suffix || ''} />
-              </p>
-              <p className="text-silver text-sm mt-3">{stat.s}</p>
             </motion.div>
-          ))}
-        </motion.div>
 
-        {/* Sportsbook strip */}
-        <div className="mt-24">
-          <p className="font-mono-hud text-silver mb-8 flex items-center gap-3">
-            <span className="block w-8 h-[1px] bg-gold" />
-            ALGORITHM INTEGRATED ACROSS
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border border-ivory/10 p-8 md:p-12">
-            {sportsbooks.map((book) => (
-              <div
-                key={book.name}
-                data-cursor={book.name.toUpperCase()}
-                className="flex items-center justify-center h-12 md:h-16 group"
-              >
-                <img
-                  src={book.src}
-                  alt={book.name}
-                  className="h-full w-auto object-contain brightness-0 invert opacity-50 group-hover:opacity-100 transition-all duration-500 max-w-[180px]"
-                />
-              </div>
-            ))}
+            <Reveal delay={0.15}>
+              <LuxButton to="/moss" cursor="ENTER" variant="outline">Enter MOSS</LuxButton>
+            </Reveal>
           </div>
         </div>
       </div>
     </section>
   )
 }
+
+useGLTF.preload('/models/moss-logo-rotating-opt.glb')

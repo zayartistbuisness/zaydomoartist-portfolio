@@ -10,8 +10,7 @@ import Directing from './components/Directing'
 import Contact from './components/Contact'
 import Loader from './components/Loader'
 import Navbar from './components/Navbar'
-import Cursor from './components/Cursor'
-import HUD from './components/HUD'
+import Cursor from './components/ui/Cursor'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -33,7 +32,7 @@ function App() {
   }, [loading])
 
   return (
-    <div className="film-grain vignette scanlines">
+    <div className="film-grain vignette">
       <Cursor />
 
       <AnimatePresence mode="wait">
@@ -42,7 +41,6 @@ function App() {
 
       {!loading && (
         <>
-          <HUD activeSection={activeSection} />
           <Navbar />
           <main>
             <Hero />

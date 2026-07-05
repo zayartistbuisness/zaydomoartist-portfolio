@@ -1,14 +1,23 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "zaydomoartist-portfolio",
+  "main": "src/worker/index.js",
   "compatibility_date": "2025-09-27",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "observability": {
     "enabled": true
   },
   "assets": {
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
   },
-  "compatibility_flags": [
-    "nodejs_compat"
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "zaydomo-portfolio",
+      "database_id": "36c100d5-eca1-4446-8156-b908956475fe"
+    }
   ]
 }

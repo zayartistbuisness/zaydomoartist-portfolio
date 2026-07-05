@@ -9,6 +9,7 @@ import {
   Users, Trophy, Zap, Target, Activity, Leaf, Cpu, BookOpen,
   Landmark, Radio, Globe, Layers, Award, ChevronDown,
 } from 'lucide-react'
+import MossLeadForm from '../components/MossLeadForm'
 
 /* ══════════════════════════════════════════════
    3D COMPONENTS
@@ -1117,7 +1118,7 @@ export default function MossAlgorithm() {
             <p className="text-[#EFE8D4]/55 text-base md:text-lg font-light max-w-xl mx-auto mb-12 leading-relaxed">
               MOSS is the surgical extraction of capital from a market that prices averages — built by an intelligence that prices specifics. Not a better calculator. A deeper lens.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-col items-center gap-10">
               <a
                 href="https://whop.com/moss-algorithm"
                 target="_blank"
@@ -1127,13 +1128,10 @@ export default function MossAlgorithm() {
                 <Award size={14} />
                 Join the Community
               </a>
-              <a
-                href="mailto:contact@zaydomo.com"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full border moss-border-gold text-[10px] tracking-[0.25em] uppercase text-[#EFE8D4]/80 hover:text-[#C7B06E] hover:border-[#C7B06E] transition-all font-mono"
-              >
-                Request Investor Deck
-                <ArrowUpRight size={12} />
-              </a>
+              <div className="w-full">
+                <p className="font-mono text-[10px] tracking-[0.4em] uppercase moss-text-tan mb-5">Request the investor deck</p>
+                <MossLeadForm />
+              </div>
             </div>
             <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-[#EFE8D4]/25 mt-10">
               Accredited investors only · Past performance does not guarantee future results.

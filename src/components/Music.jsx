@@ -4,8 +4,7 @@ import { MeshDistortMaterial, Environment, Lightformer, Float } from '@react-thr
 import { motion } from 'framer-motion'
 import { Play, Pause, SkipBack, SkipForward } from 'lucide-react'
 import * as THREE from 'three'
-import Eyebrow from './ui/Eyebrow'
-import Reveal from './ui/Reveal'
+import SectionHeader from './ui/SectionHeader'
 
 const tracks = [
   { id: 1, title: 'Queen St', artist: 'Prod. Artist', file: '/music/queen-st.mp3' },
@@ -174,14 +173,17 @@ export default function Music() {
     <section id="music" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-obsidian">
       <audio ref={audioRef} crossOrigin="anonymous" preload="none" />
 
+      {/* the room's light breathes while a track plays */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(55% 45% at 50% 42%, rgba(200,162,76,0.10), transparent 70%)' }}
+        animate={playing ? { opacity: [0.5, 1, 0.5] } : { opacity: 0.25 }}
+        transition={playing ? { duration: 3.4, repeat: Infinity, ease: 'easeInOut' } : { duration: 1.2 }}
+      />
+
       <div className="max-w-[1600px] mx-auto">
-        {/* Header */}
-        <div className="mb-16 md:mb-24">
-          <Reveal y={20}><Eyebrow index="III">Music</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-7 font-serif font-light text-ivory leading-[0.9] text-[clamp(2.6rem,6vw,5.5rem)]">Sound</h2>
-          </Reveal>
-        </div>
+        <SectionHeader index="IV" label="Music" title={[{ text: 'Sound' }]} />
 
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
           {/* Sculpture */}

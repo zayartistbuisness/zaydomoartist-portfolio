@@ -52,6 +52,13 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Lenis drives the glide when active; CSS smooth would fight its
+   per-frame scroll writes, so it yields whenever Lenis is mounted. */
+html.lenis, html.lenis-smooth {
+  scroll-behavior: auto;
+}
+html.lenis-stopped { overflow: hidden; }
+
 body {
   margin: 0;
   background-color: #060607;

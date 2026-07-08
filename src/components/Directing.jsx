@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import Eyebrow from './ui/Eyebrow'
 import Reveal from './ui/Reveal'
+import SectionHeader from './ui/SectionHeader'
 import { inView, stagger, fadeUp, easeLux } from '../lib/motion'
 
 const stills = [
@@ -25,13 +25,7 @@ export default function Directing() {
   return (
     <section id="directing" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-obsidian">
       <div className="max-w-[1600px] mx-auto">
-        {/* Header */}
-        <div className="mb-16 md:mb-24">
-          <Reveal y={20}><Eyebrow index="V">Directing · Writing</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-7 font-serif italic font-light text-ivory leading-[0.9] text-[clamp(2.6rem,6vw,5.5rem)]">Keon</h2>
-          </Reveal>
-        </div>
+        <SectionHeader index="VI" label="Directing · Writing" title={[{ text: 'Keon', italic: true }]} />
 
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
           {/* Poster */}
@@ -56,7 +50,7 @@ export default function Directing() {
           <div className="col-span-12 md:col-span-7 md:pt-2">
             <Reveal>
               <p className="font-editorial italic text-2xl md:text-3xl text-bone/90 leading-snug mb-9">
-                A feature — written and directed by Zay.
+                A feature — written and directed by Zay. The material is close to home.
               </p>
             </Reveal>
             <motion.div {...inView} variants={stagger(0.12)} className="space-y-6 text-bone/75 text-[15px] md:text-[17px] leading-relaxed font-light max-w-2xl">

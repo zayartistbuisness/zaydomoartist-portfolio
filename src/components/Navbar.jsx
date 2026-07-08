@@ -6,8 +6,10 @@ import { easeLux } from '../lib/motion'
 const links = [
   { label: 'Genesis', href: '#about' },
   { label: 'Screen', href: '#acting' },
+  { label: 'Reel', href: '#reel' },
   { label: 'Sound', href: '#music' },
   { label: 'Directing', href: '#directing' },
+  { label: 'Press', href: '#press' },
   { label: 'MOSS', href: '/moss', route: true },
   { label: 'Contact', href: '#contact' },
 ]

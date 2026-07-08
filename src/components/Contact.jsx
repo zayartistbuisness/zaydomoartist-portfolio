@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ArrowRight, Check } from 'lucide-react'
-import Eyebrow from './ui/Eyebrow'
-import Reveal from './ui/Reveal'
+import SectionHeader from './ui/SectionHeader'
 import { easeLux } from '../lib/motion'
 
 const reps = [
@@ -64,14 +63,12 @@ export default function Contact() {
   return (
     <section id="contact" className="relative pt-28 md:pt-48 px-6 md:px-16 overflow-hidden bg-obsidian border-t border-ivory/[0.06]">
       <div className="max-w-[1600px] mx-auto">
-        <div className="mb-16 md:mb-24">
-          <Reveal y={20}><Eyebrow index="VI">Contact</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-7 font-serif font-light text-ivory leading-[0.9] text-[clamp(2.6rem,6vw,5.5rem)]">
-              Get in <span className="italic text-gold-metallic">touch</span>
-            </h2>
-          </Reveal>
-        </div>
+        <SectionHeader
+          index="VIII"
+          label="Contact"
+          title={[{ text: 'Get in' }, { text: 'touch', gold: true }]}
+          titleClass="text-[clamp(3.4rem,11.5vw,13rem)]"
+        />
 
         <div className="grid grid-cols-12 gap-12 md:gap-20 items-start">
           {/* Form */}

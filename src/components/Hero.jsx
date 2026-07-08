@@ -121,6 +121,33 @@ export default function Hero() {
         </div>
       </motion.div>
 
+      {/* ── Showreel chip ── */}
+      <motion.a
+        href="#reel"
+        data-cursor="REEL"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: easeLux, delay: 1.85 }}
+        className="group absolute bottom-9 right-6 md:right-16 z-10 hidden sm:flex items-center gap-4"
+      >
+        <div className="relative w-28 h-16 overflow-hidden border border-ivory/20 group-hover:border-gold/60 transition-colors duration-500">
+          <img
+            src="/reel/reel-poster.jpg"
+            alt=""
+            className="w-full h-full object-cover opacity-75 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          />
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="w-0 h-0 border-y-[5px] border-y-transparent border-l-[8px] border-l-ivory" />
+          </span>
+        </div>
+        <div>
+          <span className="block text-[10px] tracking-[0.4em] uppercase font-light text-bone/60 group-hover:text-gold transition-colors duration-500">
+            Showreel
+          </span>
+          <span className="block text-[10px] tracking-[0.2em] font-light text-bone/40 mt-1">6′19″</span>
+        </div>
+      </motion.a>
+
       {/* ── Enter cue ── */}
       <motion.a
         href="#about"

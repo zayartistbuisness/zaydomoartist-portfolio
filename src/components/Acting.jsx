@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
-import Eyebrow from './ui/Eyebrow'
 import Reveal from './ui/Reveal'
+import SectionHeader from './ui/SectionHeader'
 import { easeLux, inView, stagger, fadeUp } from '../lib/motion'
 
 const frames = [
@@ -87,20 +87,12 @@ export default function Acting() {
   return (
     <section id="acting" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-onyx">
       <div className="max-w-[1600px] mx-auto">
-        {/* Header */}
-        <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <div>
-            <Reveal y={20}><Eyebrow index="II">Acting</Eyebrow></Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="mt-7 font-serif font-light text-ivory leading-[0.9] text-[clamp(2.6rem,6vw,5.5rem)]">Screen</h2>
-            </Reveal>
-          </div>
-          <Reveal delay={0.2}>
-            <p className="text-silver text-sm font-light max-w-xs md:text-right">
-              Portrait series and selected credits — voice to motion capture to lead.
-            </p>
-          </Reveal>
-        </div>
+        <SectionHeader
+          index="II"
+          label="Acting"
+          title={[{ text: 'Screen' }]}
+          note="Portrait series and selected credits — voice to motion capture to lead."
+        />
 
         {/* Gallery: featured frame + selector */}
         <div
@@ -159,7 +151,7 @@ export default function Acting() {
                 className="group grid grid-cols-12 gap-3 md:gap-4 items-baseline border-b border-ivory/[0.07] py-5 md:py-6 transition-colors duration-500 hover:bg-ivory/[0.015]"
               >
                 <span className="col-span-2 md:col-span-1 text-silver text-sm font-light tabular-nums">{film.year}</span>
-                <span className="col-span-10 md:col-span-6 font-serif text-xl md:text-3xl font-light text-ivory group-hover:text-gold transition-colors duration-500 leading-tight">
+                <span className="col-span-10 md:col-span-6 font-serif text-xl md:text-3xl font-light text-ivory group-hover:text-gold transition-all duration-500 md:group-hover:translate-x-2 leading-tight">
                   {film.title}
                 </span>
                 <span className="col-span-6 md:col-span-3 text-silver text-xs md:text-sm font-light md:mt-0 mt-1">{film.role}</span>

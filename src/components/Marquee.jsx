@@ -62,7 +62,7 @@ export default function Marquee() {
           {doubledCredits.map((credit, i) => (
             <span
               key={`${credit}-${i}`}
-              className="font-editorial italic text-2xl md:text-4xl text-bone/35 whitespace-nowrap flex items-center gap-10 pr-10"
+              className="font-editorial italic text-4xl md:text-6xl text-bone/35 whitespace-nowrap flex items-center gap-10 pr-10"
             >
               {credit}
               <span className="text-gold/40 text-xs not-italic">◦</span>

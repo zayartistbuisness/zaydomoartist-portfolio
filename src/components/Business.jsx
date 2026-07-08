@@ -3,8 +3,8 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useGLTF, Environment, Float } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import * as THREE from 'three'
-import Eyebrow from './ui/Eyebrow'
 import Reveal from './ui/Reveal'
+import SectionHeader from './ui/SectionHeader'
 import LuxButton from './ui/LuxButton'
 import { inView, stagger, fadeUp } from '../lib/motion'
 
@@ -72,14 +72,7 @@ export default function Business() {
   return (
     <section id="business" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-onyx">
       <div className="max-w-[1600px] mx-auto">
-        <div className="mb-16 md:mb-24">
-          <Reveal y={20}><Eyebrow index="IV">Venture</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-7 font-serif font-light text-ivory leading-[0.9] text-[clamp(2.6rem,6vw,5.5rem)]">
-              MOSS <span className="italic text-gold-metallic">Algorithm</span>
-            </h2>
-          </Reveal>
-        </div>
+        <SectionHeader index="V" label="Venture" title={[{ text: 'MOSS' }, { text: 'Algorithm', gold: true }]} />
 
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
           {/* 3D mark */}

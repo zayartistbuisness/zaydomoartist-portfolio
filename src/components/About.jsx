@@ -66,7 +66,7 @@ export default function About() {
             </motion.div>
             <div className="mt-4 flex items-center justify-between">
               <span className="text-[10px] tracking-[0.3em] uppercase font-light text-silver">Zay “Domo” Artist</span>
-              <span className="text-[10px] tracking-[0.3em] uppercase font-light text-silver">Orlando, FL</span>
+              <span className="text-[10px] tracking-[0.3em] uppercase font-light text-silver">Los Angeles, CA</span>
             </div>
           </div>
 

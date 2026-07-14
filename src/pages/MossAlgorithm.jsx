@@ -104,10 +104,21 @@ function Counter({ target, suffix = '' }) {
 
 /* ══════════════ AMBIENT PARTICLES ══════════════ */
 function LeafParticles() {
-  const particles = useMemo(() => Array.from({ length: 16 }, (_, i) => ({
-    id: i, x: Math.random() * 100, y: Math.random() * 100, size: Math.random() * 3 + 1,
-    dur: Math.random() * 25 + 15, delay: Math.random() * 8, op: Math.random() * 0.1 + 0.03,
-  })), [])
+  const particles = useMemo(() => {
+    const seeded = (index, salt) => {
+      const value = Math.sin((index + 1) * 12.9898 + salt * 78.233) * 43758.5453
+      return value - Math.floor(value)
+    }
+    return Array.from({ length: 16 }, (_, i) => ({
+      id: i,
+      x: seeded(i, 1) * 100,
+      y: seeded(i, 2) * 100,
+      size: seeded(i, 3) * 3 + 1,
+      dur: seeded(i, 4) * 25 + 15,
+      delay: seeded(i, 5) * 8,
+      op: seeded(i, 6) * 0.1 + 0.03,
+    }))
+  }, [])
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {particles.map((p) => (

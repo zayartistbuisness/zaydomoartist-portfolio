@@ -61,7 +61,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative pt-28 md:pt-48 px-6 md:px-16 overflow-hidden bg-obsidian border-t border-ivory/[0.06]">
+    <section id="contact" className="relative px-6 pb-24 pt-28 overflow-hidden border-t border-ivory/[0.06] bg-obsidian md:px-16 md:pb-20 md:pt-48">
       <div className="max-w-[1600px] mx-auto">
         <SectionHeader
           index="VIII"

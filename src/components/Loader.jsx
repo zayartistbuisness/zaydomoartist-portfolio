@@ -3,9 +3,8 @@ import { motion } from 'framer-motion'
 import { easeLux, easeInOutLux, prefersReducedMotion } from '../lib/motion'
 
 /**
- * Cinematic intro — minimal and precise.
- * A gold hairline draws, the name is unveiled with a brushed-metal sweep,
- * a counter climbs to 100, then the whole panel lifts like a curtain.
+ * A brief first-visit title card. The portfolio is mounted underneath it so
+ * the hero image can load immediately, and repeat visits skip it entirely.
  */
 export default function Loader({ onComplete }) {
   const [progress, setProgress] = useState(0)
@@ -21,18 +20,21 @@ export default function Loader({ onComplete }) {
     }
 
     if (reduced.current) {
-      setProgress(100)
-      const t = setTimeout(finish, 500)
+      const t = setTimeout(() => {
+        setProgress(100)
+        finish()
+      }, 120)
       return () => clearTimeout(t)
     }
 
-    const total = 2000
+    const total = 850
     const start = performance.now()
     const tick = (now) => {
       const p = Math.min((now - start) / total, 1)
       // ease-out so it decelerates into 100
       setProgress(Math.round((1 - Math.pow(1 - p, 2.2)) * 100))
       if (p < 1) raf = requestAnimationFrame(tick)
+      else finish()
     }
     raf = requestAnimationFrame(tick)
 
@@ -41,7 +43,7 @@ export default function Loader({ onComplete }) {
     const guard = setTimeout(() => {
       setProgress(100)
       finish()
-    }, total + 700)
+    }, total + 250)
 
     return () => {
       cancelAnimationFrame(raf)
@@ -52,7 +54,9 @@ export default function Loader({ onComplete }) {
   return (
     <motion.div
       className="fixed inset-0 z-[100] bg-obsidian flex flex-col items-center justify-center overflow-hidden"
-      exit={{ y: '-100%', transition: { duration: 1.05, ease: easeInOutLux } }}
+      role="status"
+      aria-label="Opening Zay Domo Artist portfolio"
+      exit={{ opacity: 0, transition: { duration: 0.45, ease: easeInOutLux } }}
     >
       {/* soft radial breath behind the name */}
       <div
@@ -65,7 +69,7 @@ export default function Loader({ onComplete }) {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: easeLux, delay: 0.1 }}
+          transition={{ duration: 0.45, ease: easeLux }}
           className="label-mono text-silver mb-8"
           style={{ letterSpacing: '0.5em' }}
         >
@@ -79,7 +83,7 @@ export default function Loader({ onComplete }) {
                 className={`inline-block ${i === 1 ? 'italic text-gold-metallic' : ''}`}
                 initial={{ y: '115%' }}
                 animate={{ y: '0%' }}
-                transition={{ duration: 1, ease: easeLux, delay: 0.25 + i * 0.13 }}
+                transition={{ duration: 0.62, ease: easeLux, delay: 0.08 + i * 0.07 }}
               >
                 {i === 1 ? '“Domo”' : word}
               </motion.span>
@@ -91,7 +95,7 @@ export default function Loader({ onComplete }) {
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 1.3, ease: easeInOutLux, delay: 0.5 }}
+          transition={{ duration: 0.62, ease: easeInOutLux, delay: 0.16 }}
           className="mx-auto mt-10 h-px w-56 origin-center"
           style={{ background: 'linear-gradient(to right, transparent, rgba(200,162,76,0.7), transparent)' }}
         />
@@ -99,7 +103,7 @@ export default function Loader({ onComplete }) {
 
       {/* Counter */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-baseline gap-3">
-        <span className="label-mono text-silver">LOADING</span>
+        <span className="label-mono text-silver">OPENING</span>
         <span className="font-serif text-ivory text-lg tabular-nums">
           {progress.toString().padStart(3, '0')}
         </span>

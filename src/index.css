@@ -67,12 +67,8 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: none;
+  cursor: auto;
   font-feature-settings: "ss01", "cv01", "cv11";
-}
-
-@media (max-width: 768px) {
-  body { cursor: auto; }
 }
 
 #root { max-width: 100%; margin: 0; padding: 0; }
@@ -196,11 +192,13 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   CUSTOM CURSOR reset (custom cursor component handles rendering)
+   KEYBOARD FOCUS
+   A restrained gold outline keeps interactive controls easy to follow.
    ══════════════════════════════════════════════════════════════ */
-a, button, [role="button"], input, textarea, select { cursor: none; }
-@media (max-width: 768px) {
-  a, button, [role="button"], input, textarea, select { cursor: pointer; }
+:where(a, button, summary, input, textarea, select, [role="button"], [role="link"], [tabindex]):focus-visible {
+  outline: 1px solid var(--color-gold-light);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 1px rgba(6, 6, 7, 0.88), 0 0 0 4px rgba(200, 162, 76, 0.16);
 }
 
 /* ══════════════════════════════════════════════════════════════

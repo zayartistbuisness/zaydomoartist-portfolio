@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { easeLux } from '../lib/motion'
 
 const links = [
-  { label: 'Genesis', href: '#about' },
-  { label: 'Screen', href: '#acting' },
+  { label: 'Story', href: '#about' },
+  { label: 'Acting', href: '#acting' },
   { label: 'Reel', href: '#reel' },
-  { label: 'Sound', href: '#music' },
+  { label: 'Music', href: '#music' },
   { label: 'Directing', href: '#directing' },
   { label: 'Press', href: '#press' },
   { label: 'MOSS', href: '/moss', route: true },

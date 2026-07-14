@@ -23,7 +23,9 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // Framer Motion's namespaced JSX (`motion.div`) is not recognized as a
+      // variable use by the base rule, so keep that one conventional alias.
+      'no-unused-vars': ['error', { varsIgnorePattern: '^(motion|[A-Z_])' }],
     },
   },
 ])

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, Suspense, Component } from 'react'
+import { useCallback, useEffect, useRef, useState, Suspense, Component } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { MeshDistortMaterial, Environment, Lightformer, Float } from '@react-three/drei'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { Play, Pause, SkipBack, SkipForward } from 'lucide-react'
 import * as THREE from 'three'
 import SectionHeader from './ui/SectionHeader'
@@ -74,6 +74,7 @@ class OrbBoundary extends Component {
 }
 
 export default function Music() {
+  const sectionRef = useRef(null)
   const audioRef = useRef(null)
   const analyserRef = useRef(null)
   const dataRef = useRef(null)
@@ -85,6 +86,47 @@ export default function Music() {
   const [progress, setProgress] = useState(0)
   const [duration, setDuration] = useState(0)
   const [elapsed, setElapsed] = useState(0)
+  const orbNear = useInView(sectionRef, { margin: '500px 0px' })
+
+  const ensureAnalyser = useCallback(() => {
+    if (analyserRef.current) return
+    const Ctx = window.AudioContext || window.webkitAudioContext
+    const ctx = new Ctx()
+    const src = ctx.createMediaElementSource(audioRef.current)
+    const analyser = ctx.createAnalyser()
+    analyser.fftSize = 256
+    src.connect(analyser)
+    analyser.connect(ctx.destination)
+    ctxRef.current = ctx
+    srcRef.current = src
+    analyserRef.current = analyser
+    dataRef.current = new Uint8Array(analyser.frequencyBinCount)
+  }, [])
+
+  const play = useCallback((id) => {
+    const audio = audioRef.current
+    const track = tracks.find((t) => t.id === id)
+    if (current === id && playing) {
+      audio.pause()
+      setPlaying(false)
+      return
+    }
+    if (current === id) {
+      audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false))
+      return
+    }
+    setCurrent(id)
+    setProgress(0)
+    setElapsed(0)
+    setTimeout(() => {
+      audio.src = track.file
+      audio.play().then(() => {
+        ensureAnalyser()
+        if (ctxRef.current?.state === 'suspended') ctxRef.current.resume()
+        setPlaying(true)
+      }).catch(() => setPlaying(false))
+    }, 30)
+  }, [current, ensureAnalyser, playing])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -107,48 +149,7 @@ export default function Music() {
       audio.removeEventListener('loadedmetadata', onLoad)
       audio.removeEventListener('ended', onEnd)
     }
-  }, [current])
-
-  const ensureAnalyser = () => {
-    if (analyserRef.current) return
-    const Ctx = window.AudioContext || window.webkitAudioContext
-    const ctx = new Ctx()
-    const src = ctx.createMediaElementSource(audioRef.current)
-    const analyser = ctx.createAnalyser()
-    analyser.fftSize = 256
-    src.connect(analyser)
-    analyser.connect(ctx.destination)
-    ctxRef.current = ctx
-    srcRef.current = src
-    analyserRef.current = analyser
-    dataRef.current = new Uint8Array(analyser.frequencyBinCount)
-  }
-
-  const play = (id) => {
-    const audio = audioRef.current
-    const track = tracks.find((t) => t.id === id)
-    if (current === id && playing) {
-      audio.pause()
-      setPlaying(false)
-      return
-    }
-    if (current === id) {
-      audio.play()
-      setPlaying(true)
-      return
-    }
-    setCurrent(id)
-    setProgress(0)
-    setElapsed(0)
-    setTimeout(() => {
-      audio.src = track.file
-      audio.play().then(() => {
-        ensureAnalyser()
-        if (ctxRef.current?.state === 'suspended') ctxRef.current.resume()
-        setPlaying(true)
-      }).catch(() => {})
-    }, 30)
-  }
+  }, [current, play])
 
   const step = (dir) => {
     const idx = tracks.findIndex((t) => t.id === current)
@@ -170,7 +171,7 @@ export default function Music() {
   const cur = tracks.find((t) => t.id === current)
 
   return (
-    <section id="music" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-obsidian">
+    <section ref={sectionRef} id="music" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-obsidian">
       <audio ref={audioRef} crossOrigin="anonymous" preload="none" />
 
       {/* the room's light breathes while a track plays */}
@@ -190,21 +191,25 @@ export default function Music() {
           <div className="col-span-12 md:col-span-5">
             <div className="relative aspect-square">
               <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at 50% 45%, rgba(200,162,76,0.12), transparent 60%)' }} />
-              <OrbBoundary>
-                <Canvas camera={{ position: [0, 0, 4], fov: 45 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
-                  <ambientLight intensity={0.35} />
-                  <directionalLight position={[4, 5, 5]} intensity={2.2} color="#fff2d0" />
-                  <directionalLight position={[-4, -2, -3]} intensity={0.8} color="#c8a24c" />
-                  <Suspense fallback={null}>
-                    <SoundOrb analyserRef={analyserRef} dataRef={dataRef} />
-                    <Environment resolution={64}>
-                      <Lightformer intensity={2.4} color="#fff2d0" position={[0, 2, 4]} scale={5} />
-                      <Lightformer intensity={1.2} color="#c8a24c" position={[-3, -1, -2]} scale={4} />
-                      <Lightformer intensity={0.8} color="#ffffff" position={[3, 1, 2]} scale={3} />
-                    </Environment>
-                  </Suspense>
-                </Canvas>
-              </OrbBoundary>
+              {orbNear || playing ? (
+                <OrbBoundary>
+                  <Canvas camera={{ position: [0, 0, 4], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
+                    <ambientLight intensity={0.35} />
+                    <directionalLight position={[4, 5, 5]} intensity={2.2} color="#fff2d0" />
+                    <directionalLight position={[-4, -2, -3]} intensity={0.8} color="#c8a24c" />
+                    <Suspense fallback={null}>
+                      <SoundOrb analyserRef={analyserRef} dataRef={dataRef} />
+                      <Environment resolution={64}>
+                        <Lightformer intensity={2.4} color="#fff2d0" position={[0, 2, 4]} scale={5} />
+                        <Lightformer intensity={1.2} color="#c8a24c" position={[-3, -1, -2]} scale={4} />
+                        <Lightformer intensity={0.8} color="#ffffff" position={[3, 1, 2]} scale={3} />
+                      </Environment>
+                    </Suspense>
+                  </Canvas>
+                </OrbBoundary>
+              ) : (
+                <div className="absolute inset-[18%] rounded-full" aria-hidden style={{ background: 'radial-gradient(circle at 38% 32%, #ecd7a0 0%, #c8a24c 32%, #7c5f2a 72%, #17130b 100%)', boxShadow: '0 0 90px rgba(200,162,76,0.16)' }} />
+              )}
 
               {/* now playing caption */}
               <div className="absolute -bottom-2 left-0 right-0 text-center">
@@ -262,7 +267,7 @@ export default function Music() {
               <button onClick={() => step(1)} data-cursor="NEXT" className="text-silver hover:text-gold transition-colors"><SkipForward size={16} /></button>
 
               <span className="text-[11px] tabular-nums text-silver w-10 text-right">{fmt(elapsed)}</span>
-              <div className="flex-1 h-px bg-ivory/15 relative cursor-none" data-cursor="SEEK" onClick={seek}>
+              <div className="flex-1 h-px bg-ivory/15 relative cursor-pointer" data-cursor="SEEK" onClick={seek}>
                 <div className="absolute inset-y-[-4px] left-0 flex items-center" style={{ width: `${progress}%` }}>
                   <div className="w-full h-px bg-gold" />
                 </div>

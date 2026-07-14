@@ -1,7 +1,7 @@
 import { Suspense, useRef, useMemo, useEffect, Component } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useGLTF, Environment, Float } from '@react-three/drei'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import * as THREE from 'three'
 import Reveal from './ui/Reveal'
 import SectionHeader from './ui/SectionHeader'
@@ -69,8 +69,11 @@ class LeafBoundary extends Component {
  * the facts, and a door into the full page.
  */
 export default function Business() {
+  const sectionRef = useRef(null)
+  const markNear = useInView(sectionRef, { margin: '500px 0px' })
+
   return (
-    <section id="business" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-onyx">
+    <section ref={sectionRef} id="business" className="relative py-28 md:py-48 px-6 md:px-16 overflow-hidden bg-onyx">
       <div className="max-w-[1600px] mx-auto">
         <SectionHeader index="V" label="Venture" title={[{ text: 'MOSS' }, { text: 'Algorithm', gold: true }]} />
 
@@ -79,17 +82,21 @@ export default function Business() {
           <div className="col-span-12 md:col-span-6 order-2 md:order-1">
             <div className="relative aspect-square max-w-md mx-auto">
               <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(200,162,76,0.1), transparent 62%)' }} />
-              <LeafBoundary>
-                <Canvas camera={{ position: [0, 0, 6], fov: 40 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
-                  <ambientLight intensity={0.4} />
-                  <directionalLight position={[4, 5, 5]} intensity={2} color="#fff2d0" />
-                  <Suspense fallback={null}>
-                    <MossLeaf />
-                    <AutoFit />
-                    <Environment preset="sunset" />
-                  </Suspense>
-                </Canvas>
-              </LeafBoundary>
+              {markNear ? (
+                <LeafBoundary>
+                  <Canvas camera={{ position: [0, 0, 6], fov: 40 }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
+                    <ambientLight intensity={0.4} />
+                    <directionalLight position={[4, 5, 5]} intensity={2} color="#fff2d0" />
+                    <Suspense fallback={null}>
+                      <MossLeaf />
+                      <AutoFit />
+                      <Environment preset="sunset" />
+                    </Suspense>
+                  </Canvas>
+                </LeafBoundary>
+              ) : (
+                <img src="/moss/leaf-gold.png" alt="" aria-hidden className="absolute inset-1/4 w-1/2 h-1/2 object-contain opacity-70" />
+              )}
             </div>
           </div>
 

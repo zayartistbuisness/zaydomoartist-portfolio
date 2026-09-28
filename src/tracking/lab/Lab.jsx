@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import Lenis from 'lenis'
 import { setScroller, scrollToY } from '../kit/scroller'
 import { INTRO, FEATURED, OUTRO } from '../kit/chapters'
+import ChapterBoundary from '../kit/ChapterBoundary'
 import { getChapter } from '../kit/chapterStore'
 import LabScene from './LabScene'
 import { FONTS, ROWS, setActiveRow, clearActiveRow, registerLabElements } from './labStore'
@@ -32,10 +33,14 @@ function timecode(px) {
   return `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}:${pad(f % 24)}`
 }
 
+const NAV = [['about', 'About'], ['portraits', 'Portraits'], ['work', 'Work'], ['contact', 'Contact']]
+
 function ChapterBlock({ ch }) {
   return (
     <div id={ch.id} className="tlab-chapter" data-ground={ch.ground}>
-      <ch.Section />
+      <ChapterBoundary id={ch.id}>
+        <ch.Section />
+      </ChapterBoundary>
     </div>
   )
 }
@@ -127,6 +132,22 @@ export default function Lab() {
   // Tuning panel is a dev-only aid: hidden unless the URL carries ?tune.
   const [tune] = useState(() => new URLSearchParams(window.location.search).has('tune'))
   const [active, setActive] = useState(null)
+  const [menu, setMenu] = useState(false)
+
+  useEffect(() => {
+    if (!menu) return
+    const onKey = (e) => { if (e.key === 'Escape') setMenu(false) }
+    const html = document.documentElement
+    const prev = html.style.overflow
+    html.style.overflow = 'hidden'
+    window.__tlabLenis?.stop()
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      html.style.overflow = prev
+      window.__tlabLenis?.start()
+    }
+  }, [menu])
   const heroRef = useRef()
   const curtainRef = useRef()
   const slotRef = useRef()
@@ -137,8 +158,11 @@ export default function Lab() {
 
   useEffect(() => {
     document.documentElement.classList.add('tlab-html')
-    const lenis = new Lenis({ autoRaf: true, lerp: 0.13, wheelMultiplier: 1.15, touchMultiplier: 1.4 })
+    // Reduced motion: native scrolling, no smooth-scroll glide.
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const lenis = reduced ? null : new Lenis({ autoRaf: true, lerp: 0.13, wheelMultiplier: 1.15, touchMultiplier: 1.4 })
     if (import.meta.env.DEV) window.__lenis = lenis // lets browser QA jump to exact scroll positions
+    window.__tlabLenis = lenis
     setScroller(lenis)
     registerLabElements({ heroEl: heroRef.current, curtainEl: curtainRef.current, slotEl: slotRef.current })
     let raf
@@ -157,7 +181,7 @@ export default function Lab() {
     tick()
     return () => {
       cancelAnimationFrame(raf)
-      lenis.destroy()
+      lenis?.destroy()
       document.documentElement.classList.remove('tlab-html')
     }
   }, [])
@@ -186,16 +210,30 @@ export default function Lab() {
       <header className="tlab-hud">
         <a className="tlab-mark" href="#top"><span className="tlab-sigil" aria-hidden="true" />Zay “Domo” Artist<i className="rec" aria-hidden="true" /></a>
         <nav aria-label="Primary">
-          <a href="#about" onClick={(e) => jumpTo(e, 'about')}>About</a>
-          <a href="#portraits" onClick={(e) => jumpTo(e, 'portraits')}>Portraits</a>
-          <a href="#work" onClick={(e) => jumpTo(e, 'work')}>Work</a>
-          <a href="#contact" onClick={(e) => jumpTo(e, 'contact')}>Contact</a>
+          {NAV.map(([id, label]) => (
+            <a key={id} href={`#${id}`} onClick={(e) => jumpTo(e, id)}>{label}</a>
+          ))}
         </nav>
+        <button type="button" className="tlab-menu-btn" aria-expanded={menu} aria-controls="tlab-menu" onClick={() => setMenu((m) => !m)}>
+          {menu ? 'Close' : 'Menu'}
+        </button>
         <a className="tlab-casting" href="#representation" onClick={(e) => jumpTo(e, 'representation')}>Casting ↗</a>
         <div className="tlab-tc" aria-hidden="true">
           <i className="rec" /> <span ref={tcRef}>00:00:00:00</span>
         </div>
       </header>
+
+      {/* Phone menu: full-screen index of the page. */}
+      <nav id="tlab-menu" className={`tlab-menu${menu ? ' is-open' : ''}`} aria-label="Menu" aria-hidden={!menu} inert={!menu}>
+        <ol>
+          {[['top', 'Home'], ...NAV, ['su2', 'Streamer University 2'], ['keon', 'KEON'], ['memehouse', 'MemeHouse'], ['radar', 'On The Radar']].map(([id, label], i) => (
+            <li key={id} className={i > 4 ? 'is-sub' : ''}>
+              <a href={`#${id}`} onClick={(e) => { setMenu(false); jumpTo(e, id) }}>{label}</a>
+            </li>
+          ))}
+        </ol>
+        <a className="tlab-menu-casting" href="#representation" onClick={(e) => { setMenu(false); jumpTo(e, 'representation') }}>Casting &amp; representation ↗</a>
+      </nav>
 
       <main>
         <section id="top" ref={heroRef} className="tlab-hero" data-ground="light">

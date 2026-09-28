@@ -7,6 +7,7 @@ export function setScroller(lenis) {
 }
 
 export function scrollToY(y, opts = {}) {
-  if (instance) instance.scrollTo(y, { duration: 1.1, ...opts })
-  else window.scrollTo({ top: y, behavior: opts.immediate ? 'instant' : 'smooth' })
+  const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  if (instance && !reduced) instance.scrollTo(y, { duration: 1.1, ...opts })
+  else window.scrollTo({ top: y, behavior: opts.immediate || reduced ? 'instant' : 'smooth' })
 }

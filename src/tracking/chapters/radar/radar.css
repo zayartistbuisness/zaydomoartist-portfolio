@@ -136,7 +136,8 @@
 .c-radar-src { margin: 0; opacity: 0.6; }
 /* A card's photo caption. Where the floating caption beside the card is
    shown (wide screens), this copy stays for screen readers only; on narrow
-   or tall screens it is the visible caption. */
+   screens it is the visible caption. The query is the exact complement of
+   the narrow one: wider than 760px and wider than tall. */
 .c-radar-photo {
   flex-basis: 100%;
   margin: 0;
@@ -144,7 +145,7 @@
   line-height: 1.35;
   text-wrap: pretty;
 }
-@media (min-width: 761px) and (min-aspect-ratio: 4/5) {
+@media (min-width: 761px) and (min-aspect-ratio: 1001/1000) {
   .c-radar-log li:not(:focus-within) .c-radar-photo {
     position: absolute;
     width: 1px;
@@ -175,7 +176,7 @@
 }
 .c-radar-watch:focus-visible { outline: 1px solid var(--paper); outline-offset: 3px; }
 
-.c-radar-fine { margin: 12px 0 0; font-size: 9.5px; opacity: 0.45; }
+.c-radar-fine { margin: 12px 0 0; font-size: 9.5px; opacity: 0.6; }
 
 /* ── Pull-quote: Zay's words, held before the first contact. ── */
 .c-radar-quote {
@@ -286,9 +287,27 @@ html.c-radar-lock { overflow: hidden; }
 .c-radar-modal-src { margin: 0; opacity: 0.6; }
 .c-radar-modal-src a { color: inherit; }
 
-/* ── Phone: simplify. Title up top, the scope below, and the log becomes a
-   single line that follows the sweep (every row stays in the DOM). ── */
-@media (max-width: 760px) {
+/* ── Short landscape screens (1024 × 768, 1280 × 720 …): the column has to
+   hold the title, standfirst and all four log rows with their sources and
+   the footnote, so its rhythm tightens and the type steps down a little. ── */
+@media (max-height: 820px) and (min-width: 761px) and (min-aspect-ratio: 1001/1000) {
+  .c-radar-col { top: 106px; bottom: 20px; }
+  .c-radar-title { font-size: clamp(38px, min(4.7vw, 5.8vh), 64px); }
+  .c-radar-role { margin-top: 1.6vh; }
+  .c-radar-dates { margin-top: 0.6vh; }
+  .c-radar-standfirst { margin-top: 1.6vh; font-size: clamp(17px, 2.3vh, 20px); }
+  .c-radar-log li { padding: 7px 0 6px; }
+  .c-radar-go { row-gap: 3px; }
+  .c-radar-line { font-size: 14.5px; line-height: 1.16; }
+  .c-radar-meta { padding-top: 4px; gap: 3px 12px; }
+  .c-radar-fine { margin-top: 8px; }
+}
+
+/* ── Narrow: phones and any portrait screen (the scene switches with the
+   same query, NARROW_MQ in timeline.js). Title up top, the scope below, and
+   the log becomes a single line that follows the sweep (every row stays in
+   the DOM). ── */
+@media (max-width: 760px), (max-aspect-ratio: 1/1) {
   .c-radar-head { top: 62px; }
   .c-radar-head span:last-child { display: none; }
   .c-radar-markcap { bottom: 12vh; white-space: normal; text-align: center; width: 80vw; }
@@ -320,4 +339,27 @@ html.c-radar-lock { overflow: hidden; }
     font-size: 21px;
   }
   .c-radar-cap { display: none; }
+}
+
+/* ── Portrait tablets: the narrow composition at tablet scale: larger
+   type, a readable measure, and the quote set under the headline block
+   (col top + two title lines + role and dates). The scope still sizes
+   itself between the headline and the log row, measured by Section. ── */
+@media (min-width: 600px) and (max-aspect-ratio: 1/1) {
+  .c-radar-stage { --r-title: clamp(52px, 7vw, 68px); }
+  .c-radar-head { top: 70px; }
+  .c-radar-head span:last-child { display: inline; }
+  .c-radar-col { top: 106px; bottom: 26px; }
+  .c-radar-title { font-size: var(--r-title); }
+  .c-radar-role { margin-top: 16px; }
+  .c-radar-standfirst { margin-top: 16px; max-width: 26em; font-size: clamp(20px, 2.6vw, 24px); }
+  .c-radar-log { height: 136px; }
+  .c-radar-go .c-radar-line { font-size: 19px; }
+  .c-radar-meta { font-size: 10px; }
+  .c-radar-quote {
+    top: calc(106px + 1.8 * var(--r-title) + 76px);
+    right: auto;
+    width: min(620px, calc(100% - 2 * var(--gutter)));
+    font-size: clamp(26px, 3.6vw, 36px);
+  }
 }

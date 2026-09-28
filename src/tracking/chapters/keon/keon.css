@@ -6,6 +6,11 @@
   --k-head: 0;
   --k-rail: 0;
   --k-beat: 0;
+  /* Lower-right columns: the quote, then the caption rail. */
+  --k-col: min(350px, 25vw);
+  --k-colgap: clamp(28px, 3vw, 48px);
+  /* Knock-out halo: small type stays legible over stray line art. */
+  --k-halo: 0 0 2px #0f0f0e, 0 0 6px #0f0f0e, 0 0 14px #0f0f0e;
   position: relative;
   height: 600vh;
   color: var(--paper);
@@ -34,13 +39,17 @@
   padding-bottom: 12px;
   border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
   opacity: 0.72;
+  /* The strip's far arm runs up under the right end of this line. */
+  text-shadow: var(--k-halo);
 }
 
-/* Title block, upper left: arrives as the voxel doors swing open. */
+/* Title block, upper left: arrives as the voxel doors swing open. Set high
+   and tight so the tagline and role clear the strip's upper-left edge
+   (it runs close on 4:3 and 16:9 laptop screens). */
 .c-keon-head {
   position: absolute;
   text-shadow: 0 0 18px #0f0f0e, 0 0 3px #0f0f0e;
-  top: calc(74px + 7.5vh);
+  top: calc(74px + 5vh);
   left: var(--gutter);
   opacity: var(--k-head);
   transform: translateY(calc((1 - var(--k-head)) * 28px));
@@ -56,7 +65,7 @@
   text-transform: none;
 }
 .c-keon-line {
-  margin: 1.6vh 0 0;
+  margin: 1.3vh 0 0;
   font-family: var(--display);
   font-style: italic;
   font-size: clamp(20px, 1.85vw, 30px);
@@ -64,7 +73,7 @@
   letter-spacing: 0;
   text-transform: none;
 }
-.c-keon-role { margin: 2.4vh 0 0; opacity: 0.82; }
+.c-keon-role { margin: 2vh 0 0; opacity: 0.82; text-shadow: var(--k-halo); }
 .c-keon-rec {
   display: inline-block;
   width: 6px;
@@ -75,18 +84,21 @@
   vertical-align: middle;
 }
 
-/* His words, lower right, clear of the strip's diagonal. */
+/* His words, in the clear band under the gate: bottom-aligned with the rail,
+   one column to its left. The strip's flat run ends about a quarter of the
+   screen height above the bottom edge, and its lower-left arm stays left of
+   this column, so the quote never sits on the film. */
 .c-keon-quote {
   position: absolute;
-  right: var(--gutter);
-  bottom: calc(28px + 124px);
-  width: min(350px, 25vw);
+  right: calc(var(--gutter) + var(--k-col) + var(--k-colgap));
+  bottom: 28px;
+  width: var(--k-col);
   margin: 0;
   opacity: var(--k-head);
   transform: translateY(calc((1 - var(--k-head)) * 20px));
   pointer-events: none;
 }
-.c-keon-quote blockquote { margin: 0; text-shadow: 0 0 14px #0f0f0e, 0 0 3px #0f0f0e; }
+.c-keon-quote blockquote { margin: 0; text-shadow: var(--k-halo); }
 .c-keon-quote blockquote p {
   margin: 0;
   font-family: var(--display);
@@ -100,7 +112,7 @@
 .c-keon-quote blockquote p:first-child::before { content: '“'; }
 .c-keon-quote blockquote p:last-child::after { content: '”'; }
 .c-keon-quote blockquote p + p { margin-top: 0.1em; }
-.c-keon-quote figcaption { margin-top: 14px; font-size: 10px; opacity: 0.5; }
+.c-keon-quote figcaption { margin-top: 14px; font-size: 10px; opacity: 0.62; }
 
 /* The clear frame in the gate: the beat is set right on the lamp light. */
 .c-keon-beat {
@@ -124,11 +136,15 @@
   position: absolute;
   right: var(--gutter);
   bottom: 28px;
-  width: min(350px, 25vw);
+  width: var(--k-col);
   padding-top: 12px;
   border-top: 1px solid color-mix(in srgb, var(--paper) 22%, transparent);
   opacity: var(--k-rail);
 }
+/* Prev / Next stay reachable: keyboard focus shows the rail (as Radar's
+   column does) instead of focusing a control nobody can see. */
+.c-keon-rail:focus-within { opacity: 1; }
+.c-keon-stage:not(.is-live) .c-keon-rail { pointer-events: none; }
 .c-keon-cap {
   display: flex;
   align-items: baseline;
@@ -179,6 +195,7 @@
 .c-keon-nav { display: flex; gap: 14px; }
 .c-keon-nav button {
   all: unset;
+  position: relative;
   cursor: pointer;
   font-size: 10px;
   letter-spacing: 0.06em;
@@ -186,6 +203,16 @@
   border-bottom: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
   opacity: 0.78;
   transition: opacity 0.2s, border-color 0.2s;
+}
+/* A 44 × 44 hit area around the small label; the drawn button is unchanged. */
+.c-keon-nav button::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
 }
 .c-keon-nav button:hover,
 .c-keon-nav button:focus-visible { opacity: 1; border-color: var(--rec); }
@@ -201,7 +228,27 @@
 }
 
 
-@media (max-width: 760px) {
+/* Short landscape screens: the band under the strip is shallower, so the
+   quote sets a little smaller to keep clear of it. */
+@media (max-height: 820px) and (min-width: 761px) and (min-aspect-ratio: 1001/1000) {
+  .c-keon-quote blockquote p { font-size: clamp(17px, 2.6vh, 21px); }
+  .c-keon-quote figcaption { margin-top: 10px; }
+}
+
+/* Squarer landscape screens (4:3 to 3:2): the gate is width-limited, so the
+   strip's upper-left edge rises toward the title block. A smaller title and
+   a tighter rhythm lift the tagline and role clear of it (measured at
+   1024 × 768: the role now ends ~25px short of the stock edge). */
+@media (min-width: 761px) and (min-aspect-ratio: 1001/1000) and (max-aspect-ratio: 3/2) {
+  .c-keon-head { top: calc(74px + 4.5vh); }
+  .c-keon-title { font-size: clamp(72px, 7.6vw, 140px); }
+  .c-keon-line { margin-top: 6px; }
+  .c-keon-role { margin-top: 9px; }
+}
+
+/* Narrow: phones and any portrait screen. The same test drives the 3D
+   (timeline.js isNarrow), so the gate and this layout switch together. */
+@media (max-width: 760px), (max-aspect-ratio: 1/1) {
   .c-keon-tag { top: 64px; font-size: 9.5px; }
   .c-keon-head { top: calc(64px + 4.5vh); }
   .c-keon-title { font-size: clamp(56px, 17vw, 84px); }
@@ -219,4 +266,25 @@
   .c-keon-cap { font-size: 26px; }
   .c-keon-hint { display: none; }
   .c-keon-beat { font-size: 30px; }
+}
+
+/* Portrait tablets: the narrow composition set for a bigger page. The gate
+   is capped by height here (about 60% of the width), the title scales up,
+   and the quote and rail stack in a column docked lower right, clear of the
+   strip's arm running off the lower left. */
+@media (min-width: 600px) and (max-aspect-ratio: 1/1) {
+  .c-keon-tag { font-size: 11px; }
+  .c-keon-hint { display: inline; }
+  .c-keon-head { top: calc(64px + 4vh); }
+  .c-keon-title { font-size: clamp(84px, 12.5vw, 132px); }
+  .c-keon-line { font-size: 22px; margin-top: 10px; }
+  .c-keon-role { margin-top: 14px; }
+  .c-keon-quote,
+  .c-keon-rail { left: auto; width: min(440px, 58vw); }
+  .c-keon-quote { bottom: calc(24px + 122px); }
+  .c-keon-quote blockquote p { font-size: 21px; }
+  .c-keon-quote figcaption { margin-top: 10px; }
+  .c-keon-rail { bottom: 24px; }
+  .c-keon-cap { font-size: 30px; }
+  .c-keon-beat { font-size: 40px; }
 }

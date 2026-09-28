@@ -310,4 +310,10 @@ export function drawColophon(ctx, a) {
   folio(ctx, 6, 'left')
 }
 
+// Page names by folio (the number printed on each page; 0 is the cover).
 export const SPREAD_LABELS = ['Cover', 'Title page', 'Staff', 'Behind the broadcast', 'Superlatives', 'Graduation', 'Notes']
+
+// Folios visible at each spread of the book (YearbookModel spreadAt): the
+// closed cover, then left | right pages as the leaves turn. Endpapers carry
+// no folio, so the first and last spreads show a single numbered page.
+export const SPREAD_PAGES = [[0], [1], [2, 3], [4, 5], [6]]

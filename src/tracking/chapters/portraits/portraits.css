@@ -115,12 +115,23 @@
 }
 .c-portraits-nav button {
   all: unset;
+  position: relative;
   font-size: 10px;
   letter-spacing: 0.06em;
   padding: 4px 0 3px;
   border-bottom: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
   opacity: 0.8;
   transition: opacity 0.2s, border-color 0.2s;
+}
+/* A 44 × 44 hit area around the small label; the drawn button is unchanged. */
+.c-portraits-nav button::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
 }
 .c-portraits-nav button:hover,
 .c-portraits-nav button:focus-visible { opacity: 1; border-color: var(--rec); }

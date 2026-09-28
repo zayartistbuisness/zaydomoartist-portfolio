@@ -11,7 +11,7 @@ import VoxelMark from '../../three/VoxelMark'
 import { loadFormGeometry } from '../../three/forms'
 import { pointer } from '../../ink/pointer'
 import {
-  BASE, ID, KEYS, markProgress, presenceAt, roomFocusAlpha, roomLight, scrollToStop, tourAt, trackAt,
+  BASE, ID, KEYS, LAYOUT, markProgress, presenceAt, roomFocusAlpha, roomLight, scrollToStop, tourAt, trackAt,
 } from './timeline'
 import {
   H, U, box, buildShell, frameGeometry, makeBackingMaterial, makeBaseChrome, makeRoomMaterials, makeShadow, makeShellMaterial, roofY,
@@ -34,10 +34,107 @@ const hover = { room: -1 }
 // Where the model may sit on screen (fractions of the viewport), so the DOM
 // column and captions never sit on top of the room being shown.
 const SAFE_WIDE = { x0: 0.37, x1: 0.965, y0: 0.14, y1: 0.9 }
-// Narrow: the house sits a little high so the captions (which now carry
-// photo credits) have room below it.
-const SAFE_NARROW = { x0: 0.04, x1: 0.96, y0: 0.26, y1: 0.66 }
 const DRIFT = 0.075
+
+/*
+ * Narrow framing (phones and portrait tablets: NARROW_MQ, reported by
+ * Section as LAYOUT.on). There the DOM stacks the header on top and a
+ * caption at the bottom, and the band between them changes with every caption. So
+ * instead of fitting a flat box, each stop names the house-space points that
+ * must stay in view (the room's cut-plane frame and plinth, or the whole
+ * house) and the camera is solved to fit their perspective projection inside
+ * the band that Section measures (LAYOUT).
+ */
+const P_HOUSE = [
+  [-2.5, -0.16, -1.5], [2.5, -0.16, -1.5], [-2.5, -0.16, 1.52], [2.5, -0.16, 1.52],
+  [-2.4, 2.53, -1.36], [2.4, 2.53, -1.36], [-2.4, 2.53, 1.2], [2.4, 2.53, 1.2],
+  [0, 4.16, -1.36], [0, 4.16, 1.2],
+]
+const P_ARRIVE = P_HOUSE.map(([x, y, z]) => [x * 1.6, 2 + (y - 2) * 1.6, z * 1.6])
+const mirror = (list) => list.map(([x, y, z]) => [-x, y, z])
+const P_LOW_L = [[-2.26, -0.16, 1.52], [0.08, -0.16, 1.52], [-2.26, 1.62, 1.2], [0.08, 1.62, 1.2]]
+const P_UP_L = [[0.08, 1.5, 1.2], [-2.2, 1.5, 1.2], [-2.4, 2.39, 1.2], [-2.4, 2.53, 1.2], [0.08, 4.16, 1.2]]
+// Miami is seen from the right, so the outer wall and roof running back
+// from the cut plane are in view too and must not run off the edge.
+const P_UP_R = [...mirror(P_UP_L), [2.4, 2.39, -1.36], [2.4, 2.53, -1.36], [2.2, 1.5, -1.2], [0, 4.16, -1.36]]
+const NARROW_PTS = [P_ARRIVE, P_HOUSE, P_LOW_L, mirror(P_LOW_L), P_UP_L, P_UP_R, P_HOUSE]
+const NARROW_X = [0.045, 0.955]
+const GAP_TOP = 12 // px of paper under the header copy
+const GAP_BOTTOM = 16 // px above the caption rule
+// Depth cap on narrow screens: the house is shrunk toward the kit camera
+// (an identical projection) so it never falls behind the ground plane,
+// which writes depth 16 units out.
+const DMAX = 12.5
+const MAX_PTS = 16
+const _px = new Float32Array(MAX_PTS)
+const _py = new Float32Array(MAX_PTS)
+const _pz = new Float32Array(MAX_PTS)
+const FIT_A = { d: 0, sx: 0, sy: 0 }
+const FIT_B = { d: 0, sx: 0, sy: 0 }
+const FIT_H = { d: 0, sx: 0, sy: 0 }
+const _t = [0, 0, 0]
+const _scale = new THREE.Matrix4()
+
+/**
+ * Smallest dolly distance d (and lateral shift sx, sy in camera space) at
+ * which every point projects inside the safe rect (NDC x0..x1, y0..y1).
+ * Orientation is fixed by az/el; the look-at point is t. Closed form: for
+ * each axis, every pair of points bounds d from below.
+ */
+function fitPoints(pts, t, az, el, x0, x1, y0, y1, tx, ty, out) {
+  const sa = Math.sin(az)
+  const ca = Math.cos(az)
+  const se = Math.sin(el)
+  const ce = Math.cos(el)
+  const n = Math.min(pts.length, MAX_PTS)
+  for (let i = 0; i < n; i++) {
+    const dx = pts[i][0] - t[0]
+    const dy = pts[i][1] - t[1]
+    const dz = pts[i][2] - t[2]
+    _px[i] = dx * ca - dz * sa
+    _py[i] = -dx * se * sa + dy * ce - dz * se * ca
+    _pz[i] = dx * sa * ce + dy * se + dz * ca * ce
+  }
+  let d = 0.5
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      d = Math.max(
+        d,
+        (_px[j] - _px[i] + tx * (x1 * _pz[j] - x0 * _pz[i])) / (tx * (x1 - x0)),
+        (_py[j] - _py[i] + ty * (y1 * _pz[j] - y0 * _pz[i])) / (ty * (y1 - y0)),
+      )
+    }
+  }
+  let xl = -Infinity
+  let xh = Infinity
+  let yl = -Infinity
+  let yh = Infinity
+  for (let i = 0; i < n; i++) {
+    const k = d - _pz[i]
+    xl = Math.max(xl, x0 * k * tx - _px[i])
+    xh = Math.min(xh, x1 * k * tx - _px[i])
+    yl = Math.max(yl, y0 * k * ty - _py[i])
+    yh = Math.min(yh, y1 * k * ty - _py[i])
+  }
+  out.d = d
+  out.sx = (xl + xh) / 2
+  out.sy = (yl + yh) / 2
+  return out
+}
+
+/** Top of key i's caption (CSS px); key 0 (arrival) shares the first. */
+const capTop = (i, H) => LAYOUT.caps[Math.max(0, i - 1)] || H * 0.66
+
+/** Fit `pts` in the band from the header down to a caption top (px → NDC). */
+function fitBand(pts, cap, az, el, t, H, tx, ty, out) {
+  const top = LAYOUT.top + GAP_TOP
+  const bottom = Math.max(top + H * 0.12, cap - GAP_BOTTOM)
+  return fitPoints(
+    pts, t, az, el,
+    2 * NARROW_X[0] - 1, 2 * NARROW_X[1] - 1, 1 - (2 * bottom) / H, 1 - (2 * top) / H,
+    tx, ty, out,
+  )
+}
 
 const lerp = (a, b, t) => a + (b - a) * t
 const RESOLVE = [0, 1, 2, 3].map((r) => () => U.room[r].value)
@@ -375,12 +472,44 @@ function House() {
 
     // Solve the dolly distance so the framed box fits the layout's safe area.
     const cam = state.camera
-    const aspect = state.size.width / state.size.height
-    const S = aspect < 0.85 ? SAFE_NARROW : SAFE_WIDE
+    const W = state.size.width
+    const Hpx = state.size.height
+    const aspect = W / Hpx
     const tanH = Math.tan(THREE.MathUtils.degToRad(cam.fov) / 2)
-    const fit = Math.max(POSE.fh / (2 * tanH * (S.y1 - S.y0)), POSE.fw / (2 * tanH * aspect * (S.x1 - S.x0)))
-    const dist = fit * (1 + POSE.hop * 0.3)
-    const visH = 2 * dist * tanH
+    const hop = 1 + POSE.hop * 0.3
+    // One switch with the CSS: the same media query sets LAYOUT.on.
+    const narrow = LAYOUT.on
+    let dist
+    if (narrow) {
+      // Narrow: fit this stop's points between header and caption. Mid-move,
+      // both ends are fitted from the current angle and blended, and the
+      // dolly pulls back to the whole house (a room close-up at half-way
+      // would spill under the copy).
+      const tx = tanH * aspect
+      const a = TR.i
+      _t[0] = POSE.tx
+      _t[1] = POSE.ty
+      _t[2] = POSE.tz
+      fitBand(NARROW_PTS[a], capTop(a, Hpx), POSE.az, POSE.el, _t, Hpx, tx, tanH, FIT_A)
+      if (!TR.hold) {
+        const e = TR.e
+        const cap = lerp(capTop(a, Hpx), capTop(a + 1, Hpx), e)
+        fitBand(NARROW_PTS[a + 1], capTop(a + 1, Hpx), POSE.az, POSE.el, _t, Hpx, tx, tanH, FIT_B)
+        fitBand(P_HOUSE, cap, POSE.az, POSE.el, _t, Hpx, tx, tanH, FIT_H)
+        const h = POSE.hop
+        FIT_A.d = lerp(lerp(FIT_A.d, FIT_B.d, e), Math.max(FIT_H.d, lerp(FIT_A.d, FIT_B.d, e)), h)
+        FIT_A.sx = lerp(lerp(FIT_A.sx, FIT_B.sx, e), FIT_H.sx, h)
+        FIT_A.sy = lerp(lerp(FIT_A.sy, FIT_B.sy, e), FIT_H.sy, h)
+      }
+      dist = FIT_A.d
+      _shift.makeTranslation(FIT_A.sx, FIT_A.sy, 0)
+    } else {
+      const S = SAFE_WIDE
+      const fit = Math.max(POSE.fh / (2 * tanH * (S.y1 - S.y0)), POSE.fw / (2 * tanH * aspect * (S.x1 - S.x0)))
+      dist = fit * hop
+      const visH = 2 * dist * tanH
+      _shift.makeTranslation(((S.x0 + S.x1) / 2 - 0.5) * visH * aspect, (0.5 - (S.y0 + S.y1) / 2) * visH, 0)
+    }
     _tgt.set(POSE.tx, POSE.ty, POSE.tz)
     _eye.set(
       POSE.tx + dist * Math.sin(az) * Math.cos(el),
@@ -388,12 +517,18 @@ function House() {
       POSE.tz + dist * Math.cos(az) * Math.cos(el),
     )
     _view.lookAt(_eye, _tgt, _up).setPosition(_eye).invert()
-    _shift.makeTranslation(((S.x0 + S.x1) / 2 - 0.5) * visH * aspect, (0.5 - (S.y0 + S.y1) / 2) * visH, 0)
 
     // The kit camera never moves; the house is placed where it would appear
     // from the virtual camera: world = camera · shift · view⁻¹.
     cam.updateMatrixWorld()
-    g.matrix.copy(cam.matrixWorld).multiply(_shift).multiply(_view)
+    g.matrix.copy(cam.matrixWorld)
+    // Narrow screens dolly far out for the wide shots; scale the house toward
+    // the camera instead (same picture) so it stays in front of the ground.
+    if (narrow && dist > DMAX) {
+      const k = DMAX / dist
+      g.matrix.multiply(_scale.makeScale(k, k, k))
+    }
+    g.matrix.multiply(_shift).multiply(_view)
     g.matrixWorldNeedsUpdate = true
   })
 

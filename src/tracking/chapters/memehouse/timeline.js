@@ -140,6 +140,22 @@ export const STOPS = [
 
 export const ROOMS = STOPS.filter((s) => s.room !== undefined)
 
+/*
+ * The one definition of the narrow layout: phones, plus any portrait screen
+ * (tablets held upright). memehouse.css uses the same media query, and the
+ * scene reads it through LAYOUT.on, so the camera framing and the DOM
+ * layout always switch together.
+ */
+export const NARROW_MQ = '(max-width: 760px), (max-aspect-ratio: 1/1)'
+
+/*
+ * Narrow layout, measured from the DOM by Section (CSS px from the top of
+ * the pinned stage): where the header copy ends and where each stop's
+ * caption begins. On narrow screens the camera fits the house between the
+ * two. `on` is true only while NARROW_MQ matches.
+ */
+export const LAYOUT = { on: false, top: 0, caps: STOPS.map(() => 0) }
+
 const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
 
 /**

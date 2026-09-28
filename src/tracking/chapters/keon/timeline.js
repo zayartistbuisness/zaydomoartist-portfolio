@@ -6,6 +6,11 @@ import { clamp01 } from '../../kit/space'
 export const ID = 'keon'
 export const BASE = '/tracking/chapters/keon'
 
+// The one definition of the narrow layout, used by keon.css
+// (`@media (max-width: 760px), (max-aspect-ratio: 1/1)`) and by the 3D:
+// phones, plus any portrait screen (tablets held upright).
+export const isNarrow = (w, h) => w <= 760 || w <= h
+
 // Strip slots in running order. Slot 6 is a clear frame: the
 // "Behind the camera" beat between the on-screen and BTS frames.
 // Titles are moods, not scenes (featured-projects-brief.md §2).

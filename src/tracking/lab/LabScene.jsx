@@ -11,6 +11,7 @@ import { loadFormGeometry } from '../three/forms'
 import ChapterDriver from '../kit/ChapterDriver'
 import ChapterMount from '../kit/ChapterMount'
 import ClipBand from '../kit/ClipBand'
+import ChapterBoundary from '../kit/ChapterBoundary'
 import { CHAPTERS } from '../kit/chapters'
 import { labStore, FONTS, ROWS } from './labStore'
 
@@ -138,7 +139,8 @@ function Portrait({ src }) {
     const vp = state.viewport.getCurrentViewport(camera, [0, 0, z])
     const aspect = tex.image.width / tex.image.height
     const narrow = vp.width / vp.height < 1
-    const h = vp.height * (narrow ? 0.76 : 0.9)
+    // Phones: sized so the whole figure fits the screen width, under the name.
+    const h = narrow ? Math.min(vp.height * 0.58, (vp.width * 0.84) / aspect) : vp.height * 0.9
     const p = labStore.heroProgress
     mesh.scale.set(h * aspect, h, 1)
     mesh.position.set(vp.width * (narrow ? 0 : 0.05), -vp.height * 0.5 + h * 0.5 + p * vp.height * 0.1, z)
@@ -165,7 +167,7 @@ function HeroType({ font }) {
   const W = viewport.width
   const H = viewport.height
   const narrow = W / H < 1
-  const fs = narrow ? W * 0.27 : Math.min(H * 0.31, W * 0.165)
+  const fs = narrow ? Math.min(W * 0.25, H * 0.108) : Math.min(H * 0.31, W * 0.165)
   // A bone knockout outline: invisible on paper, but where a letter crosses
   // the dark suit it cuts a clean edge so the word stays legible.
   const common = { fontSize: fs, letterSpacing: f.letterSpacing, color: INK, anchorY: 'middle', renderOrder: 1, outlineWidth: fs * 0.009, outlineBlur: fs * 0.006, outlineColor: '#e8e4db', outlineOpacity: 0.85 }
@@ -173,9 +175,10 @@ function HeroType({ font }) {
   // pushed to the opposite margin so the portrait shows between the words.
   const lines = narrow
     ? [
-        { text: 'Zay', font: f.roman, anchorX: 'left', x: -W * 0.44, y: H * 0.3 },
-        { text: '“Domo”', font: f.italic, anchorX: 'right', x: W * 0.44, y: H * 0.02 },
-        { text: 'Artist', font: f.roman, anchorX: 'left', x: -W * 0.44, y: -H * 0.26 },
+        // Phones: the name stacks in the upper half, the figure rises under it.
+        { text: 'Zay', font: f.roman, anchorX: 'left', x: -W * 0.44, y: H * 0.335 },
+        { text: '“Domo”', font: f.italic, anchorX: 'right', x: W * 0.45, y: H * 0.22 },
+        { text: 'Artist', font: f.roman, anchorX: 'left', x: -W * 0.44, y: H * 0.105 },
       ]
     : [
         { text: 'Zay', font: f.roman, anchorX: 'left', x: -W * 0.46, y: H * 0.2 },
@@ -204,9 +207,10 @@ function HeroForms() {
   if (narrow) {
     return (
       <>
-        <ChromeForm name="domo_sigil" at={[0.3, 0.26]} z={-0.4} size={0.26} phase={0.4} sway={0.42} />
-        <ChromeForm name="soft_form" at={[-0.3, 0.02]} z={-0.5} size={0.17} phase={2.2} />
-        <ChromeForm name="film_twist" at={[0.24, -0.3]} z={0.7} size={0.18} phase={4.1} tilt={[0.6, 0, 0.3]} />
+        <ChromeForm name="domo_sigil" at={[0.3, 0.345]} z={-0.4} size={0.15} phase={0.4} sway={0.42} />
+        <ChromeForm name="spike_star" at={[-0.33, 0.225]} z={0.6} size={0.075} phase={1.1} />
+        <ChromeForm name="soft_form" at={[-0.38, -0.12]} z={0.5} size={0.08} phase={2.2} />
+        <ChromeForm name="film_twist" at={[0.36, -0.28]} z={0.7} size={0.09} phase={4.1} tilt={[0.6, 0, 0.3]} />
       </>
     )
   }
@@ -311,7 +315,9 @@ export default function LabScene({ font, portrait }) {
           <group key={ch.id} renderOrder={i + 1}>
             <ChapterMount id={ch.id}>
               <ClipBand id={ch.id}>
-                <ch.Scene />
+                <ChapterBoundary id={ch.id}>
+                  <ch.Scene />
+                </ChapterBoundary>
               </ClipBand>
             </ChapterMount>
           </group>

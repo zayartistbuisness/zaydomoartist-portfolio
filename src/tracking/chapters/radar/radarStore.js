@@ -5,9 +5,13 @@ import { useEffect, useState, useSyncExternalStore } from 'react'
 //   focus   contact the visitor clicked (-1 = follow the sweep)
 //   hover   contact under the pointer or keyboard focus
 //   caps    floating DOM captions, positioned by the scene each frame
+//   layout  phone layout measured by the Section (CSS px from the stage
+//           top): `head` = bottom of the headline block, `foot` = top of
+//           the tallest log row; `on` while the narrow layout (NARROW_MQ:
+//           phones and portrait tablets) applies
 // Discrete changes notify subscribers (the Section re-renders on them);
 // per-frame values never do.
-export const radar = { active: -1, focus: -1, hover: -1, caps: [] }
+export const radar = { active: -1, focus: -1, hover: -1, caps: [], layout: { on: false, head: 0, foot: 0 } }
 
 const listeners = new Set()
 let snapshot = '-1|-1|-1'

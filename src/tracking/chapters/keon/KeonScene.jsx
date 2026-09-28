@@ -9,7 +9,7 @@ import { getChapter } from '../../kit/chapterStore'
 import { smooth, viewportAt } from '../../kit/space'
 import VoxelMark from '../../three/VoxelMark'
 import { buildRibbon, buildGateGeometry, createBeamMaterial, createStripMaterial, MM } from './filmstrip'
-import { BASE, BEAT, FILM, ID, O, P, SLOTS, keonStore, markProgress, stripOffset } from './timeline'
+import { BASE, BEAT, FILM, ID, O, P, SLOTS, isNarrow, keonStore, markProgress, stripOffset } from './timeline'
 
 const GROUND = '#0f0f0e'
 const PLATE = `${BASE}/plate_boxing_gym.webp`
@@ -18,18 +18,23 @@ const MARK = `${BASE}/keon-mark.png`
 
 const getMarkProgress = () => markProgress(getChapter(ID).progress)
 
-/** Gate frame width in world units for the current viewport. */
+/**
+ * Gate frame width in world units for the current viewport. Narrow (the same
+ * test as keon.css): the gate spans most of a phone's width; on taller or
+ * wider narrow screens (portrait tablets, landscape phones) it is capped by
+ * height, leaving the title above and the quote and rail below it clear.
+ */
 function useLayout() {
   const size = useThree((s) => s.size)
   const camera = useThree((s) => s.camera)
   const viewport = useThree((s) => s.viewport)
   const vp = viewport.getCurrentViewport(camera, [0, 0, 0])
   const aspect = size.width / Math.max(1, size.height)
-  const tall = aspect < 1
-  const fw = tall
-    ? vp.width * 0.78
+  const narrow = isNarrow(size.width, size.height)
+  const fw = narrow
+    ? Math.min(vp.width * 0.78, vp.height * 0.46)
     : Math.min(vp.width * 0.33, vp.height * 0.52 * (MM.frameW / MM.stock))
-  return { aspect, fw, tall, vp, size }
+  return { aspect, fw, narrow, vp, size }
 }
 
 // Frame-by-frame state the pieces share, written once per frame by <Driver>.
@@ -215,7 +220,7 @@ function finishMark(voxels) {
   return true
 }
 
-function Mark({ tall, aspect }) {
+function Mark({ narrow, aspect }) {
   const group = useRef()
   useFrame(() => {
     const g = group.current
@@ -226,7 +231,9 @@ function Mark({ tall, aspect }) {
   })
   // Width as a share of the viewport: VoxelMark sizes by height, and the
   // mark is 114 cells wide, so width = heightFrac / 0.8 viewport heights.
-  const heightFrac = 0.8 * (tall ? 0.86 : 0.56) * aspect
+  // Narrow: 86% of the width, but never taller than 60% of a short
+  // (landscape-phone) screen.
+  const heightFrac = narrow ? Math.min(0.8 * 0.86 * aspect, 0.6) : 0.8 * 0.56 * aspect
   return (
     <group ref={group}>
       <VoxelMark src={MARK} cell={6} getProgress={getMarkProgress} heightFrac={heightFrac} invert={1} />
@@ -265,7 +272,7 @@ function GuardedPlate() {
 import StageFollow from '../../kit/StageFollow'
 
 export default function KeonScene() {
-  const { aspect, fw, tall, size } = useLayout()
+  const { aspect, fw, narrow, size } = useLayout()
   const hiRes = size.width >= 760
   return (
     <>
@@ -278,7 +285,7 @@ export default function KeonScene() {
           <Strip fw={fw} aspect={aspect} hiRes={hiRes} />
         </Suspense>
         <Gate fw={fw} />
-        <Mark tall={tall} aspect={aspect} />
+        <Mark narrow={narrow} aspect={aspect} />
       </StageFollow>
     </>
   )

@@ -17,6 +17,15 @@ export const ARRIVE = [0.17, 0.32]
 export const TURNS = [[0.34, 0.42], [0.47, 0.55], [0.6, 0.68], [0.73, 0.81]]
 export const HOLDS = [0.325, 0.445, 0.575, 0.705, 0.86]
 
+/** Spread showing at progress q: 0 = closed cover … 4 = the notes page. */
+export function spreadAt(q) {
+  return TURNS.reduce((n, [a, b]) => n + (q > (a + b) / 2 ? 1 : 0), 0)
+}
+
+// The one definition of the narrow layout (su2.css uses the same media
+// query): phones, plus any portrait screen (tablets held upright).
+export const isNarrow = (w, h) => w <= 760 || w <= h
+
 const ASSETS = {
   monogram: '/tracking/chapters/su2/su-monogram.png',
   portrait: '/tracking/chapters/su2/su2_yearbook_portrait.webp',
@@ -192,7 +201,7 @@ export default class YearbookModel {
 
   /** Current spread: 0 = closed cover … 4 = notes. */
   spreadAt(q) {
-    return TURNS.reduce((n, [a, b]) => n + (q > (a + b) / 2 ? 1 : 0), 0)
+    return spreadAt(q)
   }
 
   update({ q, visible, vp, pointer, size, dt, shift = 0 }) {
@@ -200,14 +209,16 @@ export default class YearbookModel {
     if (!this.group.visible) return
 
     const arrive = ease(range(ARRIVE[0], ARRIVE[1], q))
-    const h = Math.min(vp.height * 0.66, vp.width * 0.42)
-    const narrow = vp.width / vp.height < 1
+    const narrow = isNarrow(size.width, size.height)
+    // Phones: the open spread nearly fills the width so the pages are readable.
+    const h = narrow ? Math.min(vp.height * 0.5, vp.width * 0.57) : Math.min(vp.height * 0.66, vp.width * 0.42)
     this.group.scale.setScalar(h)
 
     // Centre the spine on the open book's middle; the cover opens to the left.
     const opened = ease(range(TURNS[0][0], TURNS[0][1], q))
     const xShift = (narrow ? 0 : vp.width * 0.1) - PAGE_W * h * 0.5 * (1 - opened)
-    this.group.position.set(xShift, -vp.height * (1 - arrive) * 0.95 - vp.height * 0.03 + shift, 0)
+    const lift = narrow ? vp.height * 0.07 : -vp.height * 0.03 // phones: clear the title block below
+    this.group.position.set(xShift, -vp.height * (1 - arrive) * 0.95 + lift + shift, 0)
 
     // Lies back like a book on a table; leans gently toward the cursor.
     const px = pointer.active ? (pointer.x / size.width - 0.5) : 0

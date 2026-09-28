@@ -62,6 +62,8 @@ function Yearbook() {
 
 export default function Scene() {
   const [plate, setPlate] = useState(false)
+  // Fit the voxel crest inside the screen width on phones (it sizes by height).
+  const aspect = useThree((s) => s.size.width / s.size.height)
   useEffect(() => {
     let live = true
     assetExists(PLATE).then((ok) => live && setPlate(ok))
@@ -73,7 +75,7 @@ export default function Scene() {
       <GroundPlane id={ID} color="#e4ddcf" />
       {plate && <LinePlate id={ID} src={PLATE} drift={0.8} black={0.05} white={0.55} opacity={0.28} />}
       <StageFollow id={ID}>
-        <VoxelMark src="/tracking/chapters/su2/su2-mark.png" cell={6} getProgress={voxelProgress} invert={0} />
+        <VoxelMark src="/tracking/chapters/su2/su2-mark.png" cell={6} getProgress={voxelProgress} heightFrac={Math.min(0.62, 0.9 * aspect)} invert={0} />
       </StageFollow>
       <Yearbook />
     </>

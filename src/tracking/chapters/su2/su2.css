@@ -44,7 +44,9 @@
 .c-su2-intro h2 em { font-style: italic; color: #7a0f1c; }
 .c-su2-role { margin: 18px 0 6px; }
 .c-su2-role .rec { margin-right: 8px; }
-.c-su2-meta { margin: 0; opacity: 0.6; }
+/* Small labels: ink at ≥ 0.7 keeps them above 4.5:1 on the #e4ddcf ground
+   (0.55–0.6 measured 3.8–4.5:1), with room for the campus plate's lines. */
+.c-su2-meta { margin: 0; opacity: 0.72; }
 
 .c-su2-rail {
   position: absolute;
@@ -52,12 +54,60 @@
   inset-inline: var(--gutter);
   display: flex;
   justify-content: space-between;
+  gap: 2em;
   opacity: var(--book);
 }
-.c-su2-rail b { font-weight: 400; margin-right: 1.2em; opacity: 0.55; }
-.c-su2-hint { opacity: 0.55; }
+.c-su2-rail b { font-weight: 400; margin-right: 1.2em; opacity: 0.72; font-variant-numeric: tabular-nums; }
+.c-su2-hint { opacity: 0.72; }
 
-@media (max-width: 760px) {
+/* The sr-only sources (lab .tlab-sr). Its links are tab stops, so when
+   keyboard focus lands in it, it opens as a small paper panel above the
+   rail rather than focusing links nobody can see. */
+.c-su2 .c-su2-sr:focus-within {
+  right: var(--gutter);
+  bottom: 64px;
+  z-index: 3;
+  width: min(460px, calc(100vw - 2 * var(--gutter)));
+  height: auto;
+  max-height: calc(100svh - 190px);
+  padding: 14px 16px 12px;
+  overflow: auto;
+  clip-path: none;
+  white-space: normal;
+  pointer-events: auto;
+  background: #e8e4db;
+  border: 1px solid rgba(17, 17, 16, 0.22);
+  box-shadow: 0 12px 40px rgba(17, 17, 16, 0.12);
+  font-family: var(--display);
+  font-size: 15px;
+  line-height: 1.32;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.c-su2-sr:focus-within p,
+.c-su2-sr:focus-within ul { margin: 0 0 10px; }
+.c-su2-sr:focus-within ul { padding-left: 1.1em; }
+.c-su2-sr:focus-within h3 {
+  margin: 14px 0 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.c-su2-sr a { color: inherit; text-underline-offset: 3px; }
+.c-su2-sr a:focus-visible { outline: 1px solid var(--rec); outline-offset: 2px; }
+
+/* Narrow: phones and any portrait screen, the same test the book uses
+   (YearbookModel isNarrow) to lift itself and fill the width. */
+@media (max-width: 760px), (max-aspect-ratio: 1/1) {
   .c-su2-intro { max-width: none; right: var(--gutter); bottom: 72px; }
   .c-su2-hint { display: none; }
+}
+
+/* Portrait tablets: a larger title, and room for the hint again. */
+@media (min-width: 600px) and (max-aspect-ratio: 1/1) {
+  .c-su2-intro { bottom: 84px; }
+  .c-su2-intro h2 { font-size: clamp(56px, 8vw, 88px); }
+  .c-su2-hint { display: inline; }
 }

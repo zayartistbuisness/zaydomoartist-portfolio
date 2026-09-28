@@ -92,6 +92,50 @@ html.tlab-html body {
 .tlab-hud nav a { opacity: 0.8; transition: opacity 0.2s; }
 .tlab-hud nav a:hover, .tlab-hud nav a:focus-visible { opacity: 1; }
 .tlab-tc { justify-self: end; font-variant-numeric: tabular-nums; }
+.tlab-menu-btn {
+  display: none;
+  min-height: 44px;
+  min-width: 64px;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+.tlab-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 39;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 5vh;
+  padding: 90px var(--gutter) 6vh;
+  background: var(--ink);
+  color: var(--paper);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-2%);
+  transition: opacity 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tlab-menu.is-open { opacity: 1; pointer-events: auto; transform: none; }
+.tlab-menu ol { list-style: none; margin: 0; padding: 0; }
+.tlab-menu li a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--display);
+  text-transform: none;
+  letter-spacing: -0.02em;
+  font-size: clamp(40px, 12vw, 64px);
+  line-height: 1.02;
+  padding: 2px 0;
+}
+.tlab-menu li.is-sub a { font-size: clamp(22px, 6.4vw, 32px); font-style: italic; opacity: 0.7; }
+.tlab-menu li:not(.is-sub) + li.is-sub { margin-top: 3vh; }
+.tlab-menu-casting { color: var(--paper); border: 1px solid currentColor; border-radius: 999px; padding: 12px 18px; align-self: flex-start; text-decoration: none; }
+
 .tlab-casting {
   justify-self: end;
   border: 1px solid currentColor;
@@ -223,6 +267,11 @@ html.tlab-html body {
   .tlab-hud { grid-template-columns: 1fr auto auto; }
   .tlab-tc { display: none; }
   .tlab-hud nav { display: none; }
+  .tlab-menu-btn { display: inline-block; }
+  .tlab:has(.tlab-menu.is-open) .tlab-hud { color: var(--paper); }
+  .tlab:has(.tlab-menu.is-open) .tlab-hud::before { opacity: 0; }
+  .tlab-hero-meta { top: calc(100svh - 40px); grid-template-columns: 1fr; font-size: 9.5px; }
+  .tlab-hero-meta .tlab-cue { display: none; }
   .tlab-index-grid { grid-template-columns: 1fr; }
   .tlab-slot-wrap { position: fixed; right: 0; bottom: 12vh; width: 46vw; pointer-events: none; }
   .tlab-slot { position: static; }

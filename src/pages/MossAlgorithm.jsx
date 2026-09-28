@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import * as THREE from 'three'
 import { ArrowLeft, ArrowRight, Users, TrendingUp, ShieldCheck, Radio, ChevronDown } from 'lucide-react'
 import MossLeadForm from '../components/MossLeadForm'
+import './moss-fonts.css'
 
 /* ══════════════ 3D LEAF ══════════════ */
 class CanvasErrorBoundary extends Component {

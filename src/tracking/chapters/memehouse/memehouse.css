@@ -44,6 +44,9 @@
   right: var(--gutter);
   opacity: var(--mh-reveal);
 }
+/* Tabbing in before the index has faded up shows it, rather than focusing a
+   control nobody can see. */
+.c-memehouse-rooms:focus-within { opacity: 1; }
 .c-memehouse-rooms ol {
   display: flex;
   gap: 4px;
@@ -62,11 +65,12 @@
   padding: 8px 10px;
   cursor: pointer;
   color: var(--mh-ink);
-  opacity: 0.5;
+  /* ≥ 4.5:1 on the paper strip (0.5 was 3.4:1). */
+  opacity: 0.68;
   border-top: 1px solid transparent;
   transition: opacity 0.3s, border-color 0.3s;
 }
-.c-memehouse-rooms button:hover { opacity: 0.85; }
+.c-memehouse-rooms button:hover { opacity: 0.9; }
 .c-memehouse-rooms button[aria-current] { opacity: 1; border-top-color: var(--mh-ink); }
 .c-memehouse-rooms button[aria-current] .c-memehouse-rooms-n::before {
   content: '';
@@ -121,6 +125,8 @@
   align-items: end;
   opacity: var(--mh-cap);
 }
+/* Its source links are real tab stops: focus shows the caption. */
+.c-memehouse-captions:focus-within { opacity: 1; }
 .c-memehouse-cap {
   grid-area: 1 / 1;
   border-top: 1px solid var(--mh-rule);
@@ -137,7 +143,7 @@
   transition: opacity 0.6s 0.1s, transform 0.8s 0.1s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s;
 }
 .c-memehouse-cap-head { display: flex; align-items: baseline; gap: 14px; }
-.c-memehouse-cap-n { opacity: 0.55; font-variant-numeric: tabular-nums; }
+.c-memehouse-cap-n { opacity: 0.68; font-variant-numeric: tabular-nums; }
 .c-memehouse-cap h3 {
   margin: 0;
   font-family: var(--mh-serif);
@@ -170,7 +176,7 @@
 }
 .c-memehouse-quote p::before { content: '“'; margin-left: -0.4em; }
 .c-memehouse-quote p::after { content: '”'; }
-.c-memehouse-quote footer { margin-top: 8px; opacity: 0.6; }
+.c-memehouse-quote footer { margin-top: 8px; opacity: 0.7; }
 .c-memehouse-quote footer::before { content: '— '; }
 .c-memehouse-quote + .c-memehouse-cap-body { font-size: 13px; opacity: 0.7; }
 
@@ -198,7 +204,7 @@
   margin: 14px 0 0;
   font-size: 9.5px;
 }
-.c-memehouse-src > span { opacity: 0.5; }
+.c-memehouse-src > span { opacity: 0.68; }
 .c-memehouse-src a {
   color: inherit;
   text-decoration: underline;
@@ -215,10 +221,14 @@
   bottom: 22px;
   margin: 0;
   font-size: 9.5px;
-  opacity: calc(var(--mh-cap) * 0.5);
+  /* ≥ 4.5:1 once shown (0.5 was 3.4:1). */
+  opacity: calc(var(--mh-cap) * 0.68);
 }
 
-@media (max-width: 760px) {
+/* Narrow: phones and any portrait screen. Section measures this layout
+   with the same query (NARROW_MQ in timeline.js) and the camera fits the
+   house between the header and the caption. */
+@media (max-width: 760px), (max-aspect-ratio: 1/1) {
   .c-memehouse-kicker { top: 60px; }
   .c-memehouse-rooms { top: 50px; }
   .c-memehouse-rooms ol { gap: 0; }
@@ -239,6 +249,7 @@
     background: linear-gradient(to top, var(--mh-paper) 62%, color-mix(in srgb, var(--mh-paper) 0%, transparent));
     opacity: var(--mh-cap);
   }
+  .c-memehouse-stage:has(.c-memehouse-captions:focus-within)::after { opacity: 1; }
   .c-memehouse-cap h3 { font-size: 24px; }
   .c-memehouse-cap-body { font-size: 14px; margin-top: 8px; }
   .c-memehouse-quote { margin-top: 10px; }
@@ -246,6 +257,29 @@
   .c-memehouse-src { margin-top: 10px; }
   .c-memehouse-photo { margin-top: 8px; font-size: 8.5px; }
   .c-memehouse-fine { bottom: 16px; font-size: 8.5px; }
+}
+
+/* Portrait tablets: the narrow composition at tablet scale. Room names
+   come back in the index, the type steps up, and the caption keeps a
+   readable measure instead of running the full width. */
+@media (min-width: 600px) and (max-aspect-ratio: 1/1) {
+  .c-memehouse-kicker { top: 66px; }
+  .c-memehouse-rooms { top: 56px; }
+  .c-memehouse-rooms ol { gap: 2px; }
+  .c-memehouse-rooms button { padding: 8px 9px; }
+  .c-memehouse-rooms-t { display: inline; }
+  .c-memehouse-head { top: 118px; }
+  .c-memehouse-title { font-size: clamp(64px, 9vw, 96px); }
+  .c-memehouse-role { margin-top: 14px; }
+  .c-memehouse-standfirst { margin-top: 14px; font-size: clamp(19px, 2.5vw, 24px); max-width: 26em; }
+  .c-memehouse-captions { right: auto; width: min(600px, calc(100% - 2 * var(--gutter))); bottom: 60px; }
+  .c-memehouse-stage::after { height: 34svh; }
+  .c-memehouse-cap h3 { font-size: 32px; }
+  .c-memehouse-cap-body { font-size: 16px; margin-top: 10px; }
+  .c-memehouse-quote { margin-top: 12px; }
+  .c-memehouse-quote p { font-size: 21px; }
+  .c-memehouse-photo { font-size: 9.5px; }
+  .c-memehouse-fine { bottom: 22px; font-size: 9.5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

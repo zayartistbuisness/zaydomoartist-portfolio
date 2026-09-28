@@ -11,7 +11,7 @@ import { getChapter } from '../../kit/chapterStore'
 import VoxelMark from '../../three/VoxelMark'
 import { createInkPhotoMaterial } from '../../ink/inkChunk'
 import { ID, ASSETS, MOMENTS } from './moments'
-import { MARK_END, TL, DEG, sweepAt, smooth, clamp01 } from './timeline'
+import { MARK_END, TL, DEG, isNarrow, sweepAt, smooth, clamp01 } from './timeline'
 import { radar, setRadar, shownIndex, useImageReady } from './radarStore'
 import { makeScopeMaterial, R_IN, EXT } from './scopeMaterial'
 import { makeTypeTexture } from './typeCard'
@@ -29,6 +29,14 @@ const F = {
   p: 0,
   visible: false,
   narrow: false,
+  // Narrow (phones and portrait tablets: the CSS media query, reported by
+  // Section as radar.layout.on, with its measured layout): the card stands
+  // on the scope's far rim, centred, at most cardW × cardH (world units at
+  // z = 0).
+  phone: false,
+  cardY: 0,
+  cardW: 1,
+  cardH: 1,
   sweep: -168 * DEG,
   cw: 1,
   speed: 0,
@@ -80,8 +88,11 @@ function direct(state, dt, g, camera) {
   const shift = c.rect.top > 0 ? c.rect.top : Math.min(0, c.rect.bottom - vh)
   g.position.y = (-shift / vh) * vp.height
 
-  const narrow = vp.width / vp.height < 0.8
+  // One switch with the CSS: Section sets layout.on from the same query.
+  const narrow = radar.layout.on
+  const phone = narrow
   F.narrow = narrow
+  F.phone = phone
   const unit = markUnit(vp)
 
   // Logo pose: the ring sits a little behind the voxel slab and turns with it.
@@ -93,10 +104,28 @@ function direct(state, dt, g, camera) {
   const logoScale = GRID.outer * unit
 
   // Table pose.
-  const S = narrow ? vp.width * 0.47 : Math.min(vp.height * 0.43, vp.width * 0.255)
-  F.S = S
+  let S = narrow ? vp.width * 0.47 : Math.min(vp.height * 0.43, vp.width * 0.255)
   const tx = narrow ? 0 : vp.width * 0.165
-  const ty = narrow ? -vp.height * 0.085 : -vp.height * 0.15
+  let ty = narrow ? -vp.height * 0.085 : -vp.height * 0.15
+  if (phone) {
+    // Phone: a smaller scope sits low, its near markers just above the log
+    // row, leaving the band above its far rim for the rising card.
+    const L = radar.layout
+    const toY = (px) => (0.5 - px / vh) * vp.height
+    const headY = toY(L.head + 14)
+    const footY = toY(L.foot - 10)
+    S = Math.min(vp.width * 0.4, (headY - footY) * 0.42)
+    const cz = camera.position.z
+    const c = Math.cos(TILT)
+    const s = -Math.sin(TILT)
+    const R = 1.16 // the bezel's outer markers, in bezel radii
+    ty = (footY * (cz - s * R * S)) / cz + c * R * S
+    const far = ((ty + c * S) * cz) / (cz + s * S)
+    F.cardY = far + 0.012 * vp.height
+    F.cardH = Math.max(0.2, headY - F.cardY)
+    F.cardW = vp.width * 0.78
+  }
+  F.S = S
 
   const t = easeInOut(smooth(TL.doors[0], TL.doors[1], p))
   F.morph = t
@@ -265,7 +294,10 @@ const CARD = MOMENTS.map(() => ({ rise: 0, focus: 0, cap: -1, cx: 0, cy: 0, left
  *  leaving a scan of line bars); a clicked one resolves fully. */
 const resolveOf = (i, settled) => () => {
   if (shownIndex() !== i) return 0
-  return radar.focus === i ? 1 : settled * smooth(0.82, 1, CARD[i].rise)
+  if (radar.focus === i) return 1
+  // Phone: there is no hover to develop a card, so it resolves fully as it
+  // stands up (aimed a touch past 1 so the damped value actually gets there).
+  return F.phone ? 1.05 * smooth(0.45, 0.9, CARD[i].rise) : settled * smooth(0.82, 1, CARD[i].rise)
 }
 const RESOLVE_TYPE = MOMENTS.map((_, i) => resolveOf(i, 0.72))
 const RESOLVE_PHOTO = MOMENTS.map((_, i) => resolveOf(i, 0.38))
@@ -291,7 +323,17 @@ function CardRig({ i, aspect, capY = 0, children }) {
       mesh.material.uniforms.uInkAlpha.value = smooth(0, 0.3, r)
     }
 
-    if (h.visible) {
+    if (h.visible && F.phone) {
+      // Phone: the card leaves its contact and stands, centred, on the
+      // scope's far rim, as large as the band above allows.
+      const k = easeOut(r)
+      const w = Math.min(F.cardW, F.cardH * aspect)
+      const b = F.blips[i]
+      h.position.set(lerp(b.x, 0, k), lerp(b.y, F.cardY, k), lerp(b.z, 0, k))
+      h.rotation.set(lerp(TILT, 0, k), LEAN[i].yaw * 0.3 * k * (1 - st.focus), LEAN[i].roll * 0.4 * k * (1 - st.focus))
+      h.scale.setScalar(w * (0.55 + 0.45 * k))
+      inner.position.set(0, 0.5 / aspect, 0)
+    } else if (h.visible) {
       const k = easeOut(r)
       const w = F.S * (F.narrow ? 0.98 : 0.86) * (aspect > 1.4 ? 1.2 : 1)
       _v.copy(F.blips[i])
@@ -358,12 +400,25 @@ function CardRig({ i, aspect, capY = 0, children }) {
 
 function PhotoCard({ i, src }) {
   const tex = useLoader(THREE.TextureLoader, src)
+  const phone = useThree((st) => isNarrow(st.size.width, st.size.height))
   const aspect = tex.image.width / tex.image.height
   return (
     <CardRig i={i} aspect={aspect}>
       {(onClick) => (
-        // The photo's base stays in lines, rooted in the scope it rose from.
-        <InkCard src={src} width={1} invert={1} black={0.05} white={0.9} fadeFrom={0.16} fadeTo={0.58} getResolve={RESOLVE_PHOTO[i]} onClick={onClick} renderOrder={3} />
+        // The photo's base stays in lines, rooted in the scope it rose from
+        // (on a phone, where it stands clear of the scope, only a sliver).
+        <InkCard
+          src={src}
+          width={1}
+          invert={1}
+          black={0.05}
+          white={0.9}
+          fadeFrom={phone ? -0.1 : 0.16}
+          fadeTo={phone ? 0.14 : 0.58}
+          getResolve={RESOLVE_PHOTO[i]}
+          onClick={onClick}
+          renderOrder={3}
+        />
       )}
     </CardRig>
   )

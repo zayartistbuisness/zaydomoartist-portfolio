@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState } from 'react'
 import { useChapterSection, getChapter } from '../../kit/chapterStore'
 import { voice } from '../../content/voice'
 import { ID, MOMENTS, EMBED_47 } from './moments'
-import { TL, smooth, window4 } from './timeline'
+import { NARROW_MQ, TL, smooth, window4 } from './timeline'
 import { radar, setRadar, useRadarState } from './radarStore'
 import VideoModal from './VideoModal'
 import './radar.css'
@@ -42,6 +42,9 @@ function PhotoCredit({ photo }) {
 export default function Section() {
   const ref = useRef()
   const stageRef = useRef()
+  const colRef = useRef()
+  const datesRef = useRef()
+  const logRef = useRef()
   const [video, setVideo] = useState(false)
   const { focus, hover, shown } = useRadarState()
   useChapterSection(ID, ref)
@@ -67,6 +70,40 @@ export default function Section() {
     }
     tick()
     return () => cancelAnimationFrame(raf)
+  }, [])
+
+  // Narrow layout for the scene (phones and portrait tablets): the table and
+  // the rising card fit between the headline block and the log row (the
+  // tallest one, so the scope never moves between contacts). Offsets ignore
+  // the reveal transform.
+  useEffect(() => {
+    const stage = stageRef.current
+    const col = colRef.current
+    const dates = datesRef.current
+    const log = logRef.current
+    if (!stage || !col || !dates || !log) return undefined
+    const mq = window.matchMedia(NARROW_MQ)
+    const L = radar.layout
+    const measure = () => {
+      L.on = mq.matches
+      if (!mq.matches) return
+      L.head = col.offsetTop + dates.offsetTop + dates.offsetHeight
+      let tall = 0
+      for (const li of log.children) tall = Math.max(tall, li.offsetHeight)
+      L.foot = col.offsetTop + log.offsetTop + log.offsetHeight - tall
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(stage)
+    ro.observe(col)
+    for (const li of log.children) ro.observe(li)
+    mq.addEventListener('change', measure)
+    document.fonts?.ready.then(measure)
+    return () => {
+      ro.disconnect()
+      mq.removeEventListener('change', measure)
+      L.on = false
+    }
   }, [])
 
   // Esc lets go of a clicked contact (the modal handles its own Esc).
@@ -98,7 +135,7 @@ export default function Section() {
           On The Radar mark · unofficial editorial treatment
         </p>
 
-        <div className="c-radar-col">
+        <div ref={colRef} className="c-radar-col">
           <h2 id="c-radar-title" className="c-radar-title">
             <span>Mafiathon 3 /</span> <em>On The Radar</em>
           </h2>
@@ -107,12 +144,12 @@ export default function Section() {
           <p className="c-radar-role">
             <i className="rec" aria-hidden="true" /> {role}
           </p>
-          <p className="c-radar-dates">September 1–30, 2025 · Twitch</p>
+          <p ref={datesRef} className="c-radar-dates">September 1–30, 2025 · Twitch</p>
           <p className="c-radar-standfirst">
             A freestyle booth inside a month-long stream, where newer rappers and established names took the same mic.
           </p>
 
-          <ol className="c-radar-log" aria-label="On the radar: four moments">
+          <ol ref={logRef} className="c-radar-log" aria-label="On the radar: four moments">
             {MOMENTS.map((m, i) => (
               <li
                 key={m.n}

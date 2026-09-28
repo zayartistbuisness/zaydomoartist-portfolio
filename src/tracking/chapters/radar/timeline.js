@@ -22,6 +22,12 @@ const KEYS = [[0.26, -168], ...MOMENTS.map((m, i) => [0.4 + i * 0.155, m.bearing
 
 export const DEG = Math.PI / 180
 
+// The one definition of the narrow layout: phones, plus any portrait screen
+// (tablets held upright). radar.css uses the same media query; Section
+// reports it to the scene as radar.layout.on.
+export const NARROW_MQ = '(max-width: 760px), (max-aspect-ratio: 1/1)'
+export const isNarrow = (w, h) => w <= 760 || w <= h
+
 /** Target sweep bearing (radians, unwrapped) at progress p. */
 export function sweepAt(p) {
   if (p <= KEYS[0][0]) return KEYS[0][1] * DEG

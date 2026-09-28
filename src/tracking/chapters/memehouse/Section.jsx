@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { getChapter, useChapterSection } from '../../kit/chapterStore'
 import { smooth } from '../../kit/space'
 import { voice } from '../../content/voice'
-import { ID, ROOMS, SOURCES, STOPS, scrollToStop, stopAt } from './timeline'
+import { ID, LAYOUT, NARROW_MQ, ROOMS, SOURCES, STOPS, scrollToStop, stopAt } from './timeline'
 import './memehouse.css'
 
 function Sources({ keys }) {
@@ -36,6 +36,8 @@ function Photos({ list }) {
 export default function Section() {
   const ref = useRef()
   const stageRef = useRef()
+  const headRef = useRef()
+  const capsRef = useRef()
   const [active, setActive] = useState(0)
   useChapterSection(ID, ref)
 
@@ -66,6 +68,37 @@ export default function Section() {
     return () => cancelAnimationFrame(raf)
   }, [])
 
+  // Narrow layout for the scene (phones and portrait tablets): the header's
+  // bottom and each caption's top (offsets ignore the reveal transforms, so
+  // they are the resting layout).
+  useEffect(() => {
+    const stage = stageRef.current
+    const head = headRef.current
+    const caps = capsRef.current
+    if (!stage || !head || !caps) return undefined
+    const mq = window.matchMedia(NARROW_MQ)
+    const measure = () => {
+      LAYOUT.on = mq.matches
+      if (!mq.matches) return
+      LAYOUT.top = head.offsetTop + head.offsetHeight
+      Array.from(caps.children).forEach((el, i) => {
+        LAYOUT.caps[i] = caps.offsetTop + el.offsetTop
+      })
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(stage)
+    ro.observe(head)
+    Array.from(caps.children).forEach((el) => ro.observe(el))
+    mq.addEventListener('change', measure)
+    document.fonts?.ready.then(measure)
+    return () => {
+      ro.disconnect()
+      mq.removeEventListener('change', measure)
+      LAYOUT.on = false
+    }
+  }, [])
+
   const mh = voice.memehouse
 
   return (
@@ -89,7 +122,7 @@ export default function Section() {
           </ol>
         </nav>
 
-        <header className="c-memehouse-head">
+        <header ref={headRef} className="c-memehouse-head">
           <h2 id="c-memehouse-title" className="c-memehouse-title">MemeHouse</h2>
           {/*
             Role label: Zay's own line from content/voice.js (drafted with him,
@@ -105,7 +138,7 @@ export default function Section() {
           </p>
         </header>
 
-        <div className="c-memehouse-captions">
+        <div ref={capsRef} className="c-memehouse-captions">
           {STOPS.map((s, i) => (
             <article
               key={s.key}

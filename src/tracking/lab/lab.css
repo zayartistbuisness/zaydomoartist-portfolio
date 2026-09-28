@@ -1,0 +1,257 @@
+/* "Tracking" lab — bone & ink. Scoped under .tlab / html.tlab-html. */
+
+html.tlab-html,
+html.tlab-html body {
+  background: #e8e4db;
+  color: #111110;
+}
+
+.tlab {
+  --paper: #e8e4db;
+  --ink: #111110;
+  --ink-soft: #131312;
+  --rec: #d7331f;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --display: 'Instrument Serif', serif;
+  --gutter: clamp(16px, 2.4vw, 36px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tlab-canvas {
+  position: fixed !important;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.tlab main { position: relative; z-index: 1; }
+
+.tlab-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.rec {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rec);
+  vertical-align: middle;
+}
+
+/* HUD flips to bone once the curtain passes under it (class set per frame),
+   so the REC dots stay true red on both grounds. */
+.tlab-hud {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1fr auto auto 1fr;
+  gap: 2vw;
+  align-items: center;
+  padding: 18px var(--gutter);
+  color: var(--ink);
+  transition: color 0.25s;
+}
+.tlab.is-dark .tlab-hud { color: var(--paper); }
+/* A soft scrim so page type never collides with the header while scrolling. */
+.tlab-hud::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 -28px 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(var(--paper) 58%, rgba(232, 228, 219, 0));
+  transition: opacity 0.25s;
+}
+.tlab.is-dark .tlab-hud::before { background: linear-gradient(#111110 58%, rgba(17, 17, 16, 0)); }
+.tlab-hud a { color: inherit; text-decoration: none; }
+.tlab-mark { font-family: var(--display); font-size: 20px; letter-spacing: 0; text-transform: none; }
+.tlab-mark .rec { margin-left: 6px; transform: translateY(-6px); }
+.tlab-mark { display: inline-flex; align-items: center; gap: 10px; }
+/* The sigil as a mask so it takes the header's ink/paper colour. */
+.tlab-sigil {
+  display: inline-block;
+  width: 20px;
+  height: 34px;
+  background: currentColor;
+  -webkit-mask: url('/tracking/brand/domo-sigil-small.svg') center / contain no-repeat;
+  mask: url('/tracking/brand/domo-sigil-small.svg') center / contain no-repeat;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tlab-mark:hover .tlab-sigil { transform: rotate(180deg); }
+.tlab-hud nav { display: flex; gap: clamp(14px, 2.4vw, 34px); }
+.tlab-hud nav a { opacity: 0.8; transition: opacity 0.2s; }
+.tlab-hud nav a:hover, .tlab-hud nav a:focus-visible { opacity: 1; }
+.tlab-tc { justify-self: end; font-variant-numeric: tabular-nums; }
+.tlab-casting {
+  justify-self: end;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 12px;
+  opacity: 0.85;
+}
+.tlab-casting:hover, .tlab-casting:focus-visible { opacity: 1; background: var(--rec); border-color: var(--rec); color: var(--paper); }
+.tlab-tc .rec { margin-right: 4px; animation: tlab-blink 1.6s steps(1) infinite; }
+@keyframes tlab-blink { 50% { opacity: 0; } }
+
+.tlab-hero { position: relative; height: 140vh; }
+.tlab-hero-meta {
+  position: absolute;
+  top: calc(100svh - 58px);
+  inset-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.tlab-hero-meta p { margin: 0; }
+.tlab-cue { text-align: right; }
+
+/* The curtain's dark ground is drawn in WebGL (so it can cover 3D);
+   this section only carries the DOM content above it. */
+.tlab-curtain {
+  position: relative;
+  color: var(--paper);
+  padding: 22vh var(--gutter) 8vh;
+}
+.tlab-index-head {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 22%, transparent);
+  opacity: 0.8;
+}
+.tlab-index-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 3vw; }
+.tlab-rows { display: flex; flex-direction: column; padding-top: 3vh; }
+
+.tlab-row {
+  display: grid;
+  grid-template-columns: 3.4em auto 1fr;
+  align-items: baseline;
+  gap: 0.6em;
+  padding: 1.2vh 0;
+  color: var(--paper);
+  text-decoration: none;
+  outline: none;
+}
+.tlab-row sup { font-size: 10px; opacity: 0.55; align-self: start; padding-top: 1.6em; }
+.tlab-row small { font-size: 9.5px; opacity: 0.5; line-height: 1.3; max-width: 9em; }
+.tlab-row-title {
+  font-family: var(--display);
+  font-size: clamp(34px, 5.4vw, 92px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  white-space: nowrap;
+}
+.tlab-row:focus-visible .tlab-row-title { text-decoration: underline 1px var(--rec); text-underline-offset: 0.12em; }
+
+/* Letter-by-letter restyle: upright caps at rest → italic mixed case on
+   hover, staggered in both directions (discrete swaps, no tweening). */
+.tlab-row .ch {
+  display: inline-block;
+  font-style: normal;
+  text-transform: uppercase;
+  animation: tlab-ch-rest 0.001s steps(1, end) both;
+  animation-delay: calc(var(--i) * 16ms);
+}
+.tlab-row.is-on .ch { animation-name: tlab-ch-on; }
+@keyframes tlab-ch-on {
+  from { font-style: normal; text-transform: uppercase; }
+  to { font-style: italic; text-transform: none; }
+}
+@keyframes tlab-ch-rest {
+  from { font-style: italic; text-transform: none; }
+  to { font-style: normal; text-transform: uppercase; }
+}
+
+.tlab-slot-wrap { position: relative; }
+.tlab-slot { position: sticky; top: 22vh; aspect-ratio: 1; width: 100%; }
+.tlab-note { margin-top: 6vh; opacity: 0.4; font-size: 10px; }
+
+/* Pixel cursor (see kit/cursor.js). Base arrow, hand on anything
+   clickable, beam in fields, arrow + hourglass while 3D assets load. */
+.tlab { cursor: var(--cur-arrow, default); }
+.tlab a, .tlab button, .tlab label, .tlab select, .tlab summary, .tlab [role='button'] { cursor: var(--cur-hand, pointer); }
+.tlab input, .tlab textarea { cursor: var(--cur-text, text); }
+.tlab input[type='radio'], .tlab input[type='checkbox'], .tlab input[type='range'] { cursor: var(--cur-hand, pointer); }
+.tlab.xp-hand, .tlab.xp-hand * { cursor: var(--cur-hand, pointer) !important; }
+.tlab.xp-busy, .tlab.xp-busy * { cursor: var(--cur-busy, progress) !important; }
+
+.tlab-panel {
+  position: fixed;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  z-index: 60;
+  width: 230px;
+  background: rgba(17, 17, 16, 0.86);
+  color: var(--paper);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 228, 219, 0.15);
+  font-size: 10px;
+}
+.tlab-panel button {
+  all: unset;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+.tlab-panel-body { display: grid; gap: 8px; padding: 0 12px 12px; }
+.tlab-panel label { display: grid; grid-template-columns: 62px 1fr 30px; align-items: center; gap: 8px; }
+.tlab-panel input[type='range'] { width: 100%; accent-color: var(--rec); }
+.tlab-panel select {
+  grid-column: 2 / 4;
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(232, 228, 219, 0.3);
+  font: inherit;
+  padding: 3px;
+}
+.tlab-panel select option { color: #111110; }
+.tlab-panel output { text-align: right; opacity: 0.7; }
+
+@media (max-width: 760px) {
+  .tlab-hud { grid-template-columns: 1fr auto auto; }
+  .tlab-tc { display: none; }
+  .tlab-hud nav { display: none; }
+  .tlab-index-grid { grid-template-columns: 1fr; }
+  .tlab-slot-wrap { position: fixed; right: 0; bottom: 12vh; width: 46vw; pointer-events: none; }
+  .tlab-slot { position: static; }
+  .tlab-row { grid-template-columns: 2.4em auto; }
+  .tlab-row small { display: none; }
+  .tlab-panel { width: auto; left: var(--gutter); }
+}
+
+/* Film grain: a tiled grain plate over the whole page, overlay-blended so it
+   reads on paper and on ink, jittered at 12 fps like projected film. */
+.tlab-grain {
+  position: fixed;
+  inset: -80px;
+  z-index: 55;
+  pointer-events: none;
+  background: url('/tracking/grain.png') 0 0 / 320px 320px repeat;
+  mix-blend-mode: overlay;
+  opacity: 0.22;
+  animation: tlab-grain 0.5s steps(6) infinite;
+}
+@keyframes tlab-grain {
+  0% { transform: translate(0, 0); }
+  17% { transform: translate(-37px, 21px); }
+  33% { transform: translate(24px, -46px); }
+  50% { transform: translate(-58px, -12px); }
+  67% { transform: translate(41px, 33px); }
+  83% { transform: translate(-15px, 52px); }
+  100% { transform: translate(0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tlab-grain { animation: none; }
+}

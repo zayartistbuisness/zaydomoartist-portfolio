@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-labelledby="title description" shape-rendering="crispEdges">
+  <title id="title">Zay Domo Artist — stepped emblem, 32-unit grid</title>
+  <desc id="description">Exploratory optical derivative of the existing four-ribbon silhouette. Orthogonal integer-grid paths with open seams.</desc>
+  <path id="ribbon-1" fill="currentColor" fill-rule="evenodd" d="M4 16H5V13H6V12H7V11H8V10H10V9H13V8H17V9H19V12H18V13H16V14H14V15H12V16H9V17H8V19H7V22H6V21H5V19H4Z"/>
+  <path id="ribbon-2" fill="currentColor" fill-rule="evenodd" d="M16 3H19V4H21V5H22V6H23V7H24V8H25V10H26V15H25V16H24V17H22V18H21V17H20V15H19V13H20V8H19V6H18V5H17V4H16Z"/>
+  <path id="ribbon-3" fill="currentColor" fill-rule="evenodd" d="M8 20H9V18H10V17H12V18H13V21H14V24H15V26H16V27H17V28H18V29H20V30H16V29H13V28H11V27H10V26H9V24H8Z"/>
+  <path id="ribbon-4" fill="currentColor" fill-rule="evenodd" d="M15 21H17V20H19V19H23V18H25V17H26V16H27V15H28V19H27V21H26V23H24V24H22V25H17V24H16V23H15Z"/>
+</svg>

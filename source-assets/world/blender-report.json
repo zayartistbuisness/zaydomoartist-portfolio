@@ -1,0 +1,73 @@
+{
+  "scene": "AA | Between Frames",
+  "original_scene_preserved": "Scene",
+  "units": "meters",
+  "collections": [
+    "AA_WORLD | folded aperture",
+    "AA_WORLD | swift",
+    "AA_WORLD | studio"
+  ],
+  "objects": 14,
+  "mesh_vertices": 14793,
+  "emblem_objects": 4,
+  "bird_objects": 6,
+  "animation_frames": 16,
+  "exports": [
+    "C:\\Users\\zaydo\\OneDrive\\Documents\\Zay Domo Artist Webpage\\site\\public\\world\\aperture.glb",
+    "C:\\Users\\zaydo\\OneDrive\\Documents\\Zay Domo Artist Webpage\\site\\public\\world\\swift.glb",
+    "C:\\Users\\zaydo\\OneDrive\\Documents\\Zay Domo Artist Webpage\\site\\source-assets\\world\\between-frames.blend"
+  ],
+  "bird_revision": "swept-wings-v2",
+  "unit_scale": 1.0,
+  "original_scene_objects": [
+    {
+      "name": "Cube",
+      "type": "MESH",
+      "vertices": 8
+    },
+    {
+      "name": "Light",
+      "type": "LIGHT",
+      "vertices": null
+    },
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "vertices": null
+    }
+  ],
+  "emblem_bounds": [
+    {
+      "name": "AA | aperture ribbon 1",
+      "dimensions": [
+        1.5391,
+        1.4502,
+        0.178
+      ]
+    },
+    {
+      "name": "AA | aperture ribbon 2",
+      "dimensions": [
+        1.2154,
+        1.6833,
+        0.178
+      ]
+    },
+    {
+      "name": "AA | aperture ribbon 3",
+      "dimensions": [
+        1.2929,
+        1.4027,
+        0.178
+      ]
+    },
+    {
+      "name": "AA | aperture ribbon 4",
+      "dimensions": [
+        1.3784,
+        1.028,
+        0.178
+      ]
+    }
+  ]
+}

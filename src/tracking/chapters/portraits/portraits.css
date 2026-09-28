@@ -1,0 +1,274 @@
+/* PORTRAITS · "The Rotunda". The ground, the wall, the prints and their
+   labels are WebGL; this is the DOM layer above them: every real word, the
+   rail and the lightbox. Vars written per frame by Section: --intro, --rail. */
+
+.c-portraits {
+  position: relative;
+  color: var(--paper);
+}
+
+.c-portraits-stage {
+  --intro: 1;
+  --rail: 0;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Chapter tag: the same rhythm as the featured chapters. */
+.c-portraits-tag {
+  position: absolute;
+  top: 74px;
+  inset-inline: var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2em;
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+  opacity: 0.74;
+}
+.c-portraits-tag h2 {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+}
+.c-portraits-hint { opacity: calc(var(--rail) * 0.62); transition: opacity 0.3s; }
+
+/* Standfirst under the engraved wall title; leaves with it. */
+.c-portraits-intro {
+  position: absolute;
+  inset-inline: var(--gutter);
+  top: 66%;
+  margin: 0;
+  text-align: center;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(19px, 1.75vw, 28px);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: var(--intro);
+  transform: translateX(calc((1 - var(--intro)) * -48px));
+  pointer-events: none;
+}
+
+/* Rail: position in the series, ticks, controls. */
+.c-portraits-rail {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--paper) 18%, transparent);
+  opacity: var(--rail);
+}
+.c-portraits-rail:focus-within { opacity: 1; }
+.c-portraits-stage:not(.is-live) .c-portraits-rail { pointer-events: none; }
+.c-portraits-count {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(28px, 2.3vw, 38px);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+}
+.c-portraits-count small {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  vertical-align: 0.35em;
+}
+.c-portraits-ticks {
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
+  height: 12px;
+  margin: 0 0 3px;
+  padding: 0;
+  list-style: none;
+}
+.c-portraits-ticks li {
+  width: 1px;
+  height: 7px;
+  background: var(--paper);
+  opacity: 0.4;
+  transition: height 0.25s, opacity 0.25s, background-color 0.25s;
+}
+.c-portraits-ticks li.is-on { height: 12px; opacity: 1; }
+.c-portraits-ticks li.is-colour.is-on { background: var(--rec); }
+.c-portraits-nav {
+  justify-self: end;
+  display: flex;
+  gap: 16px;
+}
+.c-portraits-nav button {
+  all: unset;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding: 4px 0 3px;
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+  opacity: 0.8;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.c-portraits-nav button:hover,
+.c-portraits-nav button:focus-visible { opacity: 1; border-color: var(--rec); }
+.c-portraits-nav .c-portraits-view { opacity: 1; }
+
+/* The series as real content. Hidden until keyboard focus arrives, then a
+   small index over the lower left of the stage. */
+.c-portraits-list {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  list-style: none;
+}
+.c-portraits-list:focus-within {
+  left: var(--gutter);
+  bottom: 84px;
+  z-index: 3;
+  width: min(470px, calc(100vw - 2 * var(--gutter)));
+  height: auto;
+  padding: 12px 14px;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+  background: rgba(15, 15, 14, 0.94);
+  border: 1px solid color-mix(in srgb, var(--paper) 20%, transparent);
+}
+.c-portraits-list button {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 2.6em 7.6em 1fr;
+  gap: 8px;
+  width: 100%;
+  padding: 5px 0 5px 10px;
+  opacity: 0.66;
+}
+.c-portraits-list button:focus-visible { opacity: 1; box-shadow: inset 2px 0 0 var(--rec); }
+.c-portraits-list-s { opacity: 0.7; font-size: 10px; }
+.c-portraits-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ── Lightbox (portalled to <body>, so it restates its tokens) ── */
+.c-portraits-box {
+  --paper: #e8e4db;
+  --rec: #d7331f;
+  --pad: clamp(16px, 2.4vw, 36px);
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #0b0b0a;
+  color: var(--paper);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  overscroll-behavior: contain;
+}
+.c-portraits-box[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  animation: c-portraits-in 0.36s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.c-portraits-box::backdrop { background: #0b0b0a; }
+@keyframes c-portraits-in { from { opacity: 0; } }
+
+.c-portraits-box-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 18px var(--pad) 14px;
+}
+.c-portraits-box-head h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font: inherit;
+  letter-spacing: 0.12em;
+}
+.c-portraits-box-n { opacity: 0.55; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.c-portraits-box-rule { width: 18px; height: 1px; background: currentColor; opacity: 0.4; }
+.c-portraits-box.is-colour .c-portraits-box-rule { background: var(--rec); opacity: 1; }
+.c-portraits-box button {
+  all: unset;
+  padding: 5px 12px 4px;
+  border: 1px solid rgba(232, 228, 219, 0.4);
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.c-portraits-box button:hover { background: var(--paper); color: #111110; border-color: var(--paper); }
+.c-portraits-box button:focus-visible { outline: none; border-color: var(--rec); box-shadow: 0 0 0 1px var(--rec); }
+
+.c-portraits-box-stage {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 0 var(--pad);
+}
+.c-portraits-box-stage img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 132px);
+  opacity: 0;
+  transform: scale(0.985);
+  transition: opacity 0.45s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.c-portraits-box-stage img.is-in { opacity: 1; transform: none; }
+
+.c-portraits-box-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 14px var(--pad) 18px;
+}
+.c-portraits-box-foot p { margin: 0; opacity: 0.62; }
+.c-portraits-box-foot nav { display: flex; gap: 10px; }
+
+@media (max-width: 760px) {
+  .c-portraits-tag { top: 64px; font-size: 9.5px; }
+  .c-portraits-hint { display: none; }
+  .c-portraits-intro { top: 62%; font-size: 18px; }
+  .c-portraits-rail { bottom: 18px; grid-template-columns: auto 1fr auto; }
+  .c-portraits-ticks { justify-self: center; gap: 7px; }
+  .c-portraits-nav { gap: 12px; }
+  .c-portraits-box-head { padding-top: 14px; }
+  .c-portraits-box-foot { flex-direction: column; align-items: stretch; gap: 12px; }
+  .c-portraits-box-foot nav { justify-content: space-between; }
+  .c-portraits-box-stage img { max-height: calc(100svh - 170px); }
+}

@@ -13,12 +13,17 @@
     "db:migrate:local": "wrangler d1 execute zaydomo-portfolio --local --file=./migrations/0001_init.sql"
   },
   "dependencies": {
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@gltf-transform/core": "^4.3.0",
     "@gltf-transform/extensions": "^4.3.0",
     "@gltf-transform/functions": "^4.3.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "framer-motion": "^12.35.0",
+    "gsap": "^3.15.0",
     "hono": "^4.12.27",
     "lenis": "^1.3.25",
     "lucide-react": "^0.577.0",

@@ -1,0 +1,507 @@
+.experience-contact {
+  --contact-ink: #202a25;
+  --contact-chalk: #eee9de;
+  --contact-muted: #bac0b4;
+  --contact-rule: #788379;
+  --contact-soft-rule: rgb(238 233 222 / 22%);
+  --contact-accent: #d0debd;
+  --contact-error: #f1b59f;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding: clamp(4rem, 8vw, 8rem) clamp(1.25rem, 5vw, 5rem) 1.5rem;
+  border-top: 1px solid var(--contact-soft-rule);
+  background: var(--contact-ink);
+  color: var(--contact-chalk);
+  font-family: var(--font-sans, Arial, sans-serif);
+  line-height: 1.6;
+  color-scheme: dark;
+  scroll-margin-top: 5rem;
+}
+
+.experience-contact,
+.experience-contact *,
+.experience-contact *::before,
+.experience-contact *::after {
+  box-sizing: border-box;
+}
+
+.experience-contact ::selection {
+  background: var(--contact-chalk);
+  color: var(--contact-ink);
+}
+
+.experience-contact :where(h2, h3, p, dl, dd) {
+  margin: 0;
+}
+
+.experience-contact :where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--contact-accent);
+  outline-offset: 5px;
+}
+
+.experience-contact a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.experience-contact .experience-contact__inner {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.experience-contact .experience-contact__header {
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.experience-contact .experience-contact__eyebrow {
+  font-family: var(--font-sans, Arial, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--contact-muted);
+}
+
+.experience-contact .experience-contact__heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.experience-contact .experience-contact__heading {
+  min-width: 0;
+  font-family: var(--font-editorial, Georgia, 'Times New Roman', serif);
+  font-size: clamp(3.25rem, 9vw, 8.75rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.experience-contact .experience-contact__heading em {
+  display: block;
+  font-weight: 400;
+}
+
+.experience-contact .experience-contact__icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.experience-contact .experience-contact__heading-arrow {
+  width: clamp(2.5rem, 7vw, 7rem);
+  height: clamp(2.5rem, 7vw, 7rem);
+  margin-bottom: 0.15em;
+  color: var(--contact-accent);
+}
+
+.experience-contact .experience-contact__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: clamp(3rem, 8vw, 8rem);
+}
+
+.experience-contact .experience-contact__details,
+.experience-contact .experience-contact__form-column {
+  min-width: 0;
+}
+
+.experience-contact .experience-contact__intro {
+  max-width: 30ch;
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  line-height: 1.55;
+}
+
+.experience-contact .experience-contact__roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.75rem;
+}
+
+.experience-contact .experience-contact__role-link {
+  display: flex;
+  flex: 1 1 11rem;
+  min-width: 0;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--contact-rule);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.experience-contact .experience-contact__role-link:hover,
+.experience-contact .experience-contact__role-link:focus-visible {
+  color: var(--contact-accent);
+  border-color: var(--contact-accent);
+}
+
+.experience-contact .experience-contact__role-link[aria-disabled='true'] {
+  color: var(--contact-muted);
+  cursor: wait;
+}
+
+.experience-contact .experience-contact__representation {
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+}
+
+.experience-contact .experience-contact__representatives {
+  margin-top: 1.25rem;
+}
+
+.experience-contact .experience-contact__representative {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--contact-soft-rule);
+}
+
+.experience-contact .experience-contact__representative dt {
+  padding-top: 0.125rem;
+  color: var(--contact-muted);
+  font-size: 0.8125rem;
+}
+
+.experience-contact .experience-contact__representative dd {
+  min-width: 0;
+}
+
+.experience-contact .experience-contact__representative-name {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.experience-contact .experience-contact__email {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--contact-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-decoration-line: underline;
+}
+
+.experience-contact .experience-contact__email span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.experience-contact .experience-contact__email .experience-contact__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.experience-contact .experience-contact__email:hover {
+  color: var(--contact-chalk);
+}
+
+.experience-contact .experience-contact__form-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.375rem 1.5rem;
+  margin-bottom: 1.875rem;
+}
+
+.experience-contact .experience-contact__form-heading h3 {
+  font-size: 1.375rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.experience-contact .experience-contact__form-heading p {
+  color: var(--contact-muted);
+  font-size: 0.8125rem;
+}
+
+.experience-contact .experience-contact__form {
+  scroll-margin-top: 6rem;
+}
+
+.experience-contact .experience-contact__fieldset {
+  display: grid;
+  min-width: 0;
+  gap: 1.75rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.experience-contact .experience-contact__field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 1.75rem;
+}
+
+.experience-contact .experience-contact__field {
+  min-width: 0;
+}
+
+.experience-contact .experience-contact__field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.experience-contact .experience-contact__field :is(input, select, textarea) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  margin: 0;
+  padding: 0.75rem 0.125rem;
+  border: 0;
+  border-bottom: 1px solid var(--contact-rule);
+  border-radius: 0;
+  background: transparent;
+  color: var(--contact-chalk);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-shadow: none;
+  transition: border-color 160ms ease;
+}
+
+.experience-contact .experience-contact__field :is(input, textarea)::placeholder {
+  color: var(--contact-muted);
+  opacity: 1;
+}
+
+.experience-contact .experience-contact__field :is(input, select, textarea):focus {
+  border-bottom-color: var(--contact-accent);
+}
+
+.experience-contact .experience-contact__field :is(input, select, textarea)[aria-invalid='true'] {
+  border-bottom-color: var(--contact-error);
+}
+
+.experience-contact .experience-contact__field select {
+  appearance: auto;
+  cursor: pointer;
+}
+
+.experience-contact .experience-contact__field option {
+  background: var(--contact-ink);
+  color: var(--contact-chalk);
+}
+
+.experience-contact .experience-contact__field textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.experience-contact .experience-contact__field :is(input, select, textarea):disabled {
+  color: var(--contact-muted);
+  cursor: wait;
+  opacity: 1;
+  -webkit-text-fill-color: var(--contact-muted);
+}
+
+.experience-contact .experience-contact__hint {
+  margin-top: 0.625rem;
+  color: var(--contact-muted);
+  font-size: 0.8125rem;
+}
+
+.experience-contact .experience-contact__field-error {
+  margin-top: 0.625rem;
+  color: var(--contact-error);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.experience-contact .experience-contact__send {
+  display: flex;
+  width: 100%;
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.25rem;
+  padding: 0.875rem 1.125rem;
+  border: 1px solid var(--contact-chalk);
+  border-radius: 0;
+  background: var(--contact-chalk);
+  color: var(--contact-ink);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.experience-contact .experience-contact__send:hover:not(:disabled) {
+  border-color: var(--contact-accent);
+  background: var(--contact-accent);
+}
+
+.experience-contact .experience-contact__send:disabled {
+  border-color: var(--contact-rule);
+  background: transparent;
+  color: var(--contact-muted);
+  cursor: wait;
+}
+
+.experience-contact .experience-contact__feedback {
+  min-height: 2.75rem;
+  padding-top: 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.experience-contact .experience-contact__status {
+  color: var(--contact-accent);
+}
+
+.experience-contact .experience-contact__submit-error {
+  color: var(--contact-error);
+}
+
+.experience-contact .experience-contact__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 2.5rem;
+  margin-top: clamp(3rem, 6vw, 6rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--contact-soft-rule);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.experience-contact .experience-contact__copyright {
+  flex: 1 1 18rem;
+  color: var(--contact-muted);
+}
+
+.experience-contact .experience-contact__other-work,
+.experience-contact .experience-contact__top {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.experience-contact .experience-contact__other-work {
+  color: var(--contact-muted);
+}
+
+.experience-contact .experience-contact__other-work:hover,
+.experience-contact .experience-contact__top:hover {
+  color: var(--contact-accent);
+}
+
+.experience-contact .experience-contact__top .experience-contact__icon {
+  width: 1rem;
+  height: 1rem;
+  transform: rotate(-45deg);
+}
+
+.experience-contact .experience-contact__honeypot {
+  display: none;
+}
+
+.experience-contact .experience-contact__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 59.99rem) {
+  .experience-contact .experience-contact__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .experience-contact .experience-contact__intro {
+    max-width: 38ch;
+  }
+
+  .experience-contact .experience-contact__representation {
+    margin-top: 2.5rem;
+  }
+
+  .experience-contact .experience-contact__form-column {
+    padding-top: 2rem;
+    border-top: 1px solid var(--contact-soft-rule);
+  }
+}
+
+@media (max-width: 35rem) {
+  .experience-contact .experience-contact__heading-row {
+    display: block;
+  }
+
+  .experience-contact .experience-contact__heading-arrow {
+    display: none;
+  }
+
+  .experience-contact .experience-contact__field-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .experience-contact .experience-contact__representative {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.375rem;
+  }
+
+  .experience-contact .experience-contact__footer {
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+
+  .experience-contact .experience-contact__copyright {
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-contact .experience-contact__role-link,
+  .experience-contact .experience-contact__field :is(input, select, textarea),
+  .experience-contact .experience-contact__send {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .experience-contact .experience-contact__field :is(input, select, textarea),
+  .experience-contact .experience-contact__role-link,
+  .experience-contact .experience-contact__send {
+    border-color: ButtonText;
+  }
+
+  .experience-contact :where(a, button, input, select, textarea):focus-visible {
+    outline-color: Highlight;
+  }
+}

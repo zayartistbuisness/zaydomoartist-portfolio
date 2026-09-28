@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="zda-index" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 4H5V6H3Z M8 4H21V6H8Z M3 11H5V13H3Z M8 11H18V13H8Z M3 18H5V20H3Z M8 18H21V20H8Z"/></symbol>
+  <symbol id="zda-close" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4 4H8V6H10V8H14V6H16V4H20V6H18V8H16V10H14V14H16V16H18V18H20V20H16V18H14V16H10V18H8V20H4V18H6V16H8V14H10V10H8V8H6V6H4Z"/></symbol>
+  <symbol id="zda-arrow-diagonal" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5 17H7V15H9V13H11V11H13V9H15V7H9V5H19V15H17V9H15V11H13V13H11V15H9V17H7V19H5Z"/></symbol>
+  <symbol id="zda-scroll" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M11 3H13V6H11Z M11 8H13V16H15V14H17V17H15V19H13V21H11V19H9V17H7V14H9V16H11Z"/></symbol>
+  <symbol id="zda-play" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M6 4H8V5H10V6H12V7H14V8H16V9H18V10H20V14H18V15H16V16H14V17H12V18H10V19H8V20H6Z"/></symbol>
+  <symbol id="zda-pause" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M6 4H10V20H6Z M14 4H18V20H14Z"/></symbol>
+  <symbol id="zda-sound-off" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 9H7V7H9V5H11V19H9V17H7V15H3Z M13 15H15V13H17V11H19V7H21V11H19V13H17V15H15V17H13Z"/></symbol>
+  <symbol id="zda-external" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 8H5V19H16V17H18V21H3Z M10 3H21V14H19V7H17V9H15V11H13V13H11V11H13V9H15V7H17V5H10Z"/></symbol>
+  <symbol id="zda-project" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 4H11V6H21V20H3Z M5 9V18H19V9Z"/></symbol>
+  <symbol id="zda-film" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 4H22V20H2Z M8 6V18H16V6Z M4 6H6V8H4Z M4 11H6V13H4Z M4 16H6V18H4Z M18 6H20V8H18Z M18 11H20V13H18Z M18 16H20V18H18Z"/></symbol>
+  <symbol id="zda-creative-strategy" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 9H9V15H3Z M5 11V13H7V11Z M15 3H21V9H15Z M17 5V7H19V5Z M15 15H21V21H15Z M17 17V19H19V17Z M9 11H11V5H15V7H13V17H15V19H11V13H9Z"/></symbol>
+  <symbol id="zda-contact" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3 5H21V19H3Z M5 7V17H19V7Z M5 7H7V9H9V11H11V13H13V11H15V9H17V7H19V9H17V11H15V13H13V15H11V13H9V11H7V9H5Z"/></symbol>
+</svg>

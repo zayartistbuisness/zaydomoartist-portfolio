@@ -1,34 +1,253 @@
 <!doctype html>
 <html lang="en">
-  <head>
+  <head prefix="og: https://ogp.me/ns# profile: https://ogp.me/ns/profile#">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#060607" />
-
-    <title>Zay “Domo” Artist — Actor · Producer · Director</title>
-    <meta name="description" content="The official portfolio of Zay “Domo” Artist — actor, producer, and director. Watch the reel, explore credits and headshots, and contact representation." />
+    <title>Zay Domo Artist — Actor, Writer &amp; Creative Strategist</title>
+    <meta name="description" content="Zay Domo Artist is an actor, writer and creative strategist based in Los Angeles. His screen work includes HBO’s The Last of Us and A Quiet Place: Day One." />
     <link rel="canonical" href="https://zaydomoartist.com/" />
+    <meta name="theme-color" content="#e8e4db" />
+
+    <!-- Icons (Domo sigil) -->
+    <link rel="icon" href="/tracking/brand/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/tracking/brand/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/tracking/brand/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/tracking/brand/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/tracking/brand/favicon-180.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Zay “Domo” Artist" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Zay Domo Artist" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://zaydomoartist.com/" />
-    <meta property="og:title" content="Zay “Domo” Artist — Actor · Producer · Director" />
-    <meta property="og:description" content="Watch the reel, explore credits and headshots, and contact representation for Zay “Domo” Artist." />
-    <meta property="og:image" content="https://zaydomoartist.com/headshots/headshot-3.jpg" />
-    <meta property="og:image:alt" content="Portrait of Zay “Domo” Artist" />
+    <meta property="og:title" content="Zay Domo Artist — Actor, Writer &amp; Creative Strategist" />
+    <meta property="og:description" content="Zay Domo Artist is an actor, writer and creative strategist based in Los Angeles. His screen work includes HBO’s The Last of Us and A Quiet Place: Day One." />
+    <meta property="og:image" content="https://zaydomoartist.com/og/zay-domo-artist.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Black-and-white portrait of Zay “Domo” Artist in a charcoal suit, beside his name and “Actor · Writer · Creative strategist”" />
+    <meta property="profile:first_name" content="Zay" />
+    <meta property="profile:last_name" content="Artist" />
+    <meta property="profile:username" content="zaydomoartist" />
 
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Zay “Domo” Artist — Actor · Producer · Director" />
-    <meta name="twitter:description" content="Watch the reel, explore credits and headshots, and contact representation for Zay “Domo” Artist." />
-    <meta name="twitter:image" content="https://zaydomoartist.com/headshots/headshot-3.jpg" />
+    <meta name="twitter:title" content="Zay Domo Artist — Actor, Writer &amp; Creative Strategist" />
+    <meta name="twitter:description" content="Zay Domo Artist is an actor, writer and creative strategist based in Los Angeles. His screen work includes HBO’s The Last of Us and A Quiet Place: Day One." />
+    <meta name="twitter:image" content="https://zaydomoartist.com/og/zay-domo-artist.jpg" />
+    <meta name="twitter:image:alt" content="Black-and-white portrait of Zay “Domo” Artist in a charcoal suit, beside his name and “Actor · Writer · Creative strategist”" />
 
+    <!-- src/index.css @imports Google Fonts on every route -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured data: WebSite + ProfilePage + Person (+ verified screen credits) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://zaydomoartist.com/#website",
+          "url": "https://zaydomoartist.com/",
+          "name": "Zay Domo Artist",
+          "alternateName": [
+            "Zay “Domo” Artist",
+            "zaydomoartist.com"
+          ],
+          "inLanguage": "en",
+          "publisher": {
+            "@id": "https://zaydomoartist.com/#person"
+          },
+          "about": {
+            "@id": "https://zaydomoartist.com/#person"
+          }
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://zaydomoartist.com/#profilepage",
+          "url": "https://zaydomoartist.com/",
+          "name": "Zay Domo Artist — Actor, Writer & Creative Strategist",
+          "description": "Zay Domo Artist is an actor, writer and creative strategist based in Los Angeles. His screen work includes HBO’s The Last of Us and A Quiet Place: Day One.",
+          "inLanguage": "en",
+          "isPartOf": {
+            "@id": "https://zaydomoartist.com/#website"
+          },
+          "mainEntity": {
+            "@id": "https://zaydomoartist.com/#person"
+          },
+          "primaryImageOfPage": {
+            "@id": "https://zaydomoartist.com/#portrait"
+          },
+          "dateModified": "2026-09-28"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://zaydomoartist.com/#person",
+          "name": "Zay Domo Artist",
+          "alternateName": [
+            "Zay Domo",
+            "Zay \"Domo\" Artist"
+          ],
+          "jobTitle": [
+            "Actor",
+            "Writer",
+            "Creative strategist"
+          ],
+          "description": "Zay “Domo” Artist is an actor, writer and creative strategist based in Los Angeles. His screen work includes HBO’s The Last of Us, Kingdom of the Planet of the Apes and A Quiet Place: Day One.",
+          "image": {
+            "@id": "https://zaydomoartist.com/#portrait"
+          },
+          "url": "https://zaydomoartist.com/",
+          "sameAs": [
+            "https://www.imdb.com/name/nm14198614/",
+            "https://www.instagram.com/zaydomoartist/",
+            "https://www.youtube.com/@Zaydomoartist",
+            "https://www.tvguide.com/celebrities/zay-domo-artist/3060098117/",
+            "https://www.allmovie.com/artist/zay-domo-artist-an24763389",
+            "https://www.tiktok.com/@zaydomoartist",
+            "https://www.instagram.com/zayvsartist/"
+          ],
+          "knowsAbout": [
+            "Acting",
+            "Screenwriting",
+            "Creative strategy",
+            "Live streaming",
+            "Live production",
+            "Film",
+            "Television"
+          ],
+          "homeLocation": {
+            "@type": "Place",
+            "name": "Los Angeles, California",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Los Angeles",
+              "addressRegion": "CA",
+              "addressCountry": "US"
+            },
+            "sameAs": "https://www.wikidata.org/wiki/Q65"
+          },
+          "hasOccupation": [
+            {
+              "@type": "Occupation",
+              "name": "Actor",
+              "sameAs": "https://www.wikidata.org/wiki/Q33999"
+            },
+            {
+              "@type": "Occupation",
+              "name": "Screenwriter",
+              "sameAs": "https://www.wikidata.org/wiki/Q28389"
+            },
+            {
+              "@type": "Occupation",
+              "name": "Creative strategist"
+            }
+          ]
+        },
+        {
+          "@type": "ImageObject",
+          "@id": "https://zaydomoartist.com/#portrait",
+          "url": "https://zaydomoartist.com/tracking/portrait/zay-suit-bw.webp",
+          "contentUrl": "https://zaydomoartist.com/tracking/portrait/zay-suit-bw.webp",
+          "caption": "Zay Domo Artist"
+        },
+        {
+          "@type": "TVSeries",
+          "@id": "https://zaydomoartist.com/#the-last-of-us",
+          "name": "The Last of Us",
+          "startDate": "2023",
+          "actor": {
+            "@id": "https://zaydomoartist.com/#person"
+          }
+        },
+        {
+          "@type": "Movie",
+          "@id": "https://zaydomoartist.com/#kingdom-of-the-planet-of-the-apes",
+          "name": "Kingdom of the Planet of the Apes",
+          "datePublished": "2024",
+          "actor": {
+            "@id": "https://zaydomoartist.com/#person"
+          }
+        },
+        {
+          "@type": "Movie",
+          "@id": "https://zaydomoartist.com/#a-quiet-place-day-one",
+          "name": "A Quiet Place: Day One",
+          "datePublished": "2024",
+          "actor": {
+            "@id": "https://zaydomoartist.com/#person"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <noscript>
+      <style>
+        .nojs { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; background: #e8e4db; color: #16140f; font: 1.0625rem/1.6 Georgia, 'Times New Roman', serif; }
+        .nojs h1 { font-size: 2.75rem; font-weight: 400; line-height: 1.05; margin: 0 0 .5rem; }
+        .nojs h2 { font-size: .75rem; font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; margin: 2.5rem 0 .75rem; padding-top: .75rem; border-top: 1px solid #16140f; }
+        .nojs ul { padding-left: 1.1rem; } .nojs li { margin: .35rem 0; }
+        .nojs a { color: inherit; } .nojs small { color: #57534b; } .nojs .nojs-lede { font-style: italic; margin: 0; }
+        .nojs footer { margin-top: 2.5rem; padding-top: .75rem; border-top: 1px solid #16140f; }
+        html, body { background: #e8e4db; }
+      </style>
+    </noscript>
   </head>
   <body>
+    <noscript>
+      <div class="nojs">
+        <header>
+          <h1>Zay “Domo” Artist</h1>
+          <p class="nojs-lede">Actor, writer and creative strategist · Los Angeles</p>
+        </header>
+        <main>
+          <section aria-labelledby="nojs-about">
+            <h2 id="nojs-about">About</h2>
+            <p>Zay “Domo” Artist is an actor, writer and creative strategist based in Los Angeles. His screen work includes HBO’s The Last of Us, Kingdom of the Planet of the Apes and A Quiet Place: Day One.</p>
+            <p>Off camera he builds the stories live shows run on — as Assistant Creative Strategist at Kai Cenat’s Streamer University 2, on creative strategy and direction for MemeHouse, and on the freestyle side of Mafiathon 3’s On The Radar.</p>
+            <p>He is now developing KEON, a boxing drama set in Central Florida that he wrote and plans to direct and star in.</p>
+          </section>
+          <section aria-labelledby="nojs-credits">
+            <h2 id="nojs-credits">Screen credits</h2>
+            <ul>
+              <li><cite>A Quiet Place: Day One</cite> (2024) — Young Bryan. <small>Feature · Paramount</small></li>
+              <li><cite>Kingdom of the Planet of the Apes</cite> (2024) — Milo (Young Ape). <small>Feature · 20th Century Studios</small></li>
+              <li><cite>The Last of Us</cite> (2023) — Young Rebel Boy. <small>HBO · S1 E4</small></li>
+              <li><cite>LA Jesus</cite> — Basketball Player 1. <small>Feature · post-production</small></li>
+              <li><cite>Momma I Gotta Job</cite> — David. <small>Feature · Dust House Films</small></li>
+              <li><cite>On the Run</cite> (2017) — Jaiden. <small>Short</small></li>
+            </ul>
+            <p>In development: <cite>KEON</cite> — Writer · Director · Lead. <small>Boxing drama · in development</small></p>
+          </section>
+          <section aria-labelledby="nojs-reps">
+            <h2 id="nojs-reps">Representation</h2>
+            <ul>
+              <li>Management: Schuller Talent · <a href="mailto:schullertalent@gmail.com">schullertalent@gmail.com</a></li>
+              <li>Theatrical: Coast to Coast Talent · <a href="mailto:coastyouth@ctctalent.com">coastyouth@ctctalent.com</a></li>
+              <li>Press: Lisa — Lynk PR · <a href="mailto:lisa@lynkpr.com">lisa@lynkpr.com</a></li>
+            </ul>
+          </section>
+          <section aria-labelledby="nojs-press">
+            <h2 id="nojs-press">Press</h2>
+            <ul>
+              <li><a href="https://www.thestaffacorner.com/1395679/episodes/17219126-zay-domo-on-defying-the-odds-and-music-career-journey-exclusive-music-interview" rel="noopener">The Staffa Corner</a> — Podcast interview, 2025</li>
+              <li><a href="https://popsize.co.uk/news/2024/09/the-last-of-us-and-a-quiet-place-day-one-actor-zay-domo-artist-talks-about-helping-adopted-children-get-started-in-the-acting-industry/" rel="noopener">PopSize UK</a> — Interview, 2024</li>
+              <li><a href="https://www.einpresswire.com/article/772993754/10th-annual-real-to-reel-global-youth-film-festival-inspires-filmmakers-and-announces-winners" rel="noopener">Real to Reel Global Youth Film Festival</a> — Panelist, 2024</li>
+            </ul>
+          </section>
+        </main>
+        <footer>
+          <a href="https://www.imdb.com/name/nm14198614/" rel="me noopener">IMDb</a> ·
+          <a href="https://www.instagram.com/zaydomoartist/" rel="me noopener">Instagram</a> ·
+          <a href="https://www.youtube.com/@Zaydomoartist" rel="me noopener">YouTube</a>
+          <p><small>The full site is an interactive experience and needs JavaScript.</small></p>
+        </footer>
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

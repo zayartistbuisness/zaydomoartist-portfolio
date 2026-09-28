@@ -1,0 +1,78 @@
+/* About — who Zay is. Ground (#ebe7de) is drawn in WebGL. */
+.c-about {
+  --in: 0;
+  position: relative;
+  color: var(--ink);
+  padding: 18vh var(--gutter) 16vh;
+}
+.c-about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 5vw;
+  align-items: end;
+}
+.c-about-kicker { margin: 0 0 3vh; opacity: 0.6; }
+.c-about-title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(44px, 6.4vw, 112px);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+.c-about-title span,
+.c-about-title em {
+  display: block;
+  opacity: var(--in);
+  transform: translateY(calc((1 - var(--in)) * 40px));
+  transition: none;
+}
+.c-about-title em { font-style: italic; }
+.c-about-bio {
+  margin-top: 5vh;
+  max-width: 36em;
+  font-family: var(--display);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: clamp(18px, 1.55vw, 24px);
+  line-height: 1.38;
+  opacity: var(--in);
+}
+.c-about-bio p { margin: 0 0 0.9em; }
+
+.c-about-facts {
+  margin: 5vh 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2vw;
+  border-top: 1px solid rgba(17, 17, 16, 0.18);
+  padding-top: 18px;
+}
+.c-about-facts dt { opacity: 0.55; margin-bottom: 8px; }
+.c-about-facts dd { margin: 0; display: grid; gap: 6px; }
+.c-about-facts a { color: inherit; text-decoration: underline 1px rgba(17, 17, 16, 0.3); text-underline-offset: 3px; }
+.c-about-facts a span { opacity: 0.5; margin-left: 0.4em; }
+.c-about-facts a:hover, .c-about-facts a:focus-visible { text-decoration-color: var(--rec); }
+
+.c-about-links { margin-top: 5vh; display: flex; flex-wrap: wrap; gap: 12px; }
+.c-about-links a {
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid rgba(17, 17, 16, 0.35);
+  border-radius: 999px;
+  padding: 11px 18px;
+  transition: background 0.2s, color 0.2s;
+}
+.c-about-links a:hover, .c-about-links a:focus-visible { background: var(--ink); color: var(--paper); }
+
+.c-about-portrait { position: relative; }
+.c-about-slot { width: 100%; height: min(78vh, 900px); }
+.c-about-caption { margin: 10px 0 0; opacity: 0.5; font-size: 10px; text-align: right; }
+
+@media (max-width: 860px) {
+  .c-about-grid { grid-template-columns: 1fr; }
+  .c-about-portrait { order: -1; }
+  .c-about-slot { height: 62vh; }
+  .c-about-facts { grid-template-columns: 1fr; }
+}

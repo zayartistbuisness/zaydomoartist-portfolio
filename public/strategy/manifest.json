@@ -1,0 +1,2306 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-27",
+  "purpose": "Motion and strategy asset handoff; site integration intentionally deferred.",
+  "preserveOriginalBytes": true,
+  "overwritePolicy": "Refuse existing strategy folder; retain an identical existing path export without writing it; never overwrite files.",
+  "sourceRoot": "asset-studio",
+  "destinationRoot": "site/public/strategy",
+  "expectedFileCount": 48,
+  "excludedByRequest": [
+    "asset-studio/creatures/concepts/** (source creature concept not copied)",
+    "site/public/world/clouds.webp (already available for CSS masking; not copied)"
+  ],
+  "assetGroups": {
+    "projects": [
+      "/strategy/projects/image4.jpeg",
+      "/strategy/projects/image7.jpeg",
+      "/strategy/projects/image9.jpeg"
+    ],
+    "transitions": [
+      "/strategy/transitions/campus-grid/threshold.png",
+      "/strategy/transitions/campus-grid/poster-50.png",
+      "/strategy/transitions/studio-doors/threshold.png",
+      "/strategy/transitions/studio-doors/poster-50.png",
+      "/strategy/transitions/sound-bands/threshold.png",
+      "/strategy/transitions/sound-bands/poster-50.png"
+    ],
+    "marks": [
+      "/strategy/marks/on-the-radar/mark-display.png",
+      "/strategy/marks/on-the-radar/mark-pixel-color.png",
+      "/strategy/marks/on-the-radar/mark-pixel-ink.png",
+      "/strategy/marks/on-the-radar/mark-pixel-ink.svg",
+      "/strategy/marks/memehouse/mark-display.png",
+      "/strategy/marks/memehouse/mark-pixel-color.png",
+      "/strategy/marks/memehouse/mark-pixel-ink.png",
+      "/strategy/marks/memehouse/mark-pixel-ink.svg",
+      "/strategy/marks/streamer-university-2/mark-display.png",
+      "/strategy/marks/streamer-university-2/mark-pixel-color.png",
+      "/strategy/marks/streamer-university-2/mark-pixel-ink.png",
+      "/strategy/marks/streamer-university-2/mark-pixel-ink.svg"
+    ],
+    "motion": [
+      "/strategy/motion/aperture-assembly/loop.mp4",
+      "/strategy/motion/aperture-assembly/loop.webm",
+      "/strategy/motion/aperture-assembly/loop-mobile.mp4",
+      "/strategy/motion/aperture-assembly/poster.webp",
+      "/strategy/motion/avian-flight/loop.mp4",
+      "/strategy/motion/avian-flight/loop.webm",
+      "/strategy/motion/avian-flight/loop-mobile.mp4",
+      "/strategy/motion/avian-flight/poster.webp",
+      "/strategy/motion/fox-stride/loop.mp4",
+      "/strategy/motion/fox-stride/loop.webm",
+      "/strategy/motion/fox-stride/loop-mobile.mp4",
+      "/strategy/motion/fox-stride/poster.webp"
+    ],
+    "portrait": [
+      "/strategy/portrait/editorial.webp"
+    ],
+    "brand": [
+      "/strategy/brand/icons/sprite.svg",
+      "/strategy/brand/icons/arrow-diagonal.svg",
+      "/strategy/brand/icons/close.svg",
+      "/strategy/brand/icons/contact.svg",
+      "/strategy/brand/icons/creative-strategy.svg",
+      "/strategy/brand/icons/external.svg",
+      "/strategy/brand/icons/film.svg",
+      "/strategy/brand/icons/index.svg",
+      "/strategy/brand/icons/pause.svg",
+      "/strategy/brand/icons/play.svg",
+      "/strategy/brand/icons/project.svg",
+      "/strategy/brand/icons/scroll.svg",
+      "/strategy/brand/icons/sound-off.svg",
+      "/strategy/brand/marks/emblem-stepped-master-32.svg"
+    ]
+  },
+  "files": [
+    {
+      "id": "projects.on-the-radar.deckImage",
+      "category": "projects",
+      "publicPath": "/strategy/projects/image4.jpeg",
+      "destinationPath": "public/strategy/projects/image4.jpeg",
+      "sourceAssetPath": "asset-studio/sources/deck/media/image4.jpeg",
+      "sha256": "26fa4a16e14db0b206f420dba79db826f0272a698d60a75ad0c13edd63b1b1f6",
+      "bytes": 132368,
+      "creditCaveats": [
+        "Deck media is preserved byte-for-byte from the user-supplied pitch deck extraction.",
+        "Third-party project imagery and thumbnails require the applicable source credit and usage clearance before public deployment.",
+        "Images are thumbnails from linked official On The Radar Radio uploads.",
+        "The event-wide lineup and results are context; do not imply that every artist or metric was personally booked or caused by Zay."
+      ],
+      "sourceMetadata": {
+        "label": "On The Radar / Mafiathon 3",
+        "deckSlide": 4,
+        "deckSource": "ppt/media/image4.jpeg",
+        "deckExtractedBytes": 132368,
+        "deckExtractedSha256": "26fa4a16e14db0b206f420dba79db826f0272a698d60a75ad0c13edd63b1b1f6",
+        "deckStatus": "User-supplied pitch; claims are attributed, not independently verified."
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/sources/deck/deck-extract.json",
+          "sha256": "9c1d60fdc1ab291045895f80df4ef0e7ff016b4d5eace7ffca1013265e63ac16",
+          "bytes": 33000
+        }
+      ]
+    },
+    {
+      "id": "projects.streamer-university-2.deckImage",
+      "category": "projects",
+      "publicPath": "/strategy/projects/image7.jpeg",
+      "destinationPath": "public/strategy/projects/image7.jpeg",
+      "sourceAssetPath": "asset-studio/sources/deck/media/image7.jpeg",
+      "sha256": "e10bd4a6f2949abf2a981355589ed3878605b2981a851a248e3c1dc797a6c57a",
+      "bytes": 200033,
+      "creditCaveats": [
+        "Deck media is preserved byte-for-byte from the user-supplied pitch deck extraction.",
+        "Third-party project imagery and thumbnails require the applicable source credit and usage clearance before public deployment.",
+        "Image is a thumbnail from an official Suburbbaby video source.",
+        "Event metrics are aggregated event-related coverage figures; role and date claims remain attributed to the supplied portfolio and user clarification."
+      ],
+      "sourceMetadata": {
+        "label": "Streamer University 2",
+        "deckSlide": 5,
+        "deckSource": "ppt/media/image7.jpeg",
+        "deckExtractedBytes": 200033,
+        "deckExtractedSha256": "e10bd4a6f2949abf2a981355589ed3878605b2981a851a248e3c1dc797a6c57a",
+        "deckStatus": "User-supplied pitch; claims are attributed, not independently verified."
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/sources/deck/deck-extract.json",
+          "sha256": "9c1d60fdc1ab291045895f80df4ef0e7ff016b4d5eace7ffca1013265e63ac16",
+          "bytes": 33000
+        }
+      ]
+    },
+    {
+      "id": "projects.memehouse.deckImage",
+      "category": "projects",
+      "publicPath": "/strategy/projects/image9.jpeg",
+      "destinationPath": "public/strategy/projects/image9.jpeg",
+      "sourceAssetPath": "asset-studio/sources/deck/media/image9.jpeg",
+      "sha256": "54501eff96ddfdf36bdac105a836afda17acdb48eee970b94221dffd48f75e5f",
+      "bytes": 204509,
+      "creditCaveats": [
+        "Deck media is preserved byte-for-byte from the user-supplied pitch deck extraction.",
+        "Third-party project imagery and thumbnails require the applicable source credit and usage clearance before public deployment.",
+        "Image is an official Isaac Francis Twitch clip thumbnail and is not a claim that it depicts the specific U-Haul setup.",
+        "MemeHouse work was contracted per project, not company-wide creative ownership."
+      ],
+      "sourceMetadata": {
+        "label": "MemeHouse Productions",
+        "deckSlide": 7,
+        "deckSource": "ppt/media/image9.jpeg",
+        "deckExtractedBytes": 204509,
+        "deckExtractedSha256": "54501eff96ddfdf36bdac105a836afda17acdb48eee970b94221dffd48f75e5f",
+        "deckStatus": "User-supplied pitch; claims are attributed, not independently verified."
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/sources/deck/deck-extract.json",
+          "sha256": "9c1d60fdc1ab291045895f80df4ef0e7ff016b4d5eace7ffca1013265e63ac16",
+          "bytes": 33000
+        }
+      ]
+    },
+    {
+      "id": "transitions.campus-grid.threshold",
+      "category": "transitions",
+      "publicPath": "/strategy/transitions/campus-grid/threshold.png",
+      "destinationPath": "public/strategy/transitions/campus-grid/threshold.png",
+      "sourceAssetPath": "asset-studio/transitions/campus-grid/threshold.png",
+      "sha256": "3b650acf7a07dfb46245398e6508a7ec9f1bc918aca52a6a5fd9960cec0a09b8",
+      "bytes": 2192,
+      "creditCaveats": [
+        "Original one-shot luma assets contain no photo, logo, text, or brand mark; composite a separately sourced photo.",
+        "threshold.png is scalar grayscale data, not a final display image; poster-50.png is an exact midpoint matte, not a promise of 50% revealed area."
+      ],
+      "sourceMetadata": {
+        "label": "Campus grid",
+        "caseStudy": "SU2",
+        "seed": 24092711,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "width": 1024,
+        "height": 576,
+        "durationSeconds": 2,
+        "fps": 24,
+        "loop": false,
+        "approval": "Exploratory asset; no live integration",
+        "provenance": {
+          "method": "Original hand-authored scalar fields in NumPy; Pillow PNGs; FFmpeg encode.",
+          "sourceFile": "../build_transitions.py",
+          "sourceSha256": "9ec0d60d814579d470d55a36d8ed971760085a816a5e7156608b272eefa9ca97",
+          "thresholdSha256": "3b650acf7a07dfb46245398e6508a7ec9f1bc918aca52a6a5fd9960cec0a09b8",
+          "externalImages": [],
+          "generativeApiCalls": 0,
+          "logosBakedIn": false
+        },
+        "verification": {
+          "result": "PASS",
+          "thresholdMode": "L",
+          "thresholdSize": [
+            1024,
+            576
+          ],
+          "sourcePerPixelMonotonic": true,
+          "sourceFirstCoverage": 0,
+          "sourceLastCoverage": 1,
+          "posterProgress": 0.5
+        }
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/transitions/provenance.json",
+          "sha256": "83102cbb6c52a6b23c79a9464ecec9a61639c53be5cf6166e5fa8c41e41ea277",
+          "bytes": 1343
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/registrytransitions.json",
+          "sha256": "2c66ce85ab10424544e54c41c93af9668e999a7765e7fbd2da09288c3c8339cf",
+          "bytes": 2733
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/verification.json",
+          "sha256": "2a687908617d322c7c39e6a419b3e382da3464678469fc10a646f146064dde3d",
+          "bytes": 45578
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/campus-grid/animation.json",
+          "sha256": "0f1381d3f22ec8a9fd640622cbd9a14bf6d53dfb0da0b3a714ab6d2ae34846b8",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "transitions.campus-grid.poster",
+      "category": "transitions",
+      "publicPath": "/strategy/transitions/campus-grid/poster-50.png",
+      "destinationPath": "public/strategy/transitions/campus-grid/poster-50.png",
+      "sourceAssetPath": "asset-studio/transitions/campus-grid/poster-50.png",
+      "sha256": "e94fede201d3dff3bb6be7a84aeadd3ceaab5a7622244c6ea57d4cd921cf7975",
+      "bytes": 1604,
+      "creditCaveats": [
+        "Original one-shot luma assets contain no photo, logo, text, or brand mark; composite a separately sourced photo.",
+        "threshold.png is scalar grayscale data, not a final display image; poster-50.png is an exact midpoint matte, not a promise of 50% revealed area."
+      ],
+      "sourceMetadata": {
+        "label": "Campus grid",
+        "caseStudy": "SU2",
+        "seed": 24092711,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "width": 1024,
+        "height": 576,
+        "durationSeconds": 2,
+        "fps": 24,
+        "loop": false,
+        "approval": "Exploratory asset; no live integration",
+        "provenance": {
+          "method": "Original hand-authored scalar fields in NumPy; Pillow PNGs; FFmpeg encode.",
+          "sourceFile": "../build_transitions.py",
+          "sourceSha256": "9ec0d60d814579d470d55a36d8ed971760085a816a5e7156608b272eefa9ca97",
+          "thresholdSha256": "3b650acf7a07dfb46245398e6508a7ec9f1bc918aca52a6a5fd9960cec0a09b8",
+          "externalImages": [],
+          "generativeApiCalls": 0,
+          "logosBakedIn": false
+        },
+        "verification": {
+          "result": "PASS",
+          "thresholdMode": "L",
+          "thresholdSize": [
+            1024,
+            576
+          ],
+          "sourcePerPixelMonotonic": true,
+          "sourceFirstCoverage": 0,
+          "sourceLastCoverage": 1,
+          "posterProgress": 0.5
+        }
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/transitions/provenance.json",
+          "sha256": "83102cbb6c52a6b23c79a9464ecec9a61639c53be5cf6166e5fa8c41e41ea277",
+          "bytes": 1343
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/registrytransitions.json",
+          "sha256": "2c66ce85ab10424544e54c41c93af9668e999a7765e7fbd2da09288c3c8339cf",
+          "bytes": 2733
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/verification.json",
+          "sha256": "2a687908617d322c7c39e6a419b3e382da3464678469fc10a646f146064dde3d",
+          "bytes": 45578
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/campus-grid/animation.json",
+          "sha256": "0f1381d3f22ec8a9fd640622cbd9a14bf6d53dfb0da0b3a714ab6d2ae34846b8",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "transitions.studio-doors.threshold",
+      "category": "transitions",
+      "publicPath": "/strategy/transitions/studio-doors/threshold.png",
+      "destinationPath": "public/strategy/transitions/studio-doors/threshold.png",
+      "sourceAssetPath": "asset-studio/transitions/studio-doors/threshold.png",
+      "sha256": "c498a4c4df3dff7f9832e9f9343acb20469f99ec49eb638da7a08963c60e5b8b",
+      "bytes": 2189,
+      "creditCaveats": [
+        "Original one-shot luma assets contain no photo, logo, text, or brand mark; composite a separately sourced photo.",
+        "threshold.png is scalar grayscale data, not a final display image; poster-50.png is an exact midpoint matte, not a promise of 50% revealed area."
+      ],
+      "sourceMetadata": {
+        "label": "Studio doors",
+        "caseStudy": "MemeHouse",
+        "seed": 24092722,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "width": 1024,
+        "height": 576,
+        "durationSeconds": 2,
+        "fps": 24,
+        "loop": false,
+        "approval": "Exploratory asset; no live integration",
+        "provenance": {
+          "method": "Original hand-authored scalar fields in NumPy; Pillow PNGs; FFmpeg encode.",
+          "sourceFile": "../build_transitions.py",
+          "sourceSha256": "9ec0d60d814579d470d55a36d8ed971760085a816a5e7156608b272eefa9ca97",
+          "thresholdSha256": "c498a4c4df3dff7f9832e9f9343acb20469f99ec49eb638da7a08963c60e5b8b",
+          "externalImages": [],
+          "generativeApiCalls": 0,
+          "logosBakedIn": false
+        },
+        "verification": {
+          "result": "PASS",
+          "thresholdMode": "L",
+          "thresholdSize": [
+            1024,
+            576
+          ],
+          "sourcePerPixelMonotonic": true,
+          "sourceFirstCoverage": 0,
+          "sourceLastCoverage": 1,
+          "posterProgress": 0.5
+        }
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/transitions/provenance.json",
+          "sha256": "83102cbb6c52a6b23c79a9464ecec9a61639c53be5cf6166e5fa8c41e41ea277",
+          "bytes": 1343
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/registrytransitions.json",
+          "sha256": "2c66ce85ab10424544e54c41c93af9668e999a7765e7fbd2da09288c3c8339cf",
+          "bytes": 2733
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/verification.json",
+          "sha256": "2a687908617d322c7c39e6a419b3e382da3464678469fc10a646f146064dde3d",
+          "bytes": 45578
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/studio-doors/animation.json",
+          "sha256": "8b91f736a065b36fda33593aeab5e22293e26d09f5d942c86f4da316181c7eb3",
+          "bytes": 2659
+        }
+      ]
+    },
+    {
+      "id": "transitions.studio-doors.poster",
+      "category": "transitions",
+      "publicPath": "/strategy/transitions/studio-doors/poster-50.png",
+      "destinationPath": "public/strategy/transitions/studio-doors/poster-50.png",
+      "sourceAssetPath": "asset-studio/transitions/studio-doors/poster-50.png",
+      "sha256": "a9a74c67420695b14362e90fc31f1af596d2519e320bfad99962a4aafebb1567",
+      "bytes": 1565,
+      "creditCaveats": [
+        "Original one-shot luma assets contain no photo, logo, text, or brand mark; composite a separately sourced photo.",
+        "threshold.png is scalar grayscale data, not a final display image; poster-50.png is an exact midpoint matte, not a promise of 50% revealed area."
+      ],
+      "sourceMetadata": {
+        "label": "Studio doors",
+        "caseStudy": "MemeHouse",
+        "seed": 24092722,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "width": 1024,
+        "height": 576,
+        "durationSeconds": 2,
+        "fps": 24,
+        "loop": false,
+        "approval": "Exploratory asset; no live integration",
+        "provenance": {
+          "method": "Original hand-authored scalar fields in NumPy; Pillow PNGs; FFmpeg encode.",
+          "sourceFile": "../build_transitions.py",
+          "sourceSha256": "9ec0d60d814579d470d55a36d8ed971760085a816a5e7156608b272eefa9ca97",
+          "thresholdSha256": "c498a4c4df3dff7f9832e9f9343acb20469f99ec49eb638da7a08963c60e5b8b",
+          "externalImages": [],
+          "generativeApiCalls": 0,
+          "logosBakedIn": false
+        },
+        "verification": {
+          "result": "PASS",
+          "thresholdMode": "L",
+          "thresholdSize": [
+            1024,
+            576
+          ],
+          "sourcePerPixelMonotonic": true,
+          "sourceFirstCoverage": 0,
+          "sourceLastCoverage": 1,
+          "posterProgress": 0.5
+        }
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/transitions/provenance.json",
+          "sha256": "83102cbb6c52a6b23c79a9464ecec9a61639c53be5cf6166e5fa8c41e41ea277",
+          "bytes": 1343
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/registrytransitions.json",
+          "sha256": "2c66ce85ab10424544e54c41c93af9668e999a7765e7fbd2da09288c3c8339cf",
+          "bytes": 2733
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/verification.json",
+          "sha256": "2a687908617d322c7c39e6a419b3e382da3464678469fc10a646f146064dde3d",
+          "bytes": 45578
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/studio-doors/animation.json",
+          "sha256": "8b91f736a065b36fda33593aeab5e22293e26d09f5d942c86f4da316181c7eb3",
+          "bytes": 2659
+        }
+      ]
+    },
+    {
+      "id": "transitions.sound-bands.threshold",
+      "category": "transitions",
+      "publicPath": "/strategy/transitions/sound-bands/threshold.png",
+      "destinationPath": "public/strategy/transitions/sound-bands/threshold.png",
+      "sourceAssetPath": "asset-studio/transitions/sound-bands/threshold.png",
+      "sha256": "0f2a9d220e990fae8e32f0ced6cd6f9104cfb0dbfbecb30914200e89b8751897",
+      "bytes": 6164,
+      "creditCaveats": [
+        "Original one-shot luma assets contain no photo, logo, text, or brand mark; composite a separately sourced photo.",
+        "threshold.png is scalar grayscale data, not a final display image; poster-50.png is an exact midpoint matte, not a promise of 50% revealed area."
+      ],
+      "sourceMetadata": {
+        "label": "Sound bands",
+        "caseStudy": "OTR / Mafiathon",
+        "seed": 24092733,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "width": 1024,
+        "height": 576,
+        "durationSeconds": 2,
+        "fps": 24,
+        "loop": false,
+        "approval": "Exploratory asset; no live integration",
+        "provenance": {
+          "method": "Original hand-authored scalar fields in NumPy; Pillow PNGs; FFmpeg encode.",
+          "sourceFile": "../build_transitions.py",
+          "sourceSha256": "9ec0d60d814579d470d55a36d8ed971760085a816a5e7156608b272eefa9ca97",
+          "thresholdSha256": "0f2a9d220e990fae8e32f0ced6cd6f9104cfb0dbfbecb30914200e89b8751897",
+          "externalImages": [],
+          "generativeApiCalls": 0,
+          "logosBakedIn": false
+        },
+        "verification": {
+          "result": "PASS",
+          "thresholdMode": "L",
+          "thresholdSize": [
+            1024,
+            576
+          ],
+          "sourcePerPixelMonotonic": true,
+          "sourceFirstCoverage": 0,
+          "sourceLastCoverage": 1,
+          "posterProgress": 0.5
+        }
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/transitions/provenance.json",
+          "sha256": "83102cbb6c52a6b23c79a9464ecec9a61639c53be5cf6166e5fa8c41e41ea277",
+          "bytes": 1343
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/registrytransitions.json",
+          "sha256": "2c66ce85ab10424544e54c41c93af9668e999a7765e7fbd2da09288c3c8339cf",
+          "bytes": 2733
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/verification.json",
+          "sha256": "2a687908617d322c7c39e6a419b3e382da3464678469fc10a646f146064dde3d",
+          "bytes": 45578
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/sound-bands/animation.json",
+          "sha256": "4b4230c8271f4d9c5e069a06e5779bab594e16011d0c2dc1171d7b3ff4543c23",
+          "bytes": 2742
+        }
+      ]
+    },
+    {
+      "id": "transitions.sound-bands.poster",
+      "category": "transitions",
+      "publicPath": "/strategy/transitions/sound-bands/poster-50.png",
+      "destinationPath": "public/strategy/transitions/sound-bands/poster-50.png",
+      "sourceAssetPath": "asset-studio/transitions/sound-bands/poster-50.png",
+      "sha256": "db95bf839351ceebb57aa6023d2b6e1249a72896df5f66ea0602dcb323cd4fe8",
+      "bytes": 2158,
+      "creditCaveats": [
+        "Original one-shot luma assets contain no photo, logo, text, or brand mark; composite a separately sourced photo.",
+        "threshold.png is scalar grayscale data, not a final display image; poster-50.png is an exact midpoint matte, not a promise of 50% revealed area."
+      ],
+      "sourceMetadata": {
+        "label": "Sound bands",
+        "caseStudy": "OTR / Mafiathon",
+        "seed": 24092733,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "width": 1024,
+        "height": 576,
+        "durationSeconds": 2,
+        "fps": 24,
+        "loop": false,
+        "approval": "Exploratory asset; no live integration",
+        "provenance": {
+          "method": "Original hand-authored scalar fields in NumPy; Pillow PNGs; FFmpeg encode.",
+          "sourceFile": "../build_transitions.py",
+          "sourceSha256": "9ec0d60d814579d470d55a36d8ed971760085a816a5e7156608b272eefa9ca97",
+          "thresholdSha256": "0f2a9d220e990fae8e32f0ced6cd6f9104cfb0dbfbecb30914200e89b8751897",
+          "externalImages": [],
+          "generativeApiCalls": 0,
+          "logosBakedIn": false
+        },
+        "verification": {
+          "result": "PASS",
+          "thresholdMode": "L",
+          "thresholdSize": [
+            1024,
+            576
+          ],
+          "sourcePerPixelMonotonic": true,
+          "sourceFirstCoverage": 0,
+          "sourceLastCoverage": 1,
+          "posterProgress": 0.5
+        }
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/transitions/provenance.json",
+          "sha256": "83102cbb6c52a6b23c79a9464ecec9a61639c53be5cf6166e5fa8c41e41ea277",
+          "bytes": 1343
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/registrytransitions.json",
+          "sha256": "2c66ce85ab10424544e54c41c93af9668e999a7765e7fbd2da09288c3c8339cf",
+          "bytes": 2733
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/verification.json",
+          "sha256": "2a687908617d322c7c39e6a419b3e382da3464678469fc10a646f146064dde3d",
+          "bytes": 45578
+        },
+        {
+          "sourceAssetPath": "asset-studio/transitions/sound-bands/animation.json",
+          "sha256": "4b4230c8271f4d9c5e069a06e5779bab594e16011d0c2dc1171d7b3ff4543c23",
+          "bytes": 2742
+        }
+      ]
+    },
+    {
+      "id": "marks.on-the-radar.mark-display.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/on-the-radar/mark-display.png",
+      "destinationPath": "public/strategy/marks/on-the-radar/mark-display.png",
+      "sourceAssetPath": "asset-studio/case-studies/on-the-radar/mark-display.png",
+      "sha256": "37e5d23b51200f37860691ed46a47788db7346daf7c72887985ac6ea3f1f24b2",
+      "bytes": 264439,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "On The Radar / Mafiathon 3",
+        "sourceRecord": "MF-01",
+        "sourceAsset": "sources/brands/mafiathon3/on-the-radar/on-the-radar-radio-logo-v2.png",
+        "sourceSha256": "ec3065bebe79bb236bb8103fa2bbb8d294b3b6aa60bdf46e876f93a49fba7f5f",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "On The Radar mark, NOT a standalone Mafiathon 3 logo.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/on-the-radar/provenance.json",
+          "sha256": "7357bba6b36d36b906dcaf38ea6dd8f8c07b19ac1ee9d95ca1e2310a5dc822f1",
+          "bytes": 707
+        }
+      ]
+    },
+    {
+      "id": "marks.on-the-radar.mark-pixel-color.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/on-the-radar/mark-pixel-color.png",
+      "destinationPath": "public/strategy/marks/on-the-radar/mark-pixel-color.png",
+      "sourceAssetPath": "asset-studio/case-studies/on-the-radar/mark-pixel-color.png",
+      "sha256": "2831c60850bb038a52d2bbb7b652881d3e990a5b2eae92272f49c442c333e697",
+      "bytes": 34216,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "On The Radar / Mafiathon 3",
+        "sourceRecord": "MF-01",
+        "sourceAsset": "sources/brands/mafiathon3/on-the-radar/on-the-radar-radio-logo-v2.png",
+        "sourceSha256": "ec3065bebe79bb236bb8103fa2bbb8d294b3b6aa60bdf46e876f93a49fba7f5f",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "On The Radar mark, NOT a standalone Mafiathon 3 logo.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/on-the-radar/provenance.json",
+          "sha256": "7357bba6b36d36b906dcaf38ea6dd8f8c07b19ac1ee9d95ca1e2310a5dc822f1",
+          "bytes": 707
+        }
+      ]
+    },
+    {
+      "id": "marks.on-the-radar.mark-pixel-ink.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/on-the-radar/mark-pixel-ink.png",
+      "destinationPath": "public/strategy/marks/on-the-radar/mark-pixel-ink.png",
+      "sourceAssetPath": "asset-studio/case-studies/on-the-radar/mark-pixel-ink.png",
+      "sha256": "41a7b65511b12fcea8486023536a8536585ff37ea282d26f31fc39ed1d6aa1dd",
+      "bytes": 6570,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "On The Radar / Mafiathon 3",
+        "sourceRecord": "MF-01",
+        "sourceAsset": "sources/brands/mafiathon3/on-the-radar/on-the-radar-radio-logo-v2.png",
+        "sourceSha256": "ec3065bebe79bb236bb8103fa2bbb8d294b3b6aa60bdf46e876f93a49fba7f5f",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "On The Radar mark, NOT a standalone Mafiathon 3 logo.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/on-the-radar/provenance.json",
+          "sha256": "7357bba6b36d36b906dcaf38ea6dd8f8c07b19ac1ee9d95ca1e2310a5dc822f1",
+          "bytes": 707
+        }
+      ]
+    },
+    {
+      "id": "marks.on-the-radar.mark-pixel-ink.svg",
+      "category": "marks",
+      "publicPath": "/strategy/marks/on-the-radar/mark-pixel-ink.svg",
+      "destinationPath": "public/strategy/marks/on-the-radar/mark-pixel-ink.svg",
+      "sourceAssetPath": "asset-studio/case-studies/on-the-radar/mark-pixel-ink.svg",
+      "sha256": "d6d1a2dba90d3a0163401f59a3e772d4a2871444873034674cfe2aac3b233ec1",
+      "bytes": 22155,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "On The Radar / Mafiathon 3",
+        "sourceRecord": "MF-01",
+        "sourceAsset": "sources/brands/mafiathon3/on-the-radar/on-the-radar-radio-logo-v2.png",
+        "sourceSha256": "ec3065bebe79bb236bb8103fa2bbb8d294b3b6aa60bdf46e876f93a49fba7f5f",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "On The Radar mark, NOT a standalone Mafiathon 3 logo.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/on-the-radar/provenance.json",
+          "sha256": "7357bba6b36d36b906dcaf38ea6dd8f8c07b19ac1ee9d95ca1e2310a5dc822f1",
+          "bytes": 707
+        }
+      ]
+    },
+    {
+      "id": "marks.memehouse.mark-display.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/memehouse/mark-display.png",
+      "destinationPath": "public/strategy/marks/memehouse/mark-display.png",
+      "sourceAssetPath": "asset-studio/case-studies/memehouse/mark-display.png",
+      "sha256": "e598a1661f2b447043371039dc89cdc7901451d126b5dc79a6e93d8a2fde0da0",
+      "bytes": 162582,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "MemeHouse Productions",
+        "sourceRecord": "MH-01",
+        "sourceAsset": "sources/brands/meme-house-productions/logo.png",
+        "sourceSha256": "27361dc999b1d820987165a98b74702fc81e27801f78e923e2a60932212f2f82",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "Company icon exactly matching deck media; personal credits remain project-specific.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/memehouse/provenance.json",
+          "sha256": "340db80a80624fc097f427cd791607c7c4fad72873ae634eeb5069633f82a823",
+          "bytes": 706
+        }
+      ]
+    },
+    {
+      "id": "marks.memehouse.mark-pixel-color.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/memehouse/mark-pixel-color.png",
+      "destinationPath": "public/strategy/marks/memehouse/mark-pixel-color.png",
+      "sourceAssetPath": "asset-studio/case-studies/memehouse/mark-pixel-color.png",
+      "sha256": "617b9ef74e36545a8962a0fb06487779fec8f0999402ed8f32124da5f0a2a299",
+      "bytes": 6007,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "MemeHouse Productions",
+        "sourceRecord": "MH-01",
+        "sourceAsset": "sources/brands/meme-house-productions/logo.png",
+        "sourceSha256": "27361dc999b1d820987165a98b74702fc81e27801f78e923e2a60932212f2f82",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "Company icon exactly matching deck media; personal credits remain project-specific.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/memehouse/provenance.json",
+          "sha256": "340db80a80624fc097f427cd791607c7c4fad72873ae634eeb5069633f82a823",
+          "bytes": 706
+        }
+      ]
+    },
+    {
+      "id": "marks.memehouse.mark-pixel-ink.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/memehouse/mark-pixel-ink.png",
+      "destinationPath": "public/strategy/marks/memehouse/mark-pixel-ink.png",
+      "sourceAssetPath": "asset-studio/case-studies/memehouse/mark-pixel-ink.png",
+      "sha256": "eedec9d1c4a5bc34e1135f0de0ed80bf2f81846128136379a13fe38dca83c7f9",
+      "bytes": 1599,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "MemeHouse Productions",
+        "sourceRecord": "MH-01",
+        "sourceAsset": "sources/brands/meme-house-productions/logo.png",
+        "sourceSha256": "27361dc999b1d820987165a98b74702fc81e27801f78e923e2a60932212f2f82",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "Company icon exactly matching deck media; personal credits remain project-specific.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/memehouse/provenance.json",
+          "sha256": "340db80a80624fc097f427cd791607c7c4fad72873ae634eeb5069633f82a823",
+          "bytes": 706
+        }
+      ]
+    },
+    {
+      "id": "marks.memehouse.mark-pixel-ink.svg",
+      "category": "marks",
+      "publicPath": "/strategy/marks/memehouse/mark-pixel-ink.svg",
+      "destinationPath": "public/strategy/marks/memehouse/mark-pixel-ink.svg",
+      "sourceAssetPath": "asset-studio/case-studies/memehouse/mark-pixel-ink.svg",
+      "sha256": "b7f8c78d48d5c92028de5901a743c855e6d187d2a5dff8b76c4b5557ef8133f3",
+      "bytes": 6385,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "MemeHouse Productions",
+        "sourceRecord": "MH-01",
+        "sourceAsset": "sources/brands/meme-house-productions/logo.png",
+        "sourceSha256": "27361dc999b1d820987165a98b74702fc81e27801f78e923e2a60932212f2f82",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "Company icon exactly matching deck media; personal credits remain project-specific.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/memehouse/provenance.json",
+          "sha256": "340db80a80624fc097f427cd791607c7c4fad72873ae634eeb5069633f82a823",
+          "bytes": 706
+        }
+      ]
+    },
+    {
+      "id": "marks.streamer-university-2.mark-display.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/streamer-university-2/mark-display.png",
+      "destinationPath": "public/strategy/marks/streamer-university-2/mark-display.png",
+      "sourceAssetPath": "asset-studio/case-studies/streamer-university-2/mark-display.png",
+      "sha256": "c72440c9cf2655b13419fcc9ce248c52f9d5a9028ccdd4aa0e9e9387eb6139c7",
+      "bytes": 13671,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "Streamer University 2",
+        "sourceRecord": "SU-01",
+        "sourceAsset": "sources/brands/streamer-university/SU1.png",
+        "sourceSha256": "bab6250ed638730bdd87c5903100986755a2553fbb5a066d3bb9ba9a84c7c191",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "2026 monogram matched to the supplied deck; not the 2027 crest.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/streamer-university-2/provenance.json",
+          "sha256": "a86d359f6c9b6492d5c86588e4035c5fc11adaff3c602428b89a642ac9643b9e",
+          "bytes": 699
+        }
+      ]
+    },
+    {
+      "id": "marks.streamer-university-2.mark-pixel-color.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/streamer-university-2/mark-pixel-color.png",
+      "destinationPath": "public/strategy/marks/streamer-university-2/mark-pixel-color.png",
+      "sourceAssetPath": "asset-studio/case-studies/streamer-university-2/mark-pixel-color.png",
+      "sha256": "ba0435876d2e50344c2373ec243e4a60b1a19e6308bd9521ed0fff0939607b80",
+      "bytes": 5390,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "Streamer University 2",
+        "sourceRecord": "SU-01",
+        "sourceAsset": "sources/brands/streamer-university/SU1.png",
+        "sourceSha256": "bab6250ed638730bdd87c5903100986755a2553fbb5a066d3bb9ba9a84c7c191",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "2026 monogram matched to the supplied deck; not the 2027 crest.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/streamer-university-2/provenance.json",
+          "sha256": "a86d359f6c9b6492d5c86588e4035c5fc11adaff3c602428b89a642ac9643b9e",
+          "bytes": 699
+        }
+      ]
+    },
+    {
+      "id": "marks.streamer-university-2.mark-pixel-ink.png",
+      "category": "marks",
+      "publicPath": "/strategy/marks/streamer-university-2/mark-pixel-ink.png",
+      "destinationPath": "public/strategy/marks/streamer-university-2/mark-pixel-ink.png",
+      "sourceAssetPath": "asset-studio/case-studies/streamer-university-2/mark-pixel-ink.png",
+      "sha256": "b3398d53a68b92b2e4e5d493394cf7a4d37a99f62243891200b85bb74e858bc0",
+      "bytes": 3315,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "Streamer University 2",
+        "sourceRecord": "SU-01",
+        "sourceAsset": "sources/brands/streamer-university/SU1.png",
+        "sourceSha256": "bab6250ed638730bdd87c5903100986755a2553fbb5a066d3bb9ba9a84c7c191",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "2026 monogram matched to the supplied deck; not the 2027 crest.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/streamer-university-2/provenance.json",
+          "sha256": "a86d359f6c9b6492d5c86588e4035c5fc11adaff3c602428b89a642ac9643b9e",
+          "bytes": 699
+        }
+      ]
+    },
+    {
+      "id": "marks.streamer-university-2.mark-pixel-ink.svg",
+      "category": "marks",
+      "publicPath": "/strategy/marks/streamer-university-2/mark-pixel-ink.svg",
+      "destinationPath": "public/strategy/marks/streamer-university-2/mark-pixel-ink.svg",
+      "sourceAssetPath": "asset-studio/case-studies/streamer-university-2/mark-pixel-ink.svg",
+      "sha256": "dcea4ed0be6e5b9494ab869683fa4924b47c1e485eba6f9634cba629bbf14b9c",
+      "bytes": 7698,
+      "creditCaveats": [
+        "Unofficial editorial treatment study: source identity retained; not endorsed.",
+        "Use project-specific credit and clearance; these files do not establish ownership, approval, or registration."
+      ],
+      "sourceMetadata": {
+        "title": "Streamer University 2",
+        "sourceRecord": "SU-01",
+        "sourceAsset": "sources/brands/streamer-university/SU1.png",
+        "sourceSha256": "bab6250ed638730bdd87c5903100986755a2553fbb5a066d3bb9ba9a84c7c191",
+        "status": "Unofficial editorial treatment study. Source identity retained; not endorsed.",
+        "note": "2026 monogram matched to the supplied deck; not the 2027 crest.",
+        "official": false,
+        "sourceFaithful": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/case-studies/project-marks.json",
+          "sha256": "18916a6c4c74424cd3542cfe2cbca5e1389f2f61eed1036b04ef24455ae8137d",
+          "bytes": 2298
+        },
+        {
+          "sourceAssetPath": "asset-studio/case-studies/streamer-university-2/provenance.json",
+          "sha256": "a86d359f6c9b6492d5c86588e4035c5fc11adaff3c602428b89a642ac9643b9e",
+          "bytes": 699
+        }
+      ]
+    },
+    {
+      "id": "motion.aperture-assembly.mp4",
+      "category": "motion",
+      "publicPath": "/strategy/motion/aperture-assembly/loop.mp4",
+      "destinationPath": "public/strategy/motion/aperture-assembly/loop.mp4",
+      "sourceAssetPath": "asset-studio/library/aperture-assembly/loop.mp4",
+      "sha256": "398eead98d1ed318974c0ea5903d99066b901208368dd15a88b101268c9a2635",
+      "bytes": 1559219,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Exploratory mark assembly; not an approved final identity."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\aperture-assembly\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/aperture-assembly/loop.mp4",
+            "bytes": 1559219,
+            "sha256": "398eead98d1ed318974c0ea5903d99066b901208368dd15a88b101268c9a2635"
+          },
+          "loop.webm": {
+            "path": "library/aperture-assembly/loop.webm",
+            "bytes": 1268439,
+            "sha256": "96f5119ea3daa38b6eca5be330e3426dd51136bf1ff87f651ae01e842a7f3dbe"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/aperture-assembly/loop-mobile.mp4",
+            "bytes": 461812,
+            "sha256": "72fea370e61b230c785114bc200b63f5967c94e2a0586c0b8438cac620b89ded"
+          },
+          "poster.webp": {
+            "path": "library/aperture-assembly/poster.webp",
+            "bytes": 31400,
+            "sha256": "a19b5cda272a3ec8a39530c9ab9b07eaecaa4ae52dfa2b00a728bd2410499656"
+          }
+        },
+        "renderJob": "asset-studio/motion/aperture-assembly/_renders/5544c7a0c82b4edca1d18d8ad82a22e5"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/aperture-assembly/source.json",
+          "sha256": "24cc2edfc7936adf915e69faff9eb761bcea944144a0afd76058d3c1a0064e0e",
+          "bytes": 226
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/aperture-assembly/verification.json",
+          "sha256": "9218e1bc2e1bf6a20b38de376aaa691044b665f11672e484473f1cc7d5d4f60e",
+          "bytes": 2820
+        }
+      ]
+    },
+    {
+      "id": "motion.aperture-assembly.webm",
+      "category": "motion",
+      "publicPath": "/strategy/motion/aperture-assembly/loop.webm",
+      "destinationPath": "public/strategy/motion/aperture-assembly/loop.webm",
+      "sourceAssetPath": "asset-studio/library/aperture-assembly/loop.webm",
+      "sha256": "96f5119ea3daa38b6eca5be330e3426dd51136bf1ff87f651ae01e842a7f3dbe",
+      "bytes": 1268439,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Exploratory mark assembly; not an approved final identity."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\aperture-assembly\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/aperture-assembly/loop.mp4",
+            "bytes": 1559219,
+            "sha256": "398eead98d1ed318974c0ea5903d99066b901208368dd15a88b101268c9a2635"
+          },
+          "loop.webm": {
+            "path": "library/aperture-assembly/loop.webm",
+            "bytes": 1268439,
+            "sha256": "96f5119ea3daa38b6eca5be330e3426dd51136bf1ff87f651ae01e842a7f3dbe"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/aperture-assembly/loop-mobile.mp4",
+            "bytes": 461812,
+            "sha256": "72fea370e61b230c785114bc200b63f5967c94e2a0586c0b8438cac620b89ded"
+          },
+          "poster.webp": {
+            "path": "library/aperture-assembly/poster.webp",
+            "bytes": 31400,
+            "sha256": "a19b5cda272a3ec8a39530c9ab9b07eaecaa4ae52dfa2b00a728bd2410499656"
+          }
+        },
+        "renderJob": "asset-studio/motion/aperture-assembly/_renders/5544c7a0c82b4edca1d18d8ad82a22e5"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/aperture-assembly/source.json",
+          "sha256": "24cc2edfc7936adf915e69faff9eb761bcea944144a0afd76058d3c1a0064e0e",
+          "bytes": 226
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/aperture-assembly/verification.json",
+          "sha256": "9218e1bc2e1bf6a20b38de376aaa691044b665f11672e484473f1cc7d5d4f60e",
+          "bytes": 2820
+        }
+      ]
+    },
+    {
+      "id": "motion.aperture-assembly.mobileMp4",
+      "category": "motion",
+      "publicPath": "/strategy/motion/aperture-assembly/loop-mobile.mp4",
+      "destinationPath": "public/strategy/motion/aperture-assembly/loop-mobile.mp4",
+      "sourceAssetPath": "asset-studio/library/aperture-assembly/loop-mobile.mp4",
+      "sha256": "72fea370e61b230c785114bc200b63f5967c94e2a0586c0b8438cac620b89ded",
+      "bytes": 461812,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Exploratory mark assembly; not an approved final identity."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\aperture-assembly\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/aperture-assembly/loop.mp4",
+            "bytes": 1559219,
+            "sha256": "398eead98d1ed318974c0ea5903d99066b901208368dd15a88b101268c9a2635"
+          },
+          "loop.webm": {
+            "path": "library/aperture-assembly/loop.webm",
+            "bytes": 1268439,
+            "sha256": "96f5119ea3daa38b6eca5be330e3426dd51136bf1ff87f651ae01e842a7f3dbe"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/aperture-assembly/loop-mobile.mp4",
+            "bytes": 461812,
+            "sha256": "72fea370e61b230c785114bc200b63f5967c94e2a0586c0b8438cac620b89ded"
+          },
+          "poster.webp": {
+            "path": "library/aperture-assembly/poster.webp",
+            "bytes": 31400,
+            "sha256": "a19b5cda272a3ec8a39530c9ab9b07eaecaa4ae52dfa2b00a728bd2410499656"
+          }
+        },
+        "renderJob": "asset-studio/motion/aperture-assembly/_renders/5544c7a0c82b4edca1d18d8ad82a22e5"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/aperture-assembly/source.json",
+          "sha256": "24cc2edfc7936adf915e69faff9eb761bcea944144a0afd76058d3c1a0064e0e",
+          "bytes": 226
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/aperture-assembly/verification.json",
+          "sha256": "9218e1bc2e1bf6a20b38de376aaa691044b665f11672e484473f1cc7d5d4f60e",
+          "bytes": 2820
+        }
+      ]
+    },
+    {
+      "id": "motion.aperture-assembly.poster",
+      "category": "motion",
+      "publicPath": "/strategy/motion/aperture-assembly/poster.webp",
+      "destinationPath": "public/strategy/motion/aperture-assembly/poster.webp",
+      "sourceAssetPath": "asset-studio/library/aperture-assembly/poster.webp",
+      "sha256": "a19b5cda272a3ec8a39530c9ab9b07eaecaa4ae52dfa2b00a728bd2410499656",
+      "bytes": 31400,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Exploratory mark assembly; not an approved final identity."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\aperture-assembly\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/aperture-assembly/loop.mp4",
+            "bytes": 1559219,
+            "sha256": "398eead98d1ed318974c0ea5903d99066b901208368dd15a88b101268c9a2635"
+          },
+          "loop.webm": {
+            "path": "library/aperture-assembly/loop.webm",
+            "bytes": 1268439,
+            "sha256": "96f5119ea3daa38b6eca5be330e3426dd51136bf1ff87f651ae01e842a7f3dbe"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/aperture-assembly/loop-mobile.mp4",
+            "bytes": 461812,
+            "sha256": "72fea370e61b230c785114bc200b63f5967c94e2a0586c0b8438cac620b89ded"
+          },
+          "poster.webp": {
+            "path": "library/aperture-assembly/poster.webp",
+            "bytes": 31400,
+            "sha256": "a19b5cda272a3ec8a39530c9ab9b07eaecaa4ae52dfa2b00a728bd2410499656"
+          }
+        },
+        "renderJob": "asset-studio/motion/aperture-assembly/_renders/5544c7a0c82b4edca1d18d8ad82a22e5"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/aperture-assembly/source.json",
+          "sha256": "24cc2edfc7936adf915e69faff9eb761bcea944144a0afd76058d3c1a0064e0e",
+          "bytes": 226
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/aperture-assembly/verification.json",
+          "sha256": "9218e1bc2e1bf6a20b38de376aaa691044b665f11672e484473f1cc7d5d4f60e",
+          "bytes": 2820
+        }
+      ]
+    },
+    {
+      "id": "motion.avian-flight.mp4",
+      "category": "motion",
+      "publicPath": "/strategy/motion/avian-flight/loop.mp4",
+      "destinationPath": "public/strategy/motion/avian-flight/loop.mp4",
+      "sourceAssetPath": "asset-studio/library/avian-flight/loop.mp4",
+      "sha256": "c4c6247659a1c8501c130f380649698c648098ffc3a2ac9ccb14a4c8606e3bf0",
+      "bytes": 418757,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Original three-bird flight study; exploratory motion asset, not a brand claim."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\avian-flight\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/avian-flight/loop.mp4",
+            "bytes": 418757,
+            "sha256": "c4c6247659a1c8501c130f380649698c648098ffc3a2ac9ccb14a4c8606e3bf0"
+          },
+          "loop.webm": {
+            "path": "library/avian-flight/loop.webm",
+            "bytes": 440385,
+            "sha256": "f6e78333ac041412b1f420ef3b063c89c33e6308240502f9d8727599d31b2337"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/avian-flight/loop-mobile.mp4",
+            "bytes": 155177,
+            "sha256": "bffeab921dd76073b4fff382674845126f4f55547240b57b6ad279c586fd45ff"
+          },
+          "poster.webp": {
+            "path": "library/avian-flight/poster.webp",
+            "bytes": 15668,
+            "sha256": "d977711f45c116bb587ddcaae4d404a9679c087f64500aed2aff8b67aea775da"
+          }
+        },
+        "renderJob": "asset-studio/motion/avian-flight/_renders/df22069a7ed24659ab1f4dcf973aa7f5"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/avian-flight/source.json",
+          "sha256": "3405d8333c7fbffc94013060fc2f070be2bc83c6a79a006fcb6b1dd4f674b7d3",
+          "bytes": 216
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/avian-flight/verification.json",
+          "sha256": "d9c1f2526f59ea5478b5f3ba0ed76834a47f74ce7190bcc30ee4ea6af6433129",
+          "bytes": 2791
+        }
+      ]
+    },
+    {
+      "id": "motion.avian-flight.webm",
+      "category": "motion",
+      "publicPath": "/strategy/motion/avian-flight/loop.webm",
+      "destinationPath": "public/strategy/motion/avian-flight/loop.webm",
+      "sourceAssetPath": "asset-studio/library/avian-flight/loop.webm",
+      "sha256": "f6e78333ac041412b1f420ef3b063c89c33e6308240502f9d8727599d31b2337",
+      "bytes": 440385,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Original three-bird flight study; exploratory motion asset, not a brand claim."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\avian-flight\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/avian-flight/loop.mp4",
+            "bytes": 418757,
+            "sha256": "c4c6247659a1c8501c130f380649698c648098ffc3a2ac9ccb14a4c8606e3bf0"
+          },
+          "loop.webm": {
+            "path": "library/avian-flight/loop.webm",
+            "bytes": 440385,
+            "sha256": "f6e78333ac041412b1f420ef3b063c89c33e6308240502f9d8727599d31b2337"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/avian-flight/loop-mobile.mp4",
+            "bytes": 155177,
+            "sha256": "bffeab921dd76073b4fff382674845126f4f55547240b57b6ad279c586fd45ff"
+          },
+          "poster.webp": {
+            "path": "library/avian-flight/poster.webp",
+            "bytes": 15668,
+            "sha256": "d977711f45c116bb587ddcaae4d404a9679c087f64500aed2aff8b67aea775da"
+          }
+        },
+        "renderJob": "asset-studio/motion/avian-flight/_renders/df22069a7ed24659ab1f4dcf973aa7f5"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/avian-flight/source.json",
+          "sha256": "3405d8333c7fbffc94013060fc2f070be2bc83c6a79a006fcb6b1dd4f674b7d3",
+          "bytes": 216
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/avian-flight/verification.json",
+          "sha256": "d9c1f2526f59ea5478b5f3ba0ed76834a47f74ce7190bcc30ee4ea6af6433129",
+          "bytes": 2791
+        }
+      ]
+    },
+    {
+      "id": "motion.avian-flight.mobileMp4",
+      "category": "motion",
+      "publicPath": "/strategy/motion/avian-flight/loop-mobile.mp4",
+      "destinationPath": "public/strategy/motion/avian-flight/loop-mobile.mp4",
+      "sourceAssetPath": "asset-studio/library/avian-flight/loop-mobile.mp4",
+      "sha256": "bffeab921dd76073b4fff382674845126f4f55547240b57b6ad279c586fd45ff",
+      "bytes": 155177,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Original three-bird flight study; exploratory motion asset, not a brand claim."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\avian-flight\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/avian-flight/loop.mp4",
+            "bytes": 418757,
+            "sha256": "c4c6247659a1c8501c130f380649698c648098ffc3a2ac9ccb14a4c8606e3bf0"
+          },
+          "loop.webm": {
+            "path": "library/avian-flight/loop.webm",
+            "bytes": 440385,
+            "sha256": "f6e78333ac041412b1f420ef3b063c89c33e6308240502f9d8727599d31b2337"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/avian-flight/loop-mobile.mp4",
+            "bytes": 155177,
+            "sha256": "bffeab921dd76073b4fff382674845126f4f55547240b57b6ad279c586fd45ff"
+          },
+          "poster.webp": {
+            "path": "library/avian-flight/poster.webp",
+            "bytes": 15668,
+            "sha256": "d977711f45c116bb587ddcaae4d404a9679c087f64500aed2aff8b67aea775da"
+          }
+        },
+        "renderJob": "asset-studio/motion/avian-flight/_renders/df22069a7ed24659ab1f4dcf973aa7f5"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/avian-flight/source.json",
+          "sha256": "3405d8333c7fbffc94013060fc2f070be2bc83c6a79a006fcb6b1dd4f674b7d3",
+          "bytes": 216
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/avian-flight/verification.json",
+          "sha256": "d9c1f2526f59ea5478b5f3ba0ed76834a47f74ce7190bcc30ee4ea6af6433129",
+          "bytes": 2791
+        }
+      ]
+    },
+    {
+      "id": "motion.avian-flight.poster",
+      "category": "motion",
+      "publicPath": "/strategy/motion/avian-flight/poster.webp",
+      "destinationPath": "public/strategy/motion/avian-flight/poster.webp",
+      "sourceAssetPath": "asset-studio/library/avian-flight/poster.webp",
+      "sha256": "d977711f45c116bb587ddcaae4d404a9679c087f64500aed2aff8b67aea775da",
+      "bytes": 15668,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Original three-bird flight study; exploratory motion asset, not a brand claim."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\avian-flight\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/avian-flight/loop.mp4",
+            "bytes": 418757,
+            "sha256": "c4c6247659a1c8501c130f380649698c648098ffc3a2ac9ccb14a4c8606e3bf0"
+          },
+          "loop.webm": {
+            "path": "library/avian-flight/loop.webm",
+            "bytes": 440385,
+            "sha256": "f6e78333ac041412b1f420ef3b063c89c33e6308240502f9d8727599d31b2337"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/avian-flight/loop-mobile.mp4",
+            "bytes": 155177,
+            "sha256": "bffeab921dd76073b4fff382674845126f4f55547240b57b6ad279c586fd45ff"
+          },
+          "poster.webp": {
+            "path": "library/avian-flight/poster.webp",
+            "bytes": 15668,
+            "sha256": "d977711f45c116bb587ddcaae4d404a9679c087f64500aed2aff8b67aea775da"
+          }
+        },
+        "renderJob": "asset-studio/motion/avian-flight/_renders/df22069a7ed24659ab1f4dcf973aa7f5"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/avian-flight/source.json",
+          "sha256": "3405d8333c7fbffc94013060fc2f070be2bc83c6a79a006fcb6b1dd4f674b7d3",
+          "bytes": 216
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/avian-flight/verification.json",
+          "sha256": "d9c1f2526f59ea5478b5f3ba0ed76834a47f74ce7190bcc30ee4ea6af6433129",
+          "bytes": 2791
+        }
+      ]
+    },
+    {
+      "id": "motion.fox-stride.mp4",
+      "category": "motion",
+      "publicPath": "/strategy/motion/fox-stride/loop.mp4",
+      "destinationPath": "public/strategy/motion/fox-stride/loop.mp4",
+      "sourceAssetPath": "asset-studio/library/fox-stride/loop.mp4",
+      "sha256": "54f4d8d4b10cb5063856a08413af32dee8ca67432c0e39660c599e5198097025",
+      "bytes": 401022,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Original in-place walking study; exploratory motion asset, not a brand claim."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\fox-stride\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/fox-stride/loop.mp4",
+            "bytes": 401022,
+            "sha256": "54f4d8d4b10cb5063856a08413af32dee8ca67432c0e39660c599e5198097025"
+          },
+          "loop.webm": {
+            "path": "library/fox-stride/loop.webm",
+            "bytes": 300121,
+            "sha256": "6fd58e77cd655ff08d36afecbb82c6277e9b574e2cb4bcc2af15f9f7d0d65a29"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/fox-stride/loop-mobile.mp4",
+            "bytes": 128087,
+            "sha256": "9c5b66b71cab8a242a0e75ddab6b5c3d0ed249ccf7daa0a31c659cfb89f4b725"
+          },
+          "poster.webp": {
+            "path": "library/fox-stride/poster.webp",
+            "bytes": 16972,
+            "sha256": "f233ad019bc9cbc11ee953591eb2275a16bb6ffbfbf716830d2e5f8300842109"
+          }
+        },
+        "renderJob": "asset-studio/motion/fox-stride/_renders/c06b964793c846ad90036d79ddf19ef6"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/fox-stride/source.json",
+          "sha256": "65bb6484c1473648cdf38ea49fbc2ab948954f54973fbe55aa3b96136187d5e6",
+          "bytes": 212
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/fox-stride/verification.json",
+          "sha256": "95b97f7b723bf2b5e37e51eb5395768fc5d0380549d91f95620a1b63494ac7ef",
+          "bytes": 2783
+        }
+      ]
+    },
+    {
+      "id": "motion.fox-stride.webm",
+      "category": "motion",
+      "publicPath": "/strategy/motion/fox-stride/loop.webm",
+      "destinationPath": "public/strategy/motion/fox-stride/loop.webm",
+      "sourceAssetPath": "asset-studio/library/fox-stride/loop.webm",
+      "sha256": "6fd58e77cd655ff08d36afecbb82c6277e9b574e2cb4bcc2af15f9f7d0d65a29",
+      "bytes": 300121,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Original in-place walking study; exploratory motion asset, not a brand claim."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\fox-stride\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/fox-stride/loop.mp4",
+            "bytes": 401022,
+            "sha256": "54f4d8d4b10cb5063856a08413af32dee8ca67432c0e39660c599e5198097025"
+          },
+          "loop.webm": {
+            "path": "library/fox-stride/loop.webm",
+            "bytes": 300121,
+            "sha256": "6fd58e77cd655ff08d36afecbb82c6277e9b574e2cb4bcc2af15f9f7d0d65a29"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/fox-stride/loop-mobile.mp4",
+            "bytes": 128087,
+            "sha256": "9c5b66b71cab8a242a0e75ddab6b5c3d0ed249ccf7daa0a31c659cfb89f4b725"
+          },
+          "poster.webp": {
+            "path": "library/fox-stride/poster.webp",
+            "bytes": 16972,
+            "sha256": "f233ad019bc9cbc11ee953591eb2275a16bb6ffbfbf716830d2e5f8300842109"
+          }
+        },
+        "renderJob": "asset-studio/motion/fox-stride/_renders/c06b964793c846ad90036d79ddf19ef6"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/fox-stride/source.json",
+          "sha256": "65bb6484c1473648cdf38ea49fbc2ab948954f54973fbe55aa3b96136187d5e6",
+          "bytes": 212
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/fox-stride/verification.json",
+          "sha256": "95b97f7b723bf2b5e37e51eb5395768fc5d0380549d91f95620a1b63494ac7ef",
+          "bytes": 2783
+        }
+      ]
+    },
+    {
+      "id": "motion.fox-stride.mobileMp4",
+      "category": "motion",
+      "publicPath": "/strategy/motion/fox-stride/loop-mobile.mp4",
+      "destinationPath": "public/strategy/motion/fox-stride/loop-mobile.mp4",
+      "sourceAssetPath": "asset-studio/library/fox-stride/loop-mobile.mp4",
+      "sha256": "9c5b66b71cab8a242a0e75ddab6b5c3d0ed249ccf7daa0a31c659cfb89f4b725",
+      "bytes": 128087,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Original in-place walking study; exploratory motion asset, not a brand claim."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\fox-stride\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/fox-stride/loop.mp4",
+            "bytes": 401022,
+            "sha256": "54f4d8d4b10cb5063856a08413af32dee8ca67432c0e39660c599e5198097025"
+          },
+          "loop.webm": {
+            "path": "library/fox-stride/loop.webm",
+            "bytes": 300121,
+            "sha256": "6fd58e77cd655ff08d36afecbb82c6277e9b574e2cb4bcc2af15f9f7d0d65a29"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/fox-stride/loop-mobile.mp4",
+            "bytes": 128087,
+            "sha256": "9c5b66b71cab8a242a0e75ddab6b5c3d0ed249ccf7daa0a31c659cfb89f4b725"
+          },
+          "poster.webp": {
+            "path": "library/fox-stride/poster.webp",
+            "bytes": 16972,
+            "sha256": "f233ad019bc9cbc11ee953591eb2275a16bb6ffbfbf716830d2e5f8300842109"
+          }
+        },
+        "renderJob": "asset-studio/motion/fox-stride/_renders/c06b964793c846ad90036d79ddf19ef6"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/fox-stride/source.json",
+          "sha256": "65bb6484c1473648cdf38ea49fbc2ab948954f54973fbe55aa3b96136187d5e6",
+          "bytes": 212
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/fox-stride/verification.json",
+          "sha256": "95b97f7b723bf2b5e37e51eb5395768fc5d0380549d91f95620a1b63494ac7ef",
+          "bytes": 2783
+        }
+      ]
+    },
+    {
+      "id": "motion.fox-stride.poster",
+      "category": "motion",
+      "publicPath": "/strategy/motion/fox-stride/poster.webp",
+      "destinationPath": "public/strategy/motion/fox-stride/poster.webp",
+      "sourceAssetPath": "asset-studio/library/fox-stride/poster.webp",
+      "sha256": "f233ad019bc9cbc11ee953591eb2275a16bb6ffbfbf716830d2e5f8300842109",
+      "bytes": 16972,
+      "creditCaveats": [
+        "Completed exploratory render; not brand approval or a new approved personal logo.",
+        "Keep the associated project/design credit and complete visual review before public deployment.",
+        "Original in-place walking study; exploratory motion asset, not a brand claim."
+      ],
+      "sourceMetadata": {
+        "renderStatus": "Completed render. Exploratory design, not brand approval.",
+        "sourceBuilder": "motion\\fox-stride\\build_scene.py",
+        "verificationPassed": true,
+        "frameCount": 96,
+        "fps": 24,
+        "loopTransformEndpointEqual": true,
+        "loopEndpointMeanPixelDifference": 0.0,
+        "librarySourceCatalog": {
+          "loop.mp4": {
+            "path": "library/fox-stride/loop.mp4",
+            "bytes": 401022,
+            "sha256": "54f4d8d4b10cb5063856a08413af32dee8ca67432c0e39660c599e5198097025"
+          },
+          "loop.webm": {
+            "path": "library/fox-stride/loop.webm",
+            "bytes": 300121,
+            "sha256": "6fd58e77cd655ff08d36afecbb82c6277e9b574e2cb4bcc2af15f9f7d0d65a29"
+          },
+          "loop-mobile.mp4": {
+            "path": "library/fox-stride/loop-mobile.mp4",
+            "bytes": 128087,
+            "sha256": "9c5b66b71cab8a242a0e75ddab6b5c3d0ed249ccf7daa0a31c659cfb89f4b725"
+          },
+          "poster.webp": {
+            "path": "library/fox-stride/poster.webp",
+            "bytes": 16972,
+            "sha256": "f233ad019bc9cbc11ee953591eb2275a16bb6ffbfbf716830d2e5f8300842109"
+          }
+        },
+        "renderJob": "asset-studio/motion/fox-stride/_renders/c06b964793c846ad90036d79ddf19ef6"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/fox-stride/source.json",
+          "sha256": "65bb6484c1473648cdf38ea49fbc2ab948954f54973fbe55aa3b96136187d5e6",
+          "bytes": 212
+        },
+        {
+          "sourceAssetPath": "asset-studio/library/fox-stride/verification.json",
+          "sha256": "95b97f7b723bf2b5e37e51eb5395768fc5d0380549d91f95620a1b63494ac7ef",
+          "bytes": 2783
+        }
+      ]
+    },
+    {
+      "id": "portrait.editorial",
+      "category": "portrait",
+      "publicPath": "/strategy/portrait/editorial.webp",
+      "destinationPath": "public/strategy/portrait/editorial.webp",
+      "sourceAssetPath": "asset-studio/library/portrait-display.webp",
+      "sha256": "bee45d4edda09401cf18f64cc30f9fcfa29edef2c412c3b428decd2fae82ccaf",
+      "bytes": 446560,
+      "creditCaveats": [
+        "Art-direction candidate with fidelity caveats; face, hair, and anatomy were reconstructed rather than pixel-preserved.",
+        "Human-likeness approval is required before public use; do not present it as an exact source-photo reproduction.",
+        "Face, hair and anatomy reconstructed rather than pixel-preserved; human likeness approval needed.",
+        "Hanging-hand finger articulation differs from source.",
+        "Lower fingertips have very little bottom clearance; avoid tighter crops.",
+        "Cloud texture occupies the lower-left, so the entire left 45 percent is not blank.",
+        "Muted cobalt appears in multiple cloud patches rather than one tiny distant accent.",
+        "Ink affects the lower trouser silhouette as well as the overshirt edges.",
+        "Overshirt hides source anatomy, preventing exact body-shape comparison."
+      ],
+      "sourceMetadata": {
+        "assetId": "sunburst-editorial-portrait",
+        "status": "art_direction_candidate_with_fidelity_caveats",
+        "curationDecision": "Retained unmodified for coordinator review; limitations are explicit.",
+        "model": "gpt-image-2.5-sunburst",
+        "quality": "max",
+        "source": {
+          "path": "site/public/headshots/headshot-1.jpg",
+          "sha256_before": "65a47b30ca48cfc7681e2cbb22f450ce6c74ec92418d7eea56997fe4897d2b01",
+          "sha256_after": "65a47b30ca48cfc7681e2cbb22f450ce6c74ec92418d7eea56997fe4897d2b01",
+          "unchanged": true,
+          "dimensions": [
+            2000,
+            2999
+          ]
+        },
+        "actualOutput": {
+          "sha256": "062645081a30a1bbcde4b5f5eeaca6f2f6b687a641e8d2317a0b1e9209b41069",
+          "bytes": 3143076,
+          "format": "PNG",
+          "width": 1536,
+          "height": 1024,
+          "mode": "RGB",
+          "channels": [
+            "R",
+            "G",
+            "B"
+          ],
+          "has_alpha_channel": false,
+          "has_transparent_pixels": false
+        },
+        "verification": {
+          "technical": "pixel-verification.json",
+          "visual": "visual-review.json",
+          "qa_crops": [
+            "qa/face-comparison.png",
+            "qa/pose-and-lower-edge.png"
+          ]
+        }
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/library/manifest.json",
+          "sha256": "951868dafa32187753187a487b70cb93013a6866cdc5b5cb767cb279f6fa9ef1",
+          "bytes": 3952
+        },
+        {
+          "sourceAssetPath": "asset-studio/portraits/sunburst-editorial-v1/manifest.json",
+          "sha256": "5a3bb50e841ef5f85f697ea26fd88cf8cd6d992fefea4661d9d6a29e68d02781",
+          "bytes": 7340
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.sprite",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/sprite.svg",
+      "destinationPath": "public/strategy/brand/icons/sprite.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/sprite.svg",
+      "sha256": "913ba6b5b13b3d77e2c711ce912cee7c96da154fe69ac4dc81711aeaefb70e47",
+      "bytes": 2367,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "family": "Cut 24",
+        "publicName": "Zay Domo Artist",
+        "approval": "Exploratory",
+        "source": "build_brand.py / ICONS",
+        "iconCount": 12
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.arrow-diagonal",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/arrow-diagonal.svg",
+      "destinationPath": "public/strategy/brand/icons/arrow-diagonal.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/arrow-diagonal.svg",
+      "sha256": "e152d2e2f0a89ffedae4f2046db2cbd4ba9a4e5cdae66d649ac7e2424436582c",
+      "bytes": 447,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "arrow-diagonal",
+        "label": "Arrow diagonal",
+        "meaning": "Directional continuation; not a new-window promise.",
+        "svg": "icons/arrow-diagonal.svg",
+        "symbol": "zda-arrow-diagonal"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.close",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/close.svg",
+      "destinationPath": "public/strategy/brand/icons/close.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/close.svg",
+      "sha256": "c291bd27ccf673189187f98926e620fb23f183f01de01e59d1f0b7f28c90c30d",
+      "bytes": 476,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "close",
+        "label": "Close",
+        "meaning": "Dismiss the current overlay, not delete content.",
+        "svg": "icons/close.svg",
+        "symbol": "zda-close"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.contact",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/contact.svg",
+      "destinationPath": "public/strategy/brand/icons/contact.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/contact.svg",
+      "sha256": "01a4a14cd85d535796a7856c63a59b21e83ea79f4bd5adec9074c6350fffb97e",
+      "bytes": 475,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "contact",
+        "label": "Contact",
+        "meaning": "Contact or email. Keep a visible text label when practical.",
+        "svg": "icons/contact.svg",
+        "symbol": "zda-contact"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.creative-strategy",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/creative-strategy.svg",
+      "destinationPath": "public/strategy/brand/icons/creative-strategy.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/creative-strategy.svg",
+      "sha256": "348c4cbfbbcefb149e5853fce3cd84a200de85af9d976a3d0522a3074c12ce1b",
+      "bytes": 505,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "creative-strategy",
+        "label": "Creative strategy",
+        "meaning": "Connected decisions: research, direction, and execution.",
+        "svg": "icons/creative-strategy.svg",
+        "symbol": "zda-creative-strategy"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.external",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/external.svg",
+      "destinationPath": "public/strategy/brand/icons/external.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/external.svg",
+      "sha256": "338625980c56d9e7928d3c0e230689378a4560612a69ea7b85370ee2c0bddd29",
+      "bytes": 452,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "external",
+        "label": "External",
+        "meaning": "Leaves the current context; explain any new tab in text.",
+        "svg": "icons/external.svg",
+        "symbol": "zda-external"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.film",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/film.svg",
+      "destinationPath": "public/strategy/brand/icons/film.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/film.svg",
+      "sha256": "e27e66cf2797e39f0d8a29ec6f65e5761b81f9582f51e2bff10080c251392455",
+      "bytes": 476,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "film",
+        "label": "Film",
+        "meaning": "Film or motion work, distinct from the Play action.",
+        "svg": "icons/film.svg",
+        "symbol": "zda-film"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.index",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/index.svg",
+      "destinationPath": "public/strategy/brand/icons/index.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/index.svg",
+      "sha256": "ba7e7040a8a7feb38a6f84e30861403d879755d30e92f8bad79107948a3a69cd",
+      "bytes": 429,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "index",
+        "label": "Index",
+        "meaning": "Open the project index or navigation.",
+        "svg": "icons/index.svg",
+        "symbol": "zda-index"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.pause",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/pause.svg",
+      "destinationPath": "public/strategy/brand/icons/pause.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/pause.svg",
+      "sha256": "adde69ee700b346140ad90ae8dbaef7aebb5eb1e190945c434c4ecb762fd9cd6",
+      "bytes": 359,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "pause",
+        "label": "Pause",
+        "meaning": "Pause playing media.",
+        "svg": "icons/pause.svg",
+        "symbol": "zda-pause"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.play",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/play.svg",
+      "destinationPath": "public/strategy/brand/icons/play.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/play.svg",
+      "sha256": "583ce7c8ecc3f25bde2991649a3de89f42da48c31cc0d71d23cb118f2d1c1203",
+      "bytes": 414,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "play",
+        "label": "Play",
+        "meaning": "Start user-requested media.",
+        "svg": "icons/play.svg",
+        "symbol": "zda-play"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.project",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/project.svg",
+      "destinationPath": "public/strategy/brand/icons/project.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/project.svg",
+      "sha256": "5eb2d8bb4ada2c65cb746651a6c38280cda06119c8db25c88d1e661f5db78821",
+      "bytes": 378,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "project",
+        "label": "Project",
+        "meaning": "A project or grouped body of work.",
+        "svg": "icons/project.svg",
+        "symbol": "zda-project"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.scroll",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/scroll.svg",
+      "destinationPath": "public/strategy/brand/icons/scroll.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/scroll.svg",
+      "sha256": "e761b46d86290ce92cf003238104a8bebc3676eb4453eb35d429579121388c7c",
+      "bytes": 425,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "scroll",
+        "label": "Scroll",
+        "meaning": "Continue downward in the same document.",
+        "svg": "icons/scroll.svg",
+        "symbol": "zda-scroll"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.icons.sound-off",
+      "category": "brand",
+      "publicPath": "/strategy/brand/icons/sound-off.svg",
+      "destinationPath": "public/strategy/brand/icons/sound-off.svg",
+      "sourceAssetPath": "asset-studio/brand/icons/sound-off.svg",
+      "sha256": "4d11d62c4e4803a7440310e46cb49b5b357ecbbb2db9467a8cbce8d294ba96a7",
+      "bytes": 458,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Icon kit approval status: Exploratory."
+      ],
+      "sourceMetadata": {
+        "name": "sound-off",
+        "label": "Sound off",
+        "meaning": "Muted state; label the control by its action, such as Unmute.",
+        "svg": "icons/sound-off.svg",
+        "symbol": "zda-sound-off"
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/icons/manifest.json",
+          "sha256": "4ee6bc2913f4c3554c815a4e7eddbe515781a55ad75b941dedd15e7a00b678d6",
+          "bytes": 2745
+        }
+      ]
+    },
+    {
+      "id": "brand.marks.emblemSteppedMaster32",
+      "category": "brand",
+      "publicPath": "/strategy/brand/marks/emblem-stepped-master-32.svg",
+      "destinationPath": "public/strategy/brand/marks/emblem-stepped-master-32.svg",
+      "sourceAssetPath": "asset-studio/brand/marks/emblem-stepped-master-32.svg",
+      "sha256": "19e53e1c627424bf9df758a81448d02fbed54f6dbe4f4772c12c69d46aa146d3",
+      "bytes": 1054,
+      "creditCaveats": [
+        "Exploratory asset-only kit; approval is required before treating the mark or icons as final identity.",
+        "The SVGs are currentColor assets; keep accessible text labels alongside icon-only controls.",
+        "Exploratory optical derivative of the existing four-ribbon silhouette; approval is required.",
+        "No ownership, clearance, or registration claim is made."
+      ],
+      "sourceMetadata": {
+        "publicName": "Zay Domo Artist",
+        "status": "Exploratory; approval required",
+        "source": "site/public/world/emblem.svg",
+        "sourceSha256": "7461104a7ec53b83dd2d03c4abf93ab18650445771619bedbb6c7e48f5b5de1f",
+        "preservedMaster": "marks/emblem-preserved-master.svg#emblem-preserved-shape",
+        "preservedPathIsExact": true
+      },
+      "provenanceRecords": [
+        {
+          "sourceAssetPath": "asset-studio/brand/build-manifest.json",
+          "sha256": "6d3ad8a5d8f19e304fc589c9e103d2348b2c2ec67d5febc192898ab30629c07b",
+          "bytes": 2185
+        },
+        {
+          "sourceAssetPath": "asset-studio/brand/marks/source-provenance.json",
+          "sha256": "19a5408101bec4e8755455a5fa567f7b0447ee3aa88d2729f1b4b66f7717f3a9",
+          "bytes": 468
+        }
+      ]
+    }
+  ]
+}

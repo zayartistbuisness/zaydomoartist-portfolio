@@ -29,3 +29,7 @@ dist-ssr
 !.dev.vars.example
 .env*
 !.env.example
+
+# Blender autosave backups and the CC0 studio HDRI (re-download from Poly Haven: monochrome_studio_04)
+*.blend1
+source-assets/tracking/hdri/

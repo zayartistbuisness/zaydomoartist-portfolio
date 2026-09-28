@@ -1,0 +1,102 @@
+/* Contact — casting, representation and the form. Ground (#111110) in WebGL. */
+.c-contact {
+  position: relative;
+  color: var(--paper);
+  padding: 16vh var(--gutter) 5vh;
+  min-height: 100svh;
+}
+.c-contact a { color: inherit; }
+.c-contact-head {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(232, 228, 219, 0.2);
+}
+.c-contact-head p { margin: 0; }
+.c-contact-top { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: center; gap: 4vw; margin: 6vh 0 4vh; }
+.c-contact-title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(52px, 8vw, 148px);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+}
+.c-contact-title em { font-style: italic; }
+.c-contact-slot { width: 100%; aspect-ratio: 1; max-height: 40vh; }
+
+.c-contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 5vw; }
+.c-contact-label { margin: 0 0 14px; opacity: 0.55; }
+.c-contact-reps ul { list-style: none; margin: 0 0 5vh; padding: 0; }
+.c-contact-reps li {
+  display: grid;
+  grid-template-columns: 7.5em 1fr;
+  gap: 4px 1em;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(232, 228, 219, 0.14);
+}
+.c-contact-role { opacity: 0.55; grid-row: span 2; }
+.c-contact-name { font-family: var(--display); font-size: clamp(22px, 2vw, 32px); text-transform: none; letter-spacing: 0; }
+.c-contact-reps li a { text-decoration: underline 1px rgba(232, 228, 219, 0.35); text-underline-offset: 3px; text-transform: none; letter-spacing: 0.02em; }
+.c-contact-reps li a:hover, .c-contact-reps li a:focus-visible { text-decoration-color: var(--rec); }
+.c-contact-else li { display: block; padding: 8px 0; border: 0; }
+.c-contact-else a { text-decoration: none; }
+.c-contact-else span { opacity: 0.5; margin-left: 0.4em; }
+.c-contact-else a:hover { text-decoration: underline 1px var(--rec); text-underline-offset: 3px; }
+
+.c-contact-form { display: grid; gap: 18px; }
+.c-contact-row { display: grid; gap: 8px; }
+.c-contact-row label { opacity: 0.6; }
+.c-contact-form input,
+.c-contact-form textarea {
+  font: inherit;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 15px;
+  color: var(--paper);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(232, 228, 219, 0.3);
+  padding: 10px 0;
+  outline: none;
+  resize: vertical;
+}
+.c-contact-form input:focus-visible,
+.c-contact-form textarea:focus-visible { border-bottom-color: var(--rec); }
+.c-contact-form textarea::placeholder { color: rgba(232, 228, 219, 0.35); }
+.c-contact-types { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.c-contact-types legend { opacity: 0.6; margin-bottom: 10px; padding: 0; }
+.c-contact-types label {
+  cursor: pointer;
+  border: 1px solid rgba(232, 228, 219, 0.3);
+  border-radius: 999px;
+  padding: 9px 14px;
+  transition: background 0.2s, color 0.2s;
+}
+.c-contact-types label.is-on { background: var(--paper); color: var(--ink); }
+.c-contact-types input { position: absolute; opacity: 0; pointer-events: none; }
+.c-contact-types label:focus-within { outline: 1px solid var(--rec); outline-offset: 2px; }
+.c-contact-form button {
+  justify-self: start;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 22px;
+  cursor: pointer;
+}
+.c-contact-form button:disabled { opacity: 0.5; cursor: wait; }
+.c-contact-form button:focus-visible { outline: 2px solid var(--rec); outline-offset: 3px; }
+.c-contact-status { margin: 0; min-height: 1.4em; opacity: 0.8; }
+.c-contact-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.c-contact-foot { display: flex; justify-content: space-between; margin-top: 12vh; opacity: 0.45; }
+
+@media (max-width: 860px) {
+  .c-contact-top, .c-contact-grid { grid-template-columns: 1fr; }
+  .c-contact-slot { max-height: 26vh; }
+  .c-contact-foot { flex-direction: column; gap: 6px; }
+}
+.c-contact-sign { display: inline-flex; align-items: center; gap: 10px; }

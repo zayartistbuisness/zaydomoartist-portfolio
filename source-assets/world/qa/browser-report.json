@@ -1,0 +1,265 @@
+{
+  "url": "http://127.0.0.1:5173",
+  "checks": [
+    {
+      "name": "desktop has no horizontal overflow",
+      "passed": true,
+      "details": {
+        "width": 1440,
+        "docWidth": 1440,
+        "height": 960,
+        "canvases": [
+          {
+            "ready": "true",
+            "pixels": [
+              1440,
+              960
+            ],
+            "css": [
+              1440,
+              960
+            ]
+          },
+          {
+            "ready": "false",
+            "pixels": [
+              300,
+              150
+            ],
+            "css": [
+              1642,
+              570
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "new hero and existing casting sections present",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "live hero pixels change over time",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "pause freezes scene pixels",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "reel opens with native controls",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "reel starts from explicit user gesture",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Escape closes reel",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "focus returns to reel button",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "scroll updates scene progress",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Blender emblem WebGL viewer loads",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "emblem button changes rendered angle",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "390px no horizontal overflow",
+      "passed": true,
+      "details": {
+        "width": 390,
+        "docWidth": 390,
+        "height": 844,
+        "canvases": [
+          {
+            "ready": "true",
+            "pixels": [
+              390,
+              641
+            ],
+            "css": [
+              390,
+              641
+            ]
+          },
+          {
+            "ready": "false",
+            "pixels": [
+              300,
+              150
+            ],
+            "css": [
+              566,
+              360
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "768px no horizontal overflow",
+      "passed": true,
+      "details": {
+        "width": 768,
+        "docWidth": 768,
+        "height": 1024,
+        "canvases": [
+          {
+            "ready": "true",
+            "pixels": [
+              768,
+              778
+            ],
+            "css": [
+              768,
+              778
+            ]
+          },
+          {
+            "ready": "false",
+            "pixels": [
+              300,
+              150
+            ],
+            "css": [
+              1114,
+              360
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "320px no horizontal overflow",
+      "passed": true,
+      "details": {
+        "width": 320,
+        "docWidth": 320,
+        "height": 844,
+        "canvases": [
+          {
+            "ready": "true",
+            "pixels": [
+              320,
+              641
+            ],
+            "css": [
+              320,
+              641
+            ]
+          },
+          {
+            "ready": "false",
+            "pixels": [
+              300,
+              150
+            ],
+            "css": [
+              464,
+              360
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "mobile index opens",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "mobile index closes on navigation",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "mobile index scrolls to credits",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "reduced motion state respected",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "reduced motion remains static",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "reduced-motion hero avoids GPU render",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "reduced-motion users can explicitly opt into artwork",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "context loss reveals photo fallback",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "context restore rebuilds animated scene",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "existing MOSS route still renders",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "no-WebGL portrait fallback loads",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "no-WebGL reel action remains accessible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "no uncaught page errors",
+      "passed": true,
+      "details": []
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "desktop-hero.png",
+    "desktop-scroll-transition.png",
+    "desktop-between.png",
+    "desktop-story.png",
+    "viewport-390.png",
+    "viewport-768.png",
+    "viewport-320.png",
+    "mobile-index.png",
+    "mobile-reduced-motion.png",
+    "fallback-no-webgl.png"
+  ]
+}

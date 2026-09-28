@@ -1,0 +1,11 @@
+.tchap-spacer {
+  position: relative;
+  z-index: 1;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px var(--gutter);
+  color: var(--ink);
+}
+.tchap-spacer p { margin: 0; }

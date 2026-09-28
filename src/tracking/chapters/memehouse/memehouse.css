@@ -1,0 +1,254 @@
+/* MemeHouse chapter: "The House". Bone ground (drawn in WebGL), ink type.
+   The stage pins while the camera tours the section model. */
+
+.c-memehouse {
+  --mh-ink: #111110;
+  --mh-paper: #e8e4db;
+  --mh-rule: color-mix(in srgb, var(--mh-ink) 22%, transparent);
+  --mh-serif: 'Instrument Serif', Georgia, serif;
+  --mh-mono: 'JetBrains Mono', ui-monospace, monospace;
+  position: relative;
+  height: 500vh;
+  color: var(--mh-ink);
+}
+
+.c-memehouse-stage {
+  --mh-reveal: 0;
+  --mh-cap: 0;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+/* The stage (pinned at the viewport origin) is the pointer target for the
+   3D house: the HUD portal raycasts from event.offsetX/Y, which only equal
+   client coordinates on an element at 0,0. Text passes pointers through;
+   links and buttons stay live. */
+.c-memehouse-stage > *,
+.c-memehouse-stage > * * { pointer-events: none; }
+.c-memehouse-stage a,
+.c-memehouse-stage button { pointer-events: auto; }
+
+.c-memehouse-kicker {
+  position: absolute;
+  top: 72px;
+  left: var(--gutter);
+  margin: 0;
+  opacity: 0.72;
+}
+
+/* Room index: a floor directory in the top-right corner. */
+.c-memehouse-rooms {
+  position: absolute;
+  top: 64px;
+  right: var(--gutter);
+  opacity: var(--mh-reveal);
+}
+.c-memehouse-rooms ol {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0 4px;
+  list-style: none;
+  /* A strip of paper so the index never sits on hatching. */
+  background: color-mix(in srgb, var(--mh-paper) 88%, transparent);
+}
+.c-memehouse-rooms button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  color: var(--mh-ink);
+  opacity: 0.5;
+  border-top: 1px solid transparent;
+  transition: opacity 0.3s, border-color 0.3s;
+}
+.c-memehouse-rooms button:hover { opacity: 0.85; }
+.c-memehouse-rooms button[aria-current] { opacity: 1; border-top-color: var(--mh-ink); }
+.c-memehouse-rooms button[aria-current] .c-memehouse-rooms-n::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--rec, #d7331f);
+  vertical-align: 2px;
+}
+.c-memehouse-rooms button:focus-visible { outline: 1px solid var(--rec, #d7331f); outline-offset: 2px; }
+.c-memehouse-rooms-n { font-variant-numeric: tabular-nums; }
+
+/* Title column. */
+.c-memehouse-head {
+  position: absolute;
+  top: 16vh;
+  left: var(--gutter);
+  width: min(31vw, 480px);
+  opacity: var(--mh-reveal);
+  transform: translateY(calc((1 - var(--mh-reveal)) * 28px));
+}
+.c-memehouse-title {
+  margin: 0;
+  font-family: var(--mh-serif);
+  font-weight: 400;
+  font-size: clamp(64px, 7.6vw, 132px);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  text-transform: none;
+}
+.c-memehouse-role { margin: 18px 0 0; display: flex; align-items: center; gap: 8px; }
+.c-memehouse-standfirst {
+  margin: 22px 0 0;
+  max-width: 21em;
+  font-family: var(--mh-serif);
+  font-size: clamp(20px, 1.75vw, 28px);
+  line-height: 1.14;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  text-wrap: pretty;
+}
+
+/* Captions: one per camera stop, stacked and crossfaded. */
+.c-memehouse-captions {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 64px;
+  width: min(31vw, 440px);
+  display: grid;
+  align-items: end;
+  opacity: var(--mh-cap);
+}
+.c-memehouse-cap {
+  grid-area: 1 / 1;
+  border-top: 1px solid var(--mh-rule);
+  padding-top: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.45s, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 0.45s;
+}
+.c-memehouse-cap.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.6s 0.1s, transform 0.8s 0.1s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s;
+}
+.c-memehouse-cap-head { display: flex; align-items: baseline; gap: 14px; }
+.c-memehouse-cap-n { opacity: 0.55; font-variant-numeric: tabular-nums; }
+.c-memehouse-cap h3 {
+  margin: 0;
+  font-family: var(--mh-serif);
+  font-weight: 400;
+  font-size: clamp(28px, 2.4vw, 40px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-transform: none;
+}
+.c-memehouse-cap-date { margin: 8px 0 0; opacity: 0.72; }
+.c-memehouse-cap-body {
+  margin: 12px 0 0;
+  font-family: var(--mh-serif);
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;
+  text-wrap: pretty;
+}
+.c-memehouse-quote { margin: 14px 0 0; }
+.c-memehouse-quote p {
+  margin: 0;
+  font-family: var(--mh-serif);
+  font-style: italic;
+  font-size: clamp(21px, 1.8vw, 28px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  text-wrap: pretty;
+}
+.c-memehouse-quote p::before { content: '“'; margin-left: -0.4em; }
+.c-memehouse-quote p::after { content: '”'; }
+.c-memehouse-quote footer { margin-top: 8px; opacity: 0.6; }
+.c-memehouse-quote footer::before { content: '— '; }
+.c-memehouse-quote + .c-memehouse-cap-body { font-size: 13px; opacity: 0.7; }
+
+.c-memehouse-photo {
+  margin: 12px 0 0;
+  font-size: 9.5px;
+  line-height: 1.4;
+  opacity: 0.72;
+  text-wrap: pretty;
+}
+.c-memehouse-photo + .c-memehouse-photo { margin-top: 4px; }
+.c-memehouse-photo a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--mh-rule);
+  text-underline-offset: 3px;
+}
+.c-memehouse-photo a:hover,
+.c-memehouse-photo a:focus-visible { text-decoration-color: var(--rec, #d7331f); outline: none; }
+
+.c-memehouse-src {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 14px 0 0;
+  font-size: 9.5px;
+}
+.c-memehouse-src > span { opacity: 0.5; }
+.c-memehouse-src a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--mh-rule);
+  text-underline-offset: 3px;
+}
+.c-memehouse-src a:hover,
+.c-memehouse-src a:focus-visible { text-decoration-color: var(--rec, #d7331f); outline: none; }
+
+.c-memehouse-fine {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 22px;
+  margin: 0;
+  font-size: 9.5px;
+  opacity: calc(var(--mh-cap) * 0.5);
+}
+
+@media (max-width: 760px) {
+  .c-memehouse-kicker { top: 60px; }
+  .c-memehouse-rooms { top: 50px; }
+  .c-memehouse-rooms ol { gap: 0; }
+  .c-memehouse-rooms button { padding: 8px 7px; }
+  .c-memehouse-rooms-t { display: none; }
+  .c-memehouse-head { top: 94px; width: auto; right: var(--gutter); }
+  .c-memehouse-title { font-size: 46px; }
+  .c-memehouse-role { margin-top: 10px; }
+  .c-memehouse-standfirst { margin-top: 10px; font-size: 16px; max-width: 24em; }
+  .c-memehouse-captions { width: auto; right: var(--gutter); bottom: 52px; }
+  /* Paper under the caption so the faint house never runs through the text. */
+  .c-memehouse-stage::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 30svh;
+    z-index: -1;
+    background: linear-gradient(to top, var(--mh-paper) 62%, color-mix(in srgb, var(--mh-paper) 0%, transparent));
+    opacity: var(--mh-cap);
+  }
+  .c-memehouse-cap h3 { font-size: 24px; }
+  .c-memehouse-cap-body { font-size: 14px; margin-top: 8px; }
+  .c-memehouse-quote { margin-top: 10px; }
+  .c-memehouse-quote p { font-size: 16.5px; line-height: 1.15; }
+  .c-memehouse-src { margin-top: 10px; }
+  .c-memehouse-photo { margin-top: 8px; font-size: 8.5px; }
+  .c-memehouse-fine { bottom: 16px; font-size: 8.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-memehouse-cap,
+  .c-memehouse-cap.is-on { transition: none; }
+}

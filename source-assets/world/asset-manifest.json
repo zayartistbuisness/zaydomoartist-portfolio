@@ -1,0 +1,52 @@
+{
+  "model": "gpt-image-2.5-sunburst",
+  "quality": "max",
+  "originals": [
+    "assets\\generated\\portrait-world-master-b12af7dc02\\portrait-world-master.png",
+    "assets\\generated\\artist-emblem-concept-6360610e81\\artist-emblem-concept.png",
+    "assets\\generated\\cloud-atmosphere-master-748f36d402\\cloud-atmosphere-master.png"
+  ],
+  "derivatives": "Web delivery derivatives only; original generated pixels retained.",
+  "portrait": "Edited editorial artwork. Original casting photographs are unchanged.",
+  "emblem": "Exploratory mark, source-faithful vector contour for Blender extrusion.",
+  "dimensions": {
+    "aperture-render.png": [
+      640,
+      640
+    ],
+    "aperture-render.webp": [
+      640,
+      640
+    ],
+    "clouds.webp": [
+      1024,
+      683
+    ],
+    "emblem.png": [
+      576,
+      576
+    ],
+    "portrait-world-mobile.webp": [
+      945,
+      1024
+    ],
+    "portrait-world.webp": [
+      1536,
+      1024
+    ],
+    "swift-atlas.webp": [
+      1024,
+      1024
+    ]
+  },
+  "portrait_edit_input": {
+    "path": "site/public/headshots/headshot-3.jpg",
+    "sha256": "cf3f0c9394025759eb51303307f44fb6c3e9fa23bc25a3732503ce44eac0e5c9",
+    "provenance": "Path supplied to the actual creative.edit_image call; original photo retained."
+  },
+  "render": {
+    "emblem_samples": 64,
+    "bird_samples": 24,
+    "bird_revision": "swept-wings-v2"
+  }
+}

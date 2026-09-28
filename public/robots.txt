@@ -1,0 +1,7 @@
+# zaydomoartist.com
+User-agent: *
+Allow: /
+# /lab/chapter/* are single-chapter dev QA views, not pages.
+Disallow: /lab/chapter/
+
+Sitemap: https://zaydomoartist.com/sitemap.xml

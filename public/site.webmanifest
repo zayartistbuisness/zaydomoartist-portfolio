@@ -1,0 +1,15 @@
+{
+  "name": "Zay Domo Artist",
+  "short_name": "Zay Domo",
+  "description": "Zay “Domo” Artist — actor, writer and creative strategist based in Los Angeles.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#e8e4db",
+  "theme_color": "#e8e4db",
+  "icons": [
+    { "src": "/tracking/brand/favicon-48.png", "sizes": "48x48", "type": "image/png" },
+    { "src": "/tracking/brand/favicon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/tracking/brand/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

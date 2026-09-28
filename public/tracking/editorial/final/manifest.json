@@ -1,0 +1,94 @@
+[
+  {
+    "id": "rec",
+    "src": "/tracking/editorial/final/rec.webp",
+    "label": "REC",
+    "styling": "Colour \u00b7 red tally light, sheer black shirt, curb chain",
+    "color": true,
+    "w": 1024,
+    "h": 1536
+  },
+  {
+    "id": "tailored",
+    "src": "/tracking/editorial/final/tailored.webp",
+    "label": "TAILORED",
+    "styling": "Charcoal suit, black shirt",
+    "color": false,
+    "w": 1342,
+    "h": 2000
+  },
+  {
+    "id": "chrome",
+    "src": "/tracking/editorial/final/chrome.webp",
+    "label": "CHROME",
+    "styling": "Oversized black jacket, bone knit, silver rings",
+    "color": false,
+    "w": 1024,
+    "h": 1536,
+    "cutout": "/tracking/editorial/final/chrome-cutout.webp"
+  },
+  {
+    "id": "skates",
+    "src": "/tracking/editorial/final/skates.webp",
+    "label": "SKATES",
+    "styling": "Colour \u00b7 striped tee, roller rink",
+    "color": true,
+    "w": 1342,
+    "h": 2000
+  },
+  {
+    "id": "suit",
+    "src": "/tracking/editorial/final/suit.webp",
+    "label": "SUIT",
+    "styling": "Black suit, black turtleneck, hard light",
+    "color": false,
+    "w": 1024,
+    "h": 1536
+  },
+  {
+    "id": "paper",
+    "src": "/tracking/editorial/final/paper.webp",
+    "label": "PAPER",
+    "styling": "Charcoal suit through torn seamless",
+    "color": false,
+    "w": 1024,
+    "h": 1536,
+    "cutout": "/tracking/editorial/final/paper-cutout.webp"
+  },
+  {
+    "id": "blinds",
+    "src": "/tracking/editorial/final/blinds.webp",
+    "label": "BLINDS",
+    "styling": "White ribbed tank, slatted light",
+    "color": false,
+    "w": 1024,
+    "h": 1536
+  },
+  {
+    "id": "double",
+    "src": "/tracking/editorial/final/double.webp",
+    "label": "DOUBLE",
+    "styling": "Leather jacket, bone knit, pleated trousers",
+    "color": false,
+    "w": 1024,
+    "h": 1536
+  },
+  {
+    "id": "turn",
+    "src": "/tracking/editorial/final/turn.webp",
+    "label": "TURN",
+    "styling": "Black knit, long exposure",
+    "color": false,
+    "w": 1024,
+    "h": 1536
+  },
+  {
+    "id": "water",
+    "src": "/tracking/editorial/final/water.webp",
+    "label": "WATER",
+    "styling": "Wet skin, heavy curb chain",
+    "color": false,
+    "w": 1024,
+    "h": 1536
+  }
+]

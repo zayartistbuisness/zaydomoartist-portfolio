@@ -1,0 +1,9 @@
+{
+  "frames": 16,
+  "columns": 4,
+  "rows": 4,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "fps": 12,
+  "source": "Original Blender model and wingbeat animation"
+}

@@ -14,20 +14,10 @@
 .c-su2-stage a,
 .c-su2-stage button { pointer-events: auto; }
 
-.c-su2-head {
-  position: absolute;
-  top: 74px;
-  inset-inline: var(--gutter);
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(17, 17, 16, 0.18);
-}
-
 .c-su2-intro {
   position: absolute;
   left: var(--gutter);
-  bottom: 96px;
+  bottom: clamp(40px, 7vh, 72px);
   max-width: 30vw;
   opacity: var(--book);
   transform: translateY(calc((1 - var(--book)) * 30px));
@@ -48,66 +38,14 @@
    (0.55–0.6 measured 3.8–4.5:1), with room for the campus plate's lines. */
 .c-su2-meta { margin: 0; opacity: 0.72; }
 
-.c-su2-rail {
-  position: absolute;
-  bottom: 28px;
-  inset-inline: var(--gutter);
-  display: flex;
-  justify-content: space-between;
-  gap: 2em;
-  opacity: var(--book);
-}
-.c-su2-rail b { font-weight: 400; margin-right: 1.2em; opacity: 0.72; font-variant-numeric: tabular-nums; }
-.c-su2-hint { opacity: 0.72; }
-
-/* The sr-only sources (lab .tlab-sr). Its links are tab stops, so when
-   keyboard focus lands in it, it opens as a small paper panel above the
-   rail rather than focusing links nobody can see. */
-.c-su2 .c-su2-sr:focus-within {
-  right: var(--gutter);
-  bottom: 64px;
-  z-index: 3;
-  width: min(460px, calc(100vw - 2 * var(--gutter)));
-  height: auto;
-  max-height: calc(100svh - 190px);
-  padding: 14px 16px 12px;
-  overflow: auto;
-  clip-path: none;
-  white-space: normal;
-  pointer-events: auto;
-  background: #e8e4db;
-  border: 1px solid rgba(17, 17, 16, 0.22);
-  box-shadow: 0 12px 40px rgba(17, 17, 16, 0.12);
-  font-family: var(--display);
-  font-size: 15px;
-  line-height: 1.32;
-  letter-spacing: 0;
-  text-transform: none;
-}
-.c-su2-sr:focus-within p,
-.c-su2-sr:focus-within ul { margin: 0 0 10px; }
-.c-su2-sr:focus-within ul { padding-left: 1.1em; }
-.c-su2-sr:focus-within h3 {
-  margin: 14px 0 6px;
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.c-su2-sr a { color: inherit; text-underline-offset: 3px; }
-.c-su2-sr a:focus-visible { outline: 1px solid var(--rec); outline-offset: 2px; }
-
 /* Narrow: phones and any portrait screen, the same test the book uses
    (YearbookModel isNarrow) to lift itself and fill the width. */
 @media (max-width: 760px), (max-aspect-ratio: 1/1) {
-  .c-su2-intro { max-width: none; right: var(--gutter); bottom: 72px; }
-  .c-su2-hint { display: none; }
+  .c-su2-intro { max-width: none; right: var(--gutter); bottom: 44px; }
 }
 
-/* Portrait tablets: a larger title, and room for the hint again. */
+/* Portrait tablets: a larger title. */
 @media (min-width: 600px) and (max-aspect-ratio: 1/1) {
-  .c-su2-intro { bottom: 84px; }
+  .c-su2-intro { bottom: 60px; }
   .c-su2-intro h2 { font-size: clamp(56px, 8vw, 88px); }
-  .c-su2-hint { display: inline; }
 }

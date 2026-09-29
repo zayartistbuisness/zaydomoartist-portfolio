@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useChapterSection } from '../../kit/chapterStore'
 import { scrollToY } from '../../kit/scroller'
 import { smooth } from '../../kit/space'
-import { ID, pad2, useShots } from './shots'
+import { ID, useShots } from './shots'
 import { closePrint, openPrint, progressForSlot, sectionVh, useOpenPrint, wall, wheelAt } from './timeline'
 import Lightbox from './Lightbox'
 import './portraits.css'
@@ -20,9 +20,6 @@ export default function Section() {
   const openIndex = useOpenPrint()
   const ref = useRef()
   const stageRef = useRef()
-  const numRef = useRef()
-  const ticksRef = useRef()
-  const viewRef = useRef()
   const countRef = useRef(list.length)
   useChapterSection(ID, ref)
 
@@ -30,29 +27,18 @@ export default function Section() {
     countRef.current = list.length
   }, [list])
 
-  // Scroll → the wall position every frame: CSS vars, counter, rail. No renders.
+  // Scroll → the wall position every frame: the standfirst's exit. No renders.
+  // Art-first: no counter, rail or captions; the prints carry the chapter.
   useEffect(() => {
     const el = ref.current
     const stage = stageRef.current
     let raf
-    let shown = -9
     const tick = () => {
       raf = requestAnimationFrame(tick)
       const r = el.getBoundingClientRect()
       if (r.bottom < 0 || r.top > window.innerHeight) return
-      const n = countRef.current
-      const w = wheelAt(sectionGeometry(el).p, n) + wall.nudge
-      const rail = smooth(-0.55, -0.15, w)
+      const w = wheelAt(sectionGeometry(el).p, countRef.current) + wall.nudge
       stage.style.setProperty('--intro', (1 - smooth(-0.97, -0.76, w)).toFixed(3))
-      stage.style.setProperty('--rail', rail.toFixed(3))
-      stage.classList.toggle('is-live', rail > 0.5)
-      const k = n ? clamp(Math.round(w), 0, n - 1) : -1
-      if (k !== shown && k >= 0) {
-        shown = k
-        numRef.current.textContent = pad2(k + 1)
-        const ticks = ticksRef.current?.children || []
-        for (let i = 0; i < ticks.length; i++) ticks[i].classList.toggle('is-on', i === k)
-      }
     }
     tick()
     return () => cancelAnimationFrame(raf)
@@ -124,11 +110,6 @@ export default function Section() {
     const g = sectionGeometry(ref.current)
     scrollToY(g.top + progressForSlot(i, n) * g.travel, immediate ? { immediate: true } : undefined)
   }
-  const current = () => clamp(Math.round(wheelAt(sectionGeometry(ref.current).p, n)), 0, Math.max(0, n - 1))
-  const step = (dir) => {
-    const now = Math.round(wheelAt(sectionGeometry(ref.current).p, n))
-    goTo(clamp(Math.max(0, now) + (now < 0 && dir > 0 ? 0 : dir), 0, n - 1))
-  }
   const stepBox = (dir) => openPrint((openIndex + dir + n) % n)
   const closeBox = () => {
     // Leave the wall on the print that was last open.
@@ -139,48 +120,19 @@ export default function Section() {
   return (
     <section ref={ref} className="c-portraits" aria-labelledby="c-portraits-title" style={{ height: `${sectionVh(n)}vh` }}>
       <div ref={stageRef} className="c-portraits-stage">
-        <header className="c-portraits-tag">
-          <h2 id="c-portraits-title">Portraits</h2>
-          <span className="c-portraits-hint" aria-hidden="true">
-            Scroll or drag to turn the wall · click a print to view
-          </span>
-          <span aria-hidden="true">{pad2(n)} prints</span>
-        </header>
+        {/* The engraved wall title is the visible heading. */}
+        <h2 id="c-portraits-title" className="tlab-sr">Portraits</h2>
 
         <p className="c-portraits-intro">Selected editorial work, 2026.</p>
 
-        <div className="c-portraits-rail">
-          <p className="c-portraits-count" aria-hidden="true">
-            <span ref={numRef}>01</span>
-            <small> / {pad2(n)}</small>
-          </p>
-          <ol ref={ticksRef} className="c-portraits-ticks" aria-hidden="true">
-            {list.map((s) => (
-              <li key={s.src} className={s.color ? 'is-colour' : undefined} />
-            ))}
-          </ol>
-          <div className="c-portraits-nav">
-            <button type="button" onClick={() => step(-1)} aria-label="Previous print">
-              Prev
-            </button>
-            <button type="button" onClick={() => step(1)} aria-label="Next print">
-              Next
-            </button>
-            <button ref={viewRef} type="button" className="c-portraits-view" onClick={() => openPrint(current())}>
-              View <span aria-hidden="true">↗</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Every print as real content: hidden until keyboard focus lands in
-            it, then shown as a small index. Focus turns the wall. */}
+        {/* Every print as a real button, for keyboard and screen readers:
+            hidden until keyboard focus lands in it, then shown as a small
+            index of titles. Focus turns the wall; Enter opens the print. */}
         <ol className="c-portraits-list" aria-label="Prints in this series">
           {list.map((s, i) => (
             <li key={s.src}>
               <button type="button" onClick={() => openPrint(i)} onFocus={() => goTo(i)}>
-                <span className="c-portraits-list-n">{pad2(i + 1)}</span>
-                <span className="c-portraits-list-w">{s.label}</span>
-                <span className="c-portraits-list-s">{s.styling}</span>
+                {s.label}
                 <span className="c-portraits-sr">
                   . {s.alt} Opens full screen.
                 </span>
@@ -190,7 +142,7 @@ export default function Section() {
         </ol>
       </div>
 
-      <Lightbox list={list} index={openIndex} onClose={closeBox} onStep={stepBox} fallbackFocus={viewRef} />
+      <Lightbox list={list} index={openIndex} onClose={closeBox} onStep={stepBox} />
     </section>
   )
 }

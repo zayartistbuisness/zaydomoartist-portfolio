@@ -238,35 +238,6 @@ export function createTitleMaterial(map) {
   })
 }
 
-/** Wall label: crisp bone type (not inked, so it stays legible). */
-export function createCaptionMaterial(map) {
-  map.colorSpace = THREE.NoColorSpace
-  return new THREE.ShaderMaterial({
-    uniforms: {
-      uMap: { value: map },
-      uTint: { value: srgb(BONE) },
-      uOpacity: { value: 0 },
-      uClipY: { value: new THREE.Vector2(-1e6, 1e6) },
-    },
-    transparent: true,
-    depthWrite: false,
-    vertexShader: vertex,
-    fragmentShader: /* glsl */ `
-      uniform sampler2D uMap;
-      uniform vec3 uTint;
-      uniform float uOpacity;
-      uniform vec2 uClipY;
-      varying vec2 vUv;
-      void main() {
-        if (gl_FragCoord.y < uClipY.x || gl_FragCoord.y > uClipY.y) discard;
-        float a = texture2D(uMap, vUv).a * uOpacity;
-        if (a < 0.004) discard;
-        gl_FragColor = vec4(uTint, a);
-      }
-    `,
-  })
-}
-
 export const MAX_SPOTS = 12
 
 /**

@@ -80,8 +80,8 @@ html.tlab-html body {
 /* The sigil as a mask so it takes the header's ink/paper colour. */
 .tlab-sigil {
   display: inline-block;
-  width: 20px;
-  height: 34px;
+  width: 22px;
+  height: 38px;
   background: currentColor;
   -webkit-mask: url('/tracking/brand/domo-sigil-small.svg') center / contain no-repeat;
   mask: url('/tracking/brand/domo-sigil-small.svg') center / contain no-repeat;

@@ -65,7 +65,6 @@ export default function Section() {
 
         <div className="c-about-portrait">
           <div ref={slotRef} className="c-about-slot" role="img" aria-label="Zay Domo Artist, black-and-white portrait, his head turning in a long exposure" />
-          <p className="c-about-caption">Turn · Los Angeles</p>
         </div>
       </div>
     </section>

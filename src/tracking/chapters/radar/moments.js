@@ -1,6 +1,9 @@
 // The four blips. Event-level facts only, quoted from
 // site/research/featured-projects-brief.md §4 (Mafiathon 3 / On The Radar),
-// each with its source. None of this measures Zay's own work.
+// each with its source. None of this measures Zay's own work. On screen a
+// moment shows only its label, `short` and date; `line` is the screen-reader
+// context, and sources and photo credits render from content/credits.js in
+// the Contact footer.
 
 const DIR = '/tracking/chapters/radar'
 const EVENT = `${DIR}/event`
@@ -30,6 +33,7 @@ export const MOMENTS = [
     date: 'Sep 3, 2025',
     dateTime: '2025-09-03',
     label: 'Freestyle #1',
+    short: '41: Kyle Richh, Jenn Carter and Tata',
     line: 'The series opens: Mafiathon Freestyle #1, with 41 (Kyle Richh, Jenn Carter and Tata).',
     sources: [{ label: 'On The Radar Radio, YouTube', href: 'https://www.youtube.com/watch?v=QtNvOzEFlwI' }],
     photo: {
@@ -48,6 +52,7 @@ export const MOMENTS = [
     date: 'Sep 29, 2025',
     dateTime: '2025-09-29',
     label: 'Freestyle #47',
+    short: 'A Boogie Wit da Hoodie and Don Q',
     line: 'A Boogie Wit da Hoodie and Don Q, Mafiathon Freestyle #47.',
     sources: [
       { label: 'On The Radar Radio, YouTube', href: 'https://www.youtube.com/watch?v=5GDjmkATEFk' },
@@ -71,6 +76,7 @@ export const MOMENTS = [
     date: 'Sep 30, 2025',
     dateTime: '2025-09-30',
     label: 'Guinness World Records',
+    short: 'Most subscribers on a Twitch channel',
     line: 'Guinness World Records: “Most subscribers on a Twitch channel”, 1,095,265, set by KaiCenat on the last day of Mafiathon 3.',
     sources: [{ label: 'Guinness World Records', href: 'https://www.guinnessworldrecords.com/world-records/779754-most-subscribers-on-a-twitch-channel' }],
     // No official image of Sep 30 exists (the 1M-subs frame is Sep 27), so
@@ -84,6 +90,7 @@ export const MOMENTS = [
     date: 'Dec 6, 2025',
     dateTime: '2025-12-06',
     label: 'The Streamer Awards',
+    short: 'Best Marathon Stream',
     line: 'Mafiathon 3 takes Best Marathon Stream at The Streamer Awards.',
     sources: [
       { label: 'The Streamer Awards on X', href: 'https://x.com/StreamerAwards/status/1997514308453040590' },

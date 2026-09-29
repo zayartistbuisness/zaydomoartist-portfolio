@@ -7,25 +7,25 @@ import StageFollow from '../../kit/StageFollow'
 import { getChapter } from '../../kit/chapterStore'
 import { smooth } from '../../kit/space'
 import { pointer } from '../../ink/pointer'
-import { ID, pad2, useShots } from './shots'
+import { ID, useShots } from './shots'
 import { openPrint, wall, wheelAt } from './timeline'
 import {
   GROUND,
   MAX_SPOTS,
   bentPlane,
-  createCaptionMaterial,
   createCutMaterial,
   createPrintMaterial,
   createTitleMaterial,
   createWallMaterial,
 } from './materials'
-import { captionCanvas, fitSource, fontsReady, loadImage, makeTexture, titleCanvas } from './textures'
+import { fitSource, fontsReady, loadImage, makeTexture, titleCanvas } from './textures'
 
 // PORTRAITS · "The Rotunda": a curved wall of large prints around the
 // viewer. Scroll (or drag) turns the wall; the print that reaches the centre
 // develops out of the ink into the photograph and comes forward; the two
 // with cut-outs let him step out of the frame. Nothing reveals on hover:
-// prints develop only by arriving at the centre.
+// prints develop only by arriving at the centre. No wall labels: the prints
+// hang uncaptioned (alt text and the lightbox title carry the words).
 
 const TITLE = 'Portraits'
 const CREDIT = 'Zay “Domo” Artist'
@@ -172,31 +172,6 @@ function useWallType(text, italic) {
   return type
 }
 
-function useCaptions(list, narrow) {
-  const gl = useThree((s) => s.gl)
-  const [caps, setCaps] = useState({})
-  useEffect(() => {
-    let live = true
-    const made = []
-    fontsReady().then(() => {
-      if (!live) return
-      const next = {}
-      list.forEach((s, i) => {
-        const c = captionCanvas({ num: pad2(i + 1), label: s.label, styling: s.styling, maxW: narrow ? 270 : 420 })
-        const tex = makeTexture(c.canvas, gl, 8)
-        made.push(tex)
-        next[s.id] = { tex, wCss: c.wCss, hCss: c.hCss }
-      })
-      setCaps(next)
-    })
-    return () => {
-      live = false
-      made.forEach((t) => t.dispose())
-    }
-  }, [list, narrow, gl])
-  return caps
-}
-
 // ── The wall itself: a full cylinder, so turning it never shows an end ──
 function Wall({ lay, list }) {
   const ref = useRef()
@@ -287,14 +262,13 @@ function WallType({ lay, type, kind }) {
   )
 }
 
-// ── One print: sheet, optional cut-out, wall label ──
-function Print({ shot, index, lay, tex, cap }) {
+// ── One print: sheet and optional cut-out ──
+function Print({ shot, index, lay, tex }) {
   const p = lay.prints[index]
   const arc = lay.arcs[index + 1]
   const pivot = useRef()
   const body = useRef()
   const cutRef = useRef()
-  const capRef = useRef()
   const anim = useRef({ c: 0, a: 0, hover: 0 })
 
   const geometry = useMemo(() => bentPlane(p.sw, p.sh, lay.R), [p.sw, p.sh, lay.R])
@@ -304,16 +278,10 @@ function Print({ shot, index, lay, tex, cap }) {
     [tex.map, tex.cut, shot.color, shot.id, p.ix, p.iy],
   )
   const cutMaterial = useMemo(() => (tex.cut ? createCutMaterial(tex.cut) : null), [tex.cut])
-  const capW = cap ? cap.wCss * lay.pxW : 0
-  const capH = cap ? cap.hCss * lay.pxW : 0
-  const capGeometry = useMemo(() => (cap ? bentPlane(capW, capH, lay.R, 12) : null), [cap, capW, capH, lay.R])
-  const capMaterial = useMemo(() => (cap ? createCaptionMaterial(cap.tex) : null), [cap])
   useEffect(() => () => geometry.dispose(), [geometry])
   useEffect(() => () => cutGeometry?.dispose(), [cutGeometry])
   useEffect(() => () => material.dispose(), [material])
   useEffect(() => () => cutMaterial?.dispose(), [cutMaterial])
-  useEffect(() => () => capGeometry?.dispose(), [capGeometry])
-  useEffect(() => () => capMaterial?.dispose(), [capMaterial])
 
   useFrame((state, dt) => {
     const pv = pivot.current
@@ -360,22 +328,18 @@ function Print({ shot, index, lay, tex, cap }) {
         u.uShadow.value.set(0.016 + F.lean.x * 0.012 * step, 0.024 - F.lean.y * 0.01 * step)
       }
     }
-
-    // Wall label follows the sheet's lower edge.
-    const cp = capRef.current
-    if (cp) {
-      cp.position.set(0, -(p.sh / 2) * s - lay.H * 0.035 - capH / 2, -lay.R + lift * 0.9)
-      const o = lay.narrow ? smooth(0.5, 0.95, c) : 0.34 + 0.66 * Math.max(c, a.hover * 0.5)
-      cp.material.uniforms.uOpacity.value = o * a.a
-    }
   })
 
+  // The pointer hand is the one quiet hint that a print opens (kit/cursor.js
+  // shows it while body.style.cursor is 'pointer').
   const over = (e) => {
     e.stopPropagation()
     wall.hover = index
+    document.body.style.cursor = 'pointer'
   }
   const out = () => {
     if (wall.hover === index) wall.hover = -1
+    document.body.style.cursor = ''
   }
   const click = (e) => {
     if (wall.moved || isDomControl(e)) return
@@ -396,11 +360,6 @@ function Print({ shot, index, lay, tex, cap }) {
         onClick={click}
       />
       {cutMaterial && <mesh ref={cutRef} geometry={cutGeometry} material={cutMaterial} position={[0, 0, -lay.R]} renderOrder={2} visible={false} />}
-      {capMaterial && (
-        <group rotation-y={-(-p.sw / 2 + capW / 2 + lay.H * 0.012) / lay.R}>
-          <mesh ref={capRef} geometry={capGeometry} material={capMaterial} position={[0, -p.sh / 2 - capH, -lay.R]} renderOrder={1} />
-        </group>
-      )}
     </group>
   )
 }
@@ -411,7 +370,6 @@ function Rotunda({ list }) {
   const lay = useLayout(list, title?.aspect ?? 3.3, credit?.aspect ?? 5)
   const [maxH] = useState(() => (window.innerWidth < 760 ? 1024 : 1536))
   const tex = useTextures(list, maxH)
-  const caps = useCaptions(list, lay.narrow)
   const rig = useRef()
   const rot = useRef()
 
@@ -453,7 +411,7 @@ function Rotunda({ list }) {
         {title && <WallType lay={lay} type={title} kind="title" />}
         {credit && <WallType lay={lay} type={credit} kind="credit" />}
         {list.map((s, i) =>
-          tex[s.id] ? <Print key={s.src} shot={s} index={i} lay={lay} tex={tex[s.id]} cap={caps[s.id]} /> : null,
+          tex[s.id] ? <Print key={s.src} shot={s} index={i} lay={lay} tex={tex[s.id]} /> : null,
         )}
       </group>
     </group>

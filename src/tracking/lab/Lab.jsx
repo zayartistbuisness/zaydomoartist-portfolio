@@ -24,14 +24,6 @@ const PORTRAITS = {
   color: '/tracking/portrait/zay-tank-color.webp',
 }
 
-const pad = (n) => String(n).padStart(2, '0')
-
-// Scroll position as tape time: 24 fps, four scrolled pixels per frame.
-function timecode(px) {
-  const f = Math.floor(px / 4)
-  const s = Math.floor(f / 24)
-  return `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}:${pad(f % 24)}`
-}
 
 const NAV = [['about', 'About'], ['portraits', 'Portraits'], ['work', 'Work'], ['contact', 'Contact']]
 
@@ -151,7 +143,6 @@ export default function Lab() {
   const heroRef = useRef()
   const curtainRef = useRef()
   const slotRef = useRef()
-  const tcRef = useRef()
   const rootRef = useRef()
   usePointerTracking()
   useXpCursor(rootRef)
@@ -160,14 +151,13 @@ export default function Lab() {
     document.documentElement.classList.add('tlab-html')
     // Reduced motion: native scrolling, no smooth-scroll glide.
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const lenis = reduced ? null : new Lenis({ autoRaf: true, lerp: 0.13, wheelMultiplier: 1.15, touchMultiplier: 1.4 })
+    const lenis = reduced ? null : new Lenis({ autoRaf: true, lerp: 0.075, wheelMultiplier: 0.8, touchMultiplier: 1.1 })
     if (import.meta.env.DEV) window.__lenis = lenis // lets browser QA jump to exact scroll positions
     window.__tlabLenis = lenis
     setScroller(lenis)
     registerLabElements({ heroEl: heroRef.current, curtainEl: curtainRef.current, slotEl: slotRef.current })
     let raf
     const tick = () => {
-      if (tcRef.current) tcRef.current.textContent = timecode(window.scrollY)
       // HUD reads ink-on-paper or paper-on-ink from whatever ground sits
       // under the header line.
       let dark = false
@@ -208,7 +198,7 @@ export default function Lab() {
       <div className="tlab-grain" aria-hidden="true" />
 
       <header className="tlab-hud">
-        <a className="tlab-mark" href="#top"><span className="tlab-sigil" aria-hidden="true" />Zay “Domo” Artist<i className="rec" aria-hidden="true" /></a>
+        <a className="tlab-mark" href="#top" aria-label="Zay “Domo” Artist — home" onClick={(e) => jumpTo(e, 'top')}><span className="tlab-sigil" aria-hidden="true" /></a>
         <nav aria-label="Primary">
           {NAV.map(([id, label]) => (
             <a key={id} href={`#${id}`} onClick={(e) => jumpTo(e, id)}>{label}</a>
@@ -218,9 +208,6 @@ export default function Lab() {
           {menu ? 'Close' : 'Menu'}
         </button>
         <a className="tlab-casting" href="#representation" onClick={(e) => jumpTo(e, 'representation')}>Casting ↗</a>
-        <div className="tlab-tc" aria-hidden="true">
-          <i className="rec" /> <span ref={tcRef}>00:00:00:00</span>
-        </div>
       </header>
 
       {/* Phone menu: full-screen index of the page. */}
@@ -240,7 +227,6 @@ export default function Lab() {
           <h1 className="tlab-sr">Zay “Domo” Artist — actor, writer and creative strategist</h1>
           <div className="tlab-hero-meta">
             <p>Actor · Writer · Creative Strategist</p>
-            <p className="tlab-cue">Scroll ↓</p>
           </div>
         </section>
 
@@ -250,7 +236,6 @@ export default function Lab() {
           <div className="tlab-index">
             <div className="tlab-index-head">
               <span>Selected work</span>
-              <span>01 — 04</span>
             </div>
             <div className="tlab-index-grid">
               <div className="tlab-rows">

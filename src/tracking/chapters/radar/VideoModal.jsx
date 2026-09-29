@@ -9,7 +9,7 @@ const FOCUSABLE = 'a[href], button:not([disabled]), iframe, [tabindex]:not([tabi
  * control that opened it, and page scroll held while open. The iframe only
  * mounts while open, so nothing loads from YouTube until asked.
  */
-export default function VideoModal({ open, onClose, src, title, source }) {
+export default function VideoModal({ open, onClose, src, title }) {
   const dlg = useRef()
   const closeBtn = useRef()
   const opener = useRef(null)
@@ -73,7 +73,7 @@ export default function VideoModal({ open, onClose, src, title, source }) {
         <header className="c-radar-modal-head">
           <h3 id="c-radar-modal-title">{title}</h3>
           <button ref={closeBtn} type="button" onClick={onClose}>
-            Close <span aria-hidden="true">(Esc)</span>
+            Close
           </button>
         </header>
         <div className="c-radar-modal-frame">
@@ -86,12 +86,6 @@ export default function VideoModal({ open, onClose, src, title, source }) {
             />
           )}
         </div>
-        <p className="c-radar-modal-src">
-          Source:{' '}
-          <a href={source.href} target="_blank" rel="noreferrer">
-            {source.label}
-          </a>
-        </p>
       </div>
     </dialog>,
     document.body,

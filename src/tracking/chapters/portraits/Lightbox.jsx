@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { pad2 } from './shots'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 // Keys that would scroll the page underneath the overlay.
@@ -94,7 +93,6 @@ export default function Lightbox({ list, index, onClose, onStep, fallbackFocus }
       ref={dlg}
       className={`c-portraits-box${shot?.color ? ' is-colour' : ''}`}
       aria-labelledby="c-portraits-box-title"
-      aria-describedby="c-portraits-box-desc"
       data-lenis-prevent=""
       onCancel={(e) => {
         e.preventDefault()
@@ -107,16 +105,24 @@ export default function Lightbox({ list, index, onClose, onStep, fallbackFocus }
     >
       {shot && (
         <>
+          {/* No caption or counter: the print alone. The title is for
+              screen readers; arrows step, Close (or Esc) leaves. */}
           <header className="c-portraits-box-head">
-            <h3 id="c-portraits-box-title">
-              <span className="c-portraits-box-n">
-                {pad2(index + 1)} / {pad2(list.length)}
-              </span>
-              <span className="c-portraits-box-rule" aria-hidden="true" />
-              <span>{shot.label}</span>
+            <h3 id="c-portraits-box-title" className="c-portraits-sr">
+              {shot.label}
             </h3>
+            {list.length > 1 && (
+              <nav aria-label="Portraits">
+                <button type="button" onClick={() => onStep(-1)} aria-label="Previous print">
+                  <span aria-hidden="true">←</span>
+                </button>
+                <button type="button" onClick={() => onStep(1)} aria-label="Next print">
+                  <span aria-hidden="true">→</span>
+                </button>
+              </nav>
+            )}
             <button ref={closeBtn} type="button" onClick={onClose}>
-              Close <span aria-hidden="true">(Esc)</span>
+              Close
             </button>
           </header>
 
@@ -132,20 +138,6 @@ export default function Lightbox({ list, index, onClose, onStep, fallbackFocus }
               onLoad={() => setLoaded(shot.src)}
             />
           </div>
-
-          <footer className="c-portraits-box-foot">
-            <p id="c-portraits-box-desc">{shot.styling}</p>
-            {list.length > 1 && (
-              <nav aria-label="Portraits">
-                <button type="button" onClick={() => onStep(-1)}>
-                  <span aria-hidden="true">← </span>Previous
-                </button>
-                <button type="button" onClick={() => onStep(1)}>
-                  Next<span aria-hidden="true"> →</span>
-                </button>
-              </nav>
-            )}
-          </footer>
         </>
       )}
     </dialog>,

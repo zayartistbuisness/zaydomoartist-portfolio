@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useChapterSection } from '../../kit/chapterStore'
 import { voice } from '../../content/voice'
-import { BEAT, ID, LAST, O, P, SLOTS, keonStore, progressForSlot, stripOffset } from './timeline'
+import { ID, O, P, SLOTS, keonStore, progressForSlot, stripOffset } from './timeline'
 import './keon.css'
 
 const clamp01 = (v) => Math.min(1, Math.max(0, v))
@@ -9,7 +9,6 @@ const smooth = (a, b, v) => {
   const t = clamp01((v - a) / (b - a))
   return t * t * (3 - 2 * t)
 }
-const clampSlot = (i) => Math.min(LAST, Math.max(0, i))
 
 // Zay's own words: voice.keon (content/voice.js). Drafted with Zay on
 // 2026-09-28; he strikes anything untrue there, not here.
@@ -22,62 +21,26 @@ function sectionGeometry(el) {
   return { top: r.top + window.scrollY, travel, p: clamp01(-r.top / travel) }
 }
 
-// Eased programmatic scroll. Writes native scroll each frame, which Lenis
-// follows (it syncs to native scroll whenever it isn't animating itself).
-let tween = 0
-function glideTo(y, ms = 750) {
-  cancelAnimationFrame(tween)
-  const from = window.scrollY
-  const t0 = performance.now()
-  const step = (now) => {
-    const t = Math.min(1, (now - t0) / ms)
-    const e = t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2
-    window.scrollTo({ top: from + (y - from) * e, behavior: 'instant' })
-    if (t < 1) tween = requestAnimationFrame(step)
-  }
-  tween = requestAnimationFrame(step)
-}
-
 export default function KeonSection() {
   const ref = useRef()
   const stageRef = useRef()
-  const numRef = useRef()
-  const titleRef = useRef()
-  const groupRef = useRef()
-  const ticksRef = useRef()
   useChapterSection(ID, ref)
 
-  // Per-frame DOM sync: reveal vars and caption rail. No renders.
+  // Per-frame DOM sync: reveal vars and the drag cursor. No renders.
+  // Art-first: no frame captions or counters; the strip speaks for itself.
   useEffect(() => {
     const el = ref.current
     let raf
-    let shown = -99
     const tick = () => {
       raf = requestAnimationFrame(tick)
       const r = el.getBoundingClientRect()
       if (r.bottom < 0 || r.top > window.innerHeight) return
       const { p } = sectionGeometry(el)
-      const o = stripOffset(p) + keonStore.nudge
       const head = smooth(P.markEnd - 0.03, P.threadTo, p) * (1 - smooth(0.975, 1, p))
-      const rail = smooth(P.threadTo - 0.02, P.threadTo + 0.02, p) * (1 - smooth(P.framesTo + 0.02, P.framesTo + 0.05, p))
-      const beat = (1 - smooth(0.1, 0.36, Math.abs(o - BEAT))) * rail
-      el.style.setProperty('--k-mark', String(1 - smooth(P.markEnd - 0.06, P.markEnd, p)))
+      // The strip is in the gate (and can be dragged) between these marks.
+      const live = smooth(P.threadTo - 0.02, P.threadTo + 0.02, p) * (1 - smooth(P.framesTo + 0.02, P.framesTo + 0.05, p))
       el.style.setProperty('--k-head', head.toFixed(3))
-      el.style.setProperty('--k-rail', rail.toFixed(3))
-      el.style.setProperty('--k-beat', beat.toFixed(3))
-      stageRef.current?.classList.toggle('is-live', rail > 0.5)
-
-      const slot = clampSlot(Math.round(o))
-      if (slot !== shown) {
-        shown = slot
-        const s = SLOTS[slot]
-        numRef.current.textContent = s.n
-        titleRef.current.textContent = s.title
-        groupRef.current.textContent = s.group
-        const ticks = ticksRef.current.children
-        for (let i = 0; i < ticks.length; i++) ticks[i].classList.toggle('is-on', i === slot)
-      }
-
+      stageRef.current?.classList.toggle('is-live', live > 0.5)
     }
     tick()
     return () => {
@@ -147,22 +110,9 @@ export default function KeonSection() {
     }
   }, [])
 
-  const step = (dir) => {
-    const g = sectionGeometry(ref.current)
-    const now = Math.round(stripOffset(g.p))
-    const target = clampSlot(Math.max(0, now) + dir)
-    glideTo(g.top + progressForSlot(target) * g.travel)
-  }
-
   return (
     <section ref={ref} id="keon" className="c-keon" aria-labelledby="c-keon-title">
       <div ref={stageRef} className="c-keon-stage">
-        <p className="c-keon-tag">
-          <span>Featured · 02 / 04</span>
-          <span className="c-keon-hint" aria-hidden="true">Scroll to run the strip · drag to nudge</span>
-          <span>In development</span>
-        </p>
-
         <header className="c-keon-head">
           <h2 id="c-keon-title" className="c-keon-title">KEON</h2>
           <p className="c-keon-line">A feature in development</p>
@@ -175,29 +125,6 @@ export default function KeonSection() {
           </blockquote>
           <figcaption>Zay “Domo” Artist</figcaption>
         </figure>
-
-        <p className="c-keon-beat" aria-hidden="true"><em>Behind the camera</em></p>
-
-        <div className="c-keon-rail">
-          <div className="c-keon-cap" aria-hidden="true">
-            <span ref={numRef} className="c-keon-num">01</span>
-            <span className="c-keon-dot">·</span>
-            <span ref={titleRef} className="c-keon-ttl">The corner</span>
-          </div>
-          <div className="c-keon-meta">
-            <span ref={groupRef}>On screen</span>
-            <span className="c-keon-vd">Visual development · concept frames</span>
-          </div>
-          <div className="c-keon-foot">
-            <ol ref={ticksRef} className="c-keon-ticks" aria-hidden="true">
-              {SLOTS.map((s, i) => <li key={s.title} className={s.beat ? 'is-beat' : undefined} data-i={i} />)}
-            </ol>
-            <div className="c-keon-nav">
-              <button type="button" onClick={() => step(-1)} aria-label="Previous frame">Prev</button>
-              <button type="button" onClick={() => step(1)} aria-label="Next frame">Next</button>
-            </div>
-          </div>
-        </div>
 
         <ol className="c-keon-sr">
           {SLOTS.filter((s) => !s.beat).map((s) => (

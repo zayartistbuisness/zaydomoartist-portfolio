@@ -38,7 +38,7 @@ export default function ChapterLab() {
 
   useEffect(() => {
     document.documentElement.classList.add('tlab-html')
-    const lenis = new Lenis({ autoRaf: true, lerp: 0.13, wheelMultiplier: 1.15, touchMultiplier: 1.4 })
+    const lenis = new Lenis({ autoRaf: true, lerp: 0.075, wheelMultiplier: 0.8, touchMultiplier: 1.1 })
     if (import.meta.env.DEV) window.__lenis = lenis
     setScroller(lenis)
     return () => {

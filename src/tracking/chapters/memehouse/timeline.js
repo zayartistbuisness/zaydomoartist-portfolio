@@ -5,55 +5,12 @@ export const ID = 'memehouse'
 export const BASE = '/tracking/chapters/memehouse/'
 
 /*
- * Sources: every fact on this chapter is event-level and comes from
+ * Facts: every fact on this chapter is event-level and comes from
  * site/research/featured-projects-brief.md §3 (MemeHouse). Nothing here is a
- * personal credit; Zay's role and contribution stay placeholders.
+ * personal credit. The sources and the event-photo credits for the rooms
+ * (assets/event-photos/MANIFEST.md) live in content/credits.js, rendered in
+ * the Contact footer; on screen the chapter stays art-first.
  */
-export const SOURCES = {
-  mhp: { label: 'memehouseproductions.com', href: 'https://www.memehouseproductions.com/' },
-  mhla: { label: 'memehousela.com', href: 'https://memehousela.com/' },
-  tt: { label: 'TwitchTracker', href: 'https://twitchtracker.com/isaacfrancis/streams' },
-  clip: { label: 'Twitch clip, Dec 8, 2025', href: 'https://www.twitch.tv/isaacfranciss/clip/CulturedPunchyBatShadyLulu-5rmRr51rRIdzKKia' },
-  tmz: { label: 'TMZ, Oct 3, 2025', href: 'https://www.tmz.com/2025/10/03/ddg-streamers-win-over-rappers/' },
-  ni: { label: 'Net Influencer, Dec 12, 2025', href: 'https://www.netinfluencer.com/bridging-streaming-and-culture-inside-memehouse-la-twitchcon-takeover/' },
-}
-
-/*
- * Event photos in the rooms (public/tracking/chapters/memehouse/event/),
- * credited as assets/event-photos/MANIFEST.md records them: what each shows,
- * its date and its publisher. They are event context. Captions never name
- * Zay or suggest that anyone pictured endorses him.
- */
-const PHOTOS = {
-  debut: {
-    label: 'Photo',
-    shows: 'The stream room on Isaac Francis’s channel during The Debut’s closing run',
-    date: 'Nov 26, 2025',
-    credit: 'Isaac Francis / Twitch (viewer clip)',
-    href: 'https://clips.twitch.tv/BraveDeadRabbitFreakinStinkin-FEJ6FogG1vfsykg3',
-  },
-  capaholics: {
-    label: 'Photo',
-    shows: 'The first party at the Capaholics mansion, Los Angeles',
-    date: 'Oct 2, 2025',
-    credit: 'DDG Live / YouTube',
-    href: 'https://www.youtube.com/watch?v=hUj6V6ogLgY',
-  },
-  booth: {
-    label: 'Photo',
-    shows: 'The MemeHouse Productions DJ booth, La Jolla mansion studio',
-    date: 'TwitchCon weekend 2025',
-    credit: 'Net Influencer',
-    href: 'https://www.netinfluencer.com/bridging-streaming-and-culture-inside-memehouse-la-twitchcon-takeover/',
-  },
-  studio: {
-    label: 'Photos',
-    shows: 'The stream desk, the camera table and a videographer',
-    date: 'TwitchCon weekend 2025',
-    credit: 'MemeHouse LA',
-    href: 'https://memehousela.com/',
-  },
-}
 
 /*
  * Camera stops, in chapter progress. `hold` is where the camera rests; the
@@ -73,72 +30,54 @@ export const KEYS = [
 ]
 
 /*
- * DOM captions, one per stop after the arrival. Copy is limited to the
- * brief's sourced, event-level facts, in past tense, with the date first.
- * `photos` credits the real images in that room (Art Basel has none: no
- * non-deck image of the finale exists, so Miami keeps the coast plate).
+ * DOM captions, one per stop after the arrival: the room's name and one
+ * short line. `body` is the sourced, event-level context, kept for screen
+ * readers only. The studio stop carries his pull-quote (voice.memehouse).
  */
 export const STOPS = [
   {
     key: 'house',
-    n: '00',
     title: 'The house',
-    date: 'Los Angeles',
+    line: 'Los Angeles',
     body: 'MemeHouse is a Los Angeles live-production company that stages and streams creator events, from festival houses to multi-day marathons.',
-    sources: ['mhp', 'mhla'],
   },
   {
     key: 'debut',
     room: 0,
-    n: '01',
     title: 'The Debut',
-    date: 'Nov 24 – Dec 7, 2025',
+    line: 'Nov 24 – Dec 7, 2025',
     body: 'Isaac Francis’s numbered fifty-day Twitch series. The closing run, Days 46–50, stopped in New York on Black Friday and wrapped with Day 50/50 at Miami Art Basel on December 7, 2025.',
-    photos: [PHOTOS.debut],
-    sources: ['tt', 'clip'],
   },
   {
     key: 'capaholics',
     room: 1,
-    n: '02',
     title: 'Capaholics',
-    date: 'Oct 2, 2025 · TwitchCon weekend 2025',
+    line: 'Oct 2, 2025 · TwitchCon weekend 2025',
     body: 'A streaming collective whose members include DDG, Deshae Frost and Dub. It launched a stream-a-thon with a party in Los Angeles on October 2, 2025. During TwitchCon weekend, MemeHouse LA hosted Capaholics at its La Jolla mansion studio, a company production.',
-    photos: [PHOTOS.capaholics, PHOTOS.booth],
-    sources: ['tmz', 'ni'],
   },
   {
     key: 'studio',
     room: 2,
-    n: '03',
     title: 'The studio',
-    date: 'In his words',
-    // Renders voice.memehouse.lines as a pull-quote; this line is the note under it.
+    line: 'La Jolla · TwitchCon weekend 2025',
+    // Renders voice.memehouse.lines as a pull-quote.
     quote: true,
     body: 'MemeHouse LA’s mansion studio in La Jolla over TwitchCon weekend 2025, a company production. The people pictured aren’t named by the source.',
-    photos: [PHOTOS.studio],
-    sources: ['ni'],
   },
   {
     key: 'miami',
     room: 3,
-    n: '04',
     title: 'Art Basel / Miami',
-    date: 'Dec 7, 2025',
+    line: 'Dec 7, 2025',
     body: 'The Debut’s last stop. Day 50/50 streamed from Miami as the “Miami Art Basel Party” and closed the fifty-day run.',
-    sources: ['clip', 'tt'],
   },
   {
     key: 'section',
-    n: '—',
     title: 'In section',
-    date: 'Four rooms',
+    line: 'Four rooms',
     body: 'The Debut, Capaholics, the studio and Miami, drawn as one house. Company productions are MemeHouse’s credits, not Zay’s.',
-    sources: [],
   },
 ]
-
-export const ROOMS = STOPS.filter((s) => s.room !== undefined)
 
 /*
  * The one definition of the narrow layout: phones, plus any portrait screen

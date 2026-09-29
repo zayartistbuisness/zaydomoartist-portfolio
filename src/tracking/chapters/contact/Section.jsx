@@ -2,6 +2,7 @@ import { useId, useRef, useState } from 'react'
 import { useChapterSection } from '../../kit/chapterStore'
 import { INQUIRY_TYPES, profile, reps, press } from '../../content/profile'
 import { setContactSlot } from './store'
+import { credits } from '../../content/credits'
 import './contact.css'
 
 const ID = 'contact'
@@ -38,7 +39,6 @@ export default function Section() {
     <section ref={ref} className="c-contact" aria-labelledby="c-contact-title">
       <header className="c-contact-head">
         <p>Contact</p>
-        <p>Casting · Creative direction · Press</p>
       </header>
 
       <div className="c-contact-top">
@@ -109,7 +109,21 @@ export default function Section() {
 
       <footer className="c-contact-foot">
         <span className="c-contact-sign"><span className="tlab-sigil" aria-hidden="true" />© 2026 {profile.name}</span>
-        <span>Actor · Writer · Creative strategist</span>
+        <details className="c-contact-credits">
+          <summary>Image credits</summary>
+          {credits.map((c) => (
+            <div key={c.chapter}>
+              <p className="c-contact-credits-h">{c.chapter}</p>
+              <ul>
+                {c.items.map((it, i) => (
+                  <li key={`${i}-${it.label}`}>
+                    {it.label} — {it.url ? <a href={it.url} target="_blank" rel="noreferrer">{it.source}</a> : it.source}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </details>
       </footer>
     </section>
   )

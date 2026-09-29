@@ -92,7 +92,15 @@
 .c-contact-status { margin: 0; min-height: 1.4em; opacity: 0.8; }
 .c-contact-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
-.c-contact-foot { display: flex; justify-content: space-between; margin-top: 12vh; opacity: 0.45; }
+.c-contact-foot { display: flex; justify-content: space-between; align-items: flex-start; gap: 4vw; margin-top: 12vh; opacity: 0.6; }
+.c-contact-credits { max-width: 46em; text-align: right; }
+.c-contact-credits summary { cursor: pointer; list-style: none; }
+.c-contact-credits summary::-webkit-details-marker { display: none; }
+.c-contact-credits[open] { text-align: left; }
+.c-contact-credits[open] summary { margin-bottom: 14px; }
+.c-contact-credits-h { margin: 14px 0 6px; }
+.c-contact-credits ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; text-transform: none; letter-spacing: 0.01em; font-size: 11px; line-height: 1.45; }
+.c-contact-credits a { text-decoration: underline 1px rgba(232, 228, 219, 0.35); text-underline-offset: 3px; }
 
 @media (max-width: 860px) {
   .c-contact-top, .c-contact-grid { grid-template-columns: 1fr; }
